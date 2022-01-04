@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/src/dal/CatMovieDAO.java" dialect="AZURE" />
     <file url="file://$PROJECT_DIR$/src/dal/CategoriesDAO.java" dialect="AZURE" />
     <file url="file://$PROJECT_DIR$/src/dal/MoviesDAO.java" dialect="AZURE" />
+    <file url="PROJECT" dialect="AZURE" />
   </component>
 </project>
