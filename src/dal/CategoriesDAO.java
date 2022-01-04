@@ -12,19 +12,19 @@ public class CategoriesDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
     private final CatMovieDAO catMovieDAO = new CatMovieDAO();
 
-    // Method used to getting all the playlists from the database.
-    public List<Category> getAllCategories() {
-        List<Category> allCategories = new ArrayList<>();
+    // Method used to getting all the categories from the database.
+    public List<Categories> getAllCategories() {
+        List<Categories> allCategories = new ArrayList<>();
         try (Connection connection = db.getConnection()) {
-            String sqlStatement = "SELECT * FROM dbo.Category";
+            String sqlStatement = "SELECT * FROM Category";
             Statement statement = connection.createStatement();
             if (statement.execute(sqlStatement)) {
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
-                    Category category = new Category(id, name);
-                    category.setCategorylist(CatMovieDAO.getCategoryMovie(id));
+                    Categories category = new Categories(name, id);
+                    category.setCategorieslist(CatMovieDAO.getCategoriesMovie(id));
                     allCategories.add(category);
                 }
             }
@@ -32,46 +32,61 @@ public class CategoriesDAO {
             System.out.println(ex);
             return null;
         }
-        return allPlayList;
+        return allCategories;
     }
 
-    // Method used to update playlists in the database.
-    public Playlist updatePlaylist(Playlist selectedPlaylist, String name) {
+    // Method used to update categories in the database.
+    public Categories updatePlaylist(Categories selectedCategories, String name) {
         try (Connection connection = db.getConnection()) {
-            String query = "UPDATE playlistDatabase set title = ? WHERE id = ?";
+            String query = "UPDATE Category set name = ? WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setString(1, name);
-            pstm.setInt(2, selectedPlaylist.getID());
+            pstm.setInt(2, selectedCategories.getCategoryID());
             pstm.executeUpdate();
-            return new Playlist(name,selectedPlaylist.getID());
+            return new Categories(name,selectedCategories.getCategoryID());
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;
         }
     }
 
-    // Method used for making a new playlist in the database.
-    public Playlist makePlaylist(String title) {
-        String sqlStatement = "INSERT INTO dbo.playlistDatabase(title) VALUES(?)";
+    // Method used for making a new categories in the database.
+    public Categories makeCategories(String name) {
+        String sqlStatement = "INSERT INTO Category(name) VALUES(?)";
         try (Connection con = db.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
-            pstm.setString(1,title);
+            pstm.setString(1,name);
             pstm.addBatch();
             pstm.executeBatch();
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;
         }
-        Playlist playlist = new Playlist(title,1);
-        return playlist;
+        Categories categories = new Categories(name,1);
+        return categories;
     }
 
-    // Method used for deleting a playlist in the database.
-    public void deletePlaylist(Playlist selectedPlaylist){
+    // Method used to update categories in the database.
+    public Categories updateCategories(Categories selectedCategories, String name) {
+        try (Connection connection = db.getConnection()) {
+            String query = "UPDATE Category set name = ? WHERE id = ?";
+            PreparedStatement pstm = connection.prepareStatement(query);
+            pstm.setString(1, name);
+            pstm.setInt(2, selectedCategories.getID());
+            pstm.executeUpdate();
+            return new Categories(name,selectedCategories.getID());
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+    }
+
+    // Method used for deleting a categories in the database.
+    public void deleteCategories(Categories selectedCategories){
         try(Connection con = db.getConnection()){
-            String sql = "DELETE from dbo.playlistDatabase Where id =?";
+            String sql = "DELETE from Category Where id =?";
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setInt(1,selectedPlaylist.getID());
+            pstm.setInt(1,selectedCategories.getCategoryID());
             pstm.execute();
         } catch(SQLException ex){
             System.out.println(ex);
