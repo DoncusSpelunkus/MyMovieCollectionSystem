@@ -23,7 +23,7 @@ public class CategoriesDAO {
                 while (rs.next()) {
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
-                    Categories category = new Categories(id, name);
+                    Categories category = new Categories(name, id);
                     category.setCategorieslist(CatMovieDAO.getCategoriesMovie(id));
                     allCategories.add(category);
                 }
@@ -41,9 +41,9 @@ public class CategoriesDAO {
             String query = "UPDATE Category set name = ? WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setString(1, name);
-            pstm.setInt(2, selectedCategories.getID());
+            pstm.setInt(2, selectedCategories.getCategoryID());
             pstm.executeUpdate();
-            return new Categories(name,selectedCategories.getID());
+            return new Categories(name,selectedCategories.getCategoryID());
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;
@@ -71,7 +71,7 @@ public class CategoriesDAO {
         try(Connection con = db.getConnection()){
             String sql = "DELETE from Category Where id =?";
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setInt(1,selectedCategories.getID());
+            pstm.setInt(1,selectedCategories.getCategoryID());
             pstm.execute();
         } catch(SQLException ex){
             System.out.println(ex);

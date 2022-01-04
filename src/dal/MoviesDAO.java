@@ -52,7 +52,7 @@ public class MoviesDAO {
             System.out.println(ex);
             return null;
         }
-        Movies movie = new Movies(1,name,rating,filelink,lastview,); // Creating a new movie object
+        Movies movie = new Movies(1,name,rating,filelink,lastview); // Creating a new movie object
         return movie;
     }
 
@@ -65,9 +65,9 @@ public class MoviesDAO {
             pstm.setFloat(2, rating);
             pstm.setString(3, filelink);
             pstm.setDate(4, lastview);
-            pstm.setInt(5, selectedMovie.getID());
+            pstm.setInt(5, selectedMovie.getMovieID());
             pstm.executeUpdate();
-            return new Movies(name,rating,filelink,lastview,selectedMovie.getID());
+            return new Movies(selectedMovie.getMovieID(),name,rating,filelink,lastview);
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;
@@ -79,7 +79,7 @@ public class MoviesDAO {
         try(Connection connection = db.getConnection()){
             String query = "DELETE FROM Movie WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
-            pstm.setInt(1,selectedMovie.getID());
+            pstm.setInt(1,selectedMovie.getMovieID());
             pstm.executeUpdate(); // Executing the statement
         } catch(SQLException ex){
             System.out.println(ex);
