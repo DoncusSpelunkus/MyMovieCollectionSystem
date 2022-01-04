@@ -66,6 +66,21 @@ public class CategoriesDAO {
         return categories;
     }
 
+    // Method used to update categories in the database.
+    public Categories updateCategories(Categories selectedCategories, String name) {
+        try (Connection connection = db.getConnection()) {
+            String query = "UPDATE Category set name = ? WHERE id = ?";
+            PreparedStatement pstm = connection.prepareStatement(query);
+            pstm.setString(1, name);
+            pstm.setInt(2, selectedCategories.getID());
+            pstm.executeUpdate();
+            return new Categories(name,selectedCategories.getID());
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+    }
+
     // Method used for deleting a categories in the database.
     public void deleteCategories(Categories selectedCategories){
         try(Connection con = db.getConnection()){
