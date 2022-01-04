@@ -11,7 +11,7 @@ import java.util.List;
 public class MoviesDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
 
-    // Method used to get all the songs from the database.
+    // Method used to get all the movies from the database.
     public List<Movies> getAllMovies() {
         List<Movies> movieList = FXCollections.observableArrayList();
         try (Connection connection = db.getConnection()) {
@@ -26,8 +26,8 @@ public class MoviesDAO {
                     String filelink = rs.getString("filelink");
                     Date lastview = rs.getDate("lastview");
 
-                    Movie movie = new Movie(id, name,rating,filelink,lastview);// Creating a song object from the retrieved values
-                    movieList.add(movie); // Adding the song to  list
+                    Movies movie = new Movies(id, name,rating,filelink,lastview);// Creating a movie object from the retrieved values
+                    movieList.add(movie); // Adding the movie to  list
                 }
             }
         } catch (SQLException ex) {
@@ -37,8 +37,8 @@ public class MoviesDAO {
         return movieList;
     }
 
-    // Method used for adding songs from user input into the database.
-    public Movie addMovies(String name, float rating, String filelink, Date lastview) {
+    // Method used for adding movies from user input into the database.
+    public Movies addMovies(String name, float rating, String filelink, Date lastview) {
         String sqlStatement = "INSERT INTO Movies(name, rating, filelink, lastview) VALUES (?,?,?,?)";
         try(Connection connection = db.getConnection()){
             PreparedStatement pstm = connection.prepareStatement(sqlStatement);
@@ -52,12 +52,12 @@ public class MoviesDAO {
             System.out.println(ex);
             return null;
         }
-        Movie movie = new Movie(name,rating,filelink,lastview,1); // Creating a new song object
+        Movies movie = new Movies(1,name,rating,filelink,lastview,); // Creating a new movie object
         return movie;
     }
 
-    // Method used for editing the songs in the database.
-    public Movie editMovies(Movie selectedMovie, String name, float rating, String filelink, Date lastview) {
+    // Method used for editing the movies in the database.
+    public Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview) {
         try (Connection connection = db.getConnection()) {
             String query = "UPDATE Movies set name = ?,rating = ?,filelink = ?,lastview = ?, WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
@@ -67,15 +67,15 @@ public class MoviesDAO {
             pstm.setDate(4, lastview);
             pstm.setInt(5, selectedMovie.getID());
             pstm.executeUpdate();
-            return new Movie(name,rating,filelink,lastview,selectedMovie.getID());
+            return new Movies(name,rating,filelink,lastview,selectedMovie.getID());
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;
         }
     }
 
-    // Method used for deleting the songs in the database. ATTENTION SHOULD USE ID TO IDENTIFY SONG.
-    public void deleteMovie(Movie selectedMovie){
+    // Method used for deleting the movies in the database. ATTENTION SHOULD USE ID TO IDENTIFY SONG.
+    public void deleteMovie(Movies selectedMovie){
         try(Connection connection = db.getConnection()){
             String query = "DELETE FROM Movies WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
