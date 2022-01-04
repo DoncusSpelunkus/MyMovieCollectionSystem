@@ -16,7 +16,7 @@ public class CategoriesDAO {
     public List<Categories> getAllCategories() {
         List<Categories> allCategories = new ArrayList<>();
         try (Connection connection = db.getConnection()) {
-            String sqlStatement = "SELECT * FROM dbo.Category";
+            String sqlStatement = "SELECT * FROM Category";
             Statement statement = connection.createStatement();
             if (statement.execute(sqlStatement)) {
                 ResultSet rs = statement.getResultSet();
@@ -38,7 +38,7 @@ public class CategoriesDAO {
     // Method used to update categories in the database.
     public Categories updatePlaylist(Categories selectedCategories, String name) {
         try (Connection connection = db.getConnection()) {
-            String query = "UPDATE Categories set name = ? WHERE id = ?";
+            String query = "UPDATE Category set name = ? WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setString(1, name);
             pstm.setInt(2, selectedCategories.getID());
@@ -52,7 +52,7 @@ public class CategoriesDAO {
 
     // Method used for making a new categories in the database.
     public Categories makeCategories(String name) {
-        String sqlStatement = "INSERT INTO dbo.Categories(name) VALUES(?)";
+        String sqlStatement = "INSERT INTO Category(name) VALUES(?)";
         try (Connection con = db.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1,name);
@@ -69,7 +69,7 @@ public class CategoriesDAO {
     // Method used for deleting a categories in the database.
     public void deleteCategories(Categories selectedCategories){
         try(Connection con = db.getConnection()){
-            String sql = "DELETE from dbo.Categories Where id =?";
+            String sql = "DELETE from Category Where id =?";
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1,selectedCategories.getID());
             pstm.execute();

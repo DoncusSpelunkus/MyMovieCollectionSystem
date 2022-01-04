@@ -15,7 +15,7 @@ public class MoviesDAO {
     public List<Movies> getAllMovies() {
         List<Movies> movieList = FXCollections.observableArrayList();
         try (Connection connection = db.getConnection()) {
-            String sqlStatement = "SELECT * FROM dbo.Movies";
+            String sqlStatement = "SELECT * FROM Movie";
             Statement statement = connection.createStatement();
             if (statement.execute(sqlStatement)) {
                 ResultSet rs = statement.getResultSet();
@@ -39,7 +39,7 @@ public class MoviesDAO {
 
     // Method used for adding movies from user input into the database.
     public Movies addMovies(String name, float rating, String filelink, Date lastview) {
-        String sqlStatement = "INSERT INTO Movies(name, rating, filelink, lastview) VALUES (?,?,?,?)";
+        String sqlStatement = "INSERT INTO Movie(name, rating, filelink, lastview) VALUES (?,?,?,?)";
         try(Connection connection = db.getConnection()){
             PreparedStatement pstm = connection.prepareStatement(sqlStatement);
             pstm.setString(1, name);
@@ -59,7 +59,7 @@ public class MoviesDAO {
     // Method used for editing the movies in the database.
     public Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview) {
         try (Connection connection = db.getConnection()) {
-            String query = "UPDATE Movies set name = ?,rating = ?,filelink = ?,lastview = ?, WHERE id = ?";
+            String query = "UPDATE Movie set name = ?,rating = ?,filelink = ?,lastview = ?, WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setString(1, name);
             pstm.setFloat(2, rating);
@@ -77,7 +77,7 @@ public class MoviesDAO {
     // Method used for deleting the movies in the database. ATTENTION SHOULD USE ID TO IDENTIFY SONG.
     public void deleteMovie(Movies selectedMovie){
         try(Connection connection = db.getConnection()){
-            String query = "DELETE FROM Movies WHERE id = ?";
+            String query = "DELETE FROM Movie WHERE id = ?";
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setInt(1,selectedMovie.getID());
             pstm.executeUpdate(); // Executing the statement
