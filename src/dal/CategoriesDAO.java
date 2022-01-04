@@ -15,9 +15,9 @@ public class CategoriesDAO {
     // Method used to getting all the categories from the database.
     public List<Categories> getAllCategories() {
         List<Categories> allCategories = new ArrayList<>();
-        try (Connection connection = db.getConnection()) {
+        try (Connection con = db.getConnection()) {
             String sqlStatement = "SELECT * FROM Category";
-            Statement statement = connection.createStatement();
+            Statement statement = con.createStatement();
             if (statement.execute(sqlStatement)) {
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
@@ -37,9 +37,9 @@ public class CategoriesDAO {
 
     // Method used to update categories in the database.
     public Categories updatePlaylist(Categories selectedCategories, String name) {
-        try (Connection connection = db.getConnection()) {
+        try (Connection con = db.getConnection()) {
             String query = "UPDATE Category set name = ? WHERE id = ?";
-            PreparedStatement pstm = connection.prepareStatement(query);
+            PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, name);
             pstm.setInt(2, selectedCategories.getCategoryID());
             pstm.executeUpdate();
@@ -68,13 +68,13 @@ public class CategoriesDAO {
 
     // Method used to update categories in the database.
     public Categories updateCategories(Categories selectedCategories, String name) {
-        try (Connection connection = db.getConnection()) {
+        try (Connection con = db.getConnection()) {
             String query = "UPDATE Category set name = ? WHERE id = ?";
-            PreparedStatement pstm = connection.prepareStatement(query);
+            PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, name);
-            pstm.setInt(2, selectedCategories.getID());
+            pstm.setInt(2, selectedCategories.getCategoryID());
             pstm.executeUpdate();
-            return new Categories(name,selectedCategories.getID());
+            return new Categories(name,selectedCategories.getCategoryID());
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;

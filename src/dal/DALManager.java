@@ -24,9 +24,9 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public void deleteMovie(Movie selectedMovie) {
+    public void deleteMovie(Movies selectedMovie) {
         moviesDAO.deleteMovie(selectedMovie);
-        CatMovieDAO.deleteMoviesFromAllCategories(selectedMovie);
+        CatMovieDAO.deleteMovieFromAllCategories(selectedMovie);
     }
 
     @Override
@@ -63,13 +63,13 @@ public class DALManager implements DALFacade {
     public Movies addToCategories(Movies selectedCategories, Movies selectedMovie) {
         return CatMovieDAO.addToCategories(selectedCategories, selectedMovie);
     }
-
+    @Override
     public void deleteFromCategories(Categories selectedCategories, Movies selectedMovie){
         catMovieDAO.deleteFromCategories(selectedCategories, selectedMovie);
     }
 
-
-    public void deleteSongFromAllCategories(Movies selectedMovie){
-        catMovieDAO.deleteSongFromAllCategories(selectedMovie);
+    @Override
+    public void deleteMovieFromAllCategories(Movies selectedMovie){
+        catMovieDAO.deleteMovieFromAllCategories(selectedMovie);
     }
 }

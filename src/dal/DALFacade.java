@@ -22,4 +22,8 @@ public interface DALFacade {
     Categories updateCategories(Categories selectedCategories, String name);
 
     void deleteCategories(Categories selectedCategories);
+
+    Movies addToCategories(Movies selectedCategories, Movies selectedMovie);
+
+    void deleteMovieFromAllCategories(Movies selectedMovie);
 }

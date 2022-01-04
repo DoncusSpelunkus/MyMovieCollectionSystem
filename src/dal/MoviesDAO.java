@@ -14,9 +14,9 @@ public class MoviesDAO {
     // Method used to get all the movies from the database.
     public List<Movies> getAllMovies() {
         List<Movies> movieList = FXCollections.observableArrayList();
-        try (Connection connection = db.getConnection()) {
+        try (Connection con = db.getConnection()) {
             String sqlStatement = "SELECT * FROM Movie";
-            Statement statement = connection.createStatement();
+            Statement statement = con.createStatement();
             if (statement.execute(sqlStatement)) {
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
@@ -40,8 +40,8 @@ public class MoviesDAO {
     // Method used for adding movies from user input into the database.
     public Movies addMovies(String name, float rating, String filelink, Date lastview) {
         String sqlStatement = "INSERT INTO Movie(name, rating, filelink, lastview) VALUES (?,?,?,?)";
-        try(Connection connection = db.getConnection()){
-            PreparedStatement pstm = connection.prepareStatement(sqlStatement);
+        try(Connection con = db.getConnection()){
+            PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, name);
             pstm.setFloat(2, rating);
             pstm.setString(3, filelink);
@@ -58,9 +58,9 @@ public class MoviesDAO {
 
     // Method used for editing the movies in the database.
     public Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview) {
-        try (Connection connection = db.getConnection()) {
+        try (Connection con = db.getConnection()) {
             String query = "UPDATE Movie set name = ?,rating = ?,filelink = ?,lastview = ?, WHERE id = ?";
-            PreparedStatement pstm = connection.prepareStatement(query);
+            PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, name);
             pstm.setFloat(2, rating);
             pstm.setString(3, filelink);
@@ -76,9 +76,9 @@ public class MoviesDAO {
 
     // Method used for deleting the movies in the database. ATTENTION SHOULD USE ID TO IDENTIFY SONG.
     public void deleteMovie(Movies selectedMovie){
-        try(Connection connection = db.getConnection()){
+        try(Connection con = db.getConnection()){
             String query = "DELETE FROM Movie WHERE id = ?";
-            PreparedStatement pstm = connection.prepareStatement(query);
+            PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,selectedMovie.getMovieID());
             pstm.executeUpdate(); // Executing the statement
         } catch(SQLException ex){
