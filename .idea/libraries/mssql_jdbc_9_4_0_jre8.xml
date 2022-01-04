@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="mssql-jdbc-9.4.0.jre8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/sqljdbc_9.4.0.0_enu/sqljdbc_9.4/enu/mssql-jdbc-9.4.0.jre8.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/sqljdbc_9.4.0.0_enu/sqljdbc_9.4/enu/mssql-jdbc-9.4.0.jre11.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/sqljdbc_9.4.0.0_enu/sqljdbc_9.4/enu/mssql-jdbc-9.4.0.jre16.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
