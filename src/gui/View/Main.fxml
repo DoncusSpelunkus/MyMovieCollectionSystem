@@ -34,6 +34,7 @@
                     <columns>
                       <TableColumn fx:id="categoryNameColumn" prefWidth="75.0" text="Name" />
                       <TableColumn fx:id="amountColumn" prefWidth="75.0" text="Amount" />
+                        <TableColumn fx:id="avgRatingColumn" prefWidth="75.0" text="Avg Rating" />
                     </columns>
                   </TableView>
                   <HBox prefWidth="390.0">
@@ -62,7 +63,7 @@
                     <columns>
                       <TableColumn fx:id="movieNameColumn" prefWidth="75.0" text="Title" />
                       <TableColumn fx:id="ratingColumn" prefWidth="75.0" text="Rating" />
-                        <TableColumn fx:id="directorColumn1" prefWidth="75.0" text="Director" />
+                        <TableColumn fx:id="directorColumn" prefWidth="75.0" text="Director" />
                     </columns>
                   </TableView>
                   <HBox prefWidth="390.0">
