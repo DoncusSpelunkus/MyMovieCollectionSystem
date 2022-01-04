@@ -48,7 +48,7 @@
             </TextField>
          </children>
       </HBox>
-      <Button fx:id="cancelBtn1" layoutX="87.5" layoutY="137.5" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="52.0" text="Cancel" />
+      <Button fx:id="cancelBtn1" layoutX="87.5" layoutY="137.5" mnemonicParsing="false" onAction="#closeAMWindow" prefHeight="25.0" prefWidth="52.0" text="Cancel" />
       <Button fx:id="addMovieBtn" layoutX="175.0" layoutY="137.5" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="52.0" text="Add" />
    </children>
 </AnchorPane>
