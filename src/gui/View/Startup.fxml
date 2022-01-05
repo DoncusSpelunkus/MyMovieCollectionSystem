@@ -8,8 +8,8 @@
 
 <AnchorPane prefHeight="420.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
    <children>
-      <ListView fx:id="listOfMovies" layoutX="150.0" layoutY="45.0" prefHeight="256.0" prefWidth="200.0" />
-      <Label layoutX="105.0" layoutY="15.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile">
+      <ListView fx:id="listOfMovies" layoutX="150.0" layoutY="55.0" prefHeight="255.0" prefWidth="200.0" />
+      <Label layoutX="105.0" layoutY="25.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile">
          <font>
             <Font size="18.0" />
          </font>
@@ -21,5 +21,6 @@
       </Label>
       <Button fx:id="yesBtn" layoutX="275.0" layoutY="370.0" mnemonicParsing="false" onAction="#yes" text="Yes" />
       <Button fx:id="noBtn" layoutX="175.0" layoutY="370.0" mnemonicParsing="false" onAction="#no" text="No" />
+      <Label fx:id="errorLabel3" layoutX="240.0" layoutY="10.0" />
    </children>
 </AnchorPane>

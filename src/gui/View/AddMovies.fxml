@@ -35,5 +35,6 @@
       </HBox>
       <Button fx:id="cancelBtn1" layoutX="87.5" layoutY="107.5" mnemonicParsing="false" onAction="#closeAMWindow" prefHeight="25.0" prefWidth="52.0" text="Cancel" />
       <Button fx:id="addMovieBtn" layoutX="175.0" layoutY="107.5" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="52.0" text="Add" />
+      <Label fx:id="errorLabel2" layoutX="135.0" layoutY="15.0" />
    </children>
 </AnchorPane>
