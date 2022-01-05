@@ -38,7 +38,7 @@ public class MoviesDAO {
     }
 
     // Method used for adding movies from user input into the database.
-    public Movies addMovies(String name, float rating, String filelink, Date lastview) {
+    public void addMovies(String name, float rating, String filelink, Date lastview) {
         String sqlStatement = "INSERT INTO Movie(name, rating, filelink, lastview) VALUES (?,?,?,?)";
         try(Connection con = db.getConnection()){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
@@ -50,9 +50,12 @@ public class MoviesDAO {
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch(SQLException ex) {
             System.out.println(ex);
-            return null;
         }
         Movies movie = new Movies(1,name,rating,filelink,lastview); // Creating a new movie object
+        getCurrentMovie(movie);
+    }
+
+    public Movies getCurrentMovie(Movies movie){
         return movie;
     }
 

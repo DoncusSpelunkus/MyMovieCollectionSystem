@@ -1,11 +1,14 @@
 package bll;
 
+import be.Categories;
 import be.Movies;
 
-import java.util.Date;
+import java.sql.Date;
 
 public interface BLLFacade {
-    Movies addMovie(String name, float rating, String filelink, Date lastview);
+    void addMovie(String name, float rating, String filelink, Date lastview);
 
-    int getCurrentMovieID();
+    Movies getCurrentMovie();
+
+    void addToCategory(Categories selectedCategory, Movies selectedMovie);
 }

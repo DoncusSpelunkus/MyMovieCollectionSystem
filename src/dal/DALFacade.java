@@ -10,7 +10,7 @@ public interface DALFacade {
 
     List<Movies> getAllMovies();
 
-    Movies addMovies(String name, float rating, String filelink, Date lastview);
+    void addMovies(String name, float rating, String filelink, Date lastview);
 
     Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview);
 
@@ -30,5 +30,5 @@ public interface DALFacade {
 
     void deleteFromCategories(Categories selectedCategories, Movies selectedMovie);
 
-    int getCurrentMovieID();
+    Movies getCurrentMovie();
 }

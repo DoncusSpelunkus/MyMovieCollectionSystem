@@ -1,12 +1,13 @@
 package gui.Model;
 
+import be.Categories;
 import be.Movies;
 import bll.BLLFacade;
 import bll.BLLManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MoviesModel {
 
@@ -23,8 +24,8 @@ public class MoviesModel {
         logiclayer.addMovie(name, rating, filelink, lastview);
     }
 
-    public int getCurrentMovieID(){
-        return logiclayer.getCurrentMovieID();
+    public Movies getCurrentMovie(){
+        return logiclayer.getCurrentMovie();
     }
 
     public ObservableList<Movies> getMovies() {
@@ -39,6 +40,10 @@ public class MoviesModel {
 
     public void editMovie(Movies selectedMovie, String name, float rating, String filelink, Date lastview){
         logiclayer.editMovie(selectedMovie, name, rating, filelink, lastview);
+    }
+
+    public void addToCategory(Categories selectedCategory, Movies selectedMovie){
+        logiclayer.addToCategory(selectedCategory, selectedMovie);
     }
 }
 
