@@ -93,7 +93,7 @@ public class AddMoviesController {
         }
     }
 
-    public void setCategory1Combo(ActionEvent event){
+    public void onSelectionCombo1(ActionEvent event){
         if(category1Combo.getSelectionModel().getSelectedItem() != null){
             category2Combo.setVisible(true);
             category2Combo.setEditable(true);
@@ -108,7 +108,7 @@ public class AddMoviesController {
         }
     }
 
-    public void setCategory2Combo(ActionEvent event){
+    public void onSelectionCombo2(ActionEvent event){
         if(category2Combo.getSelectionModel().getSelectedItem() != null){
             category1Combo.setEditable(false);
             category3Combo.setVisible(true);
@@ -123,7 +123,7 @@ public class AddMoviesController {
         }
     }
 
-    public void setCategory3Combo(ActionEvent event){
+    public void onSelectionCombo3(ActionEvent event){
         if(category3Combo.getSelectionModel().getSelectedItem() != null){
             category2Combo.setEditable(false);
             category3 = category3Combo.getSelectionModel().getSelectedItem();

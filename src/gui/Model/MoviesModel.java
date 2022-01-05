@@ -28,9 +28,9 @@ public class MoviesModel {
         return logiclayer.getCurrentMovie();
     }
 
-    public ObservableList<Movies> getMovies() {
+    public ObservableList<Movies> getAllMovies() {
         movies = FXCollections.observableArrayList();
-        movies.addAll(logiclayer.getAllMovies);
+        movies.addAll(logiclayer.getAllMovies());
         return movies;
     }
 
