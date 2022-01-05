@@ -6,6 +6,7 @@ import java.util.List;
 public class Categories {
 
     private String name;
+    private List<Movies> moviesList = new ArrayList<>();
     private final int categoryID;
 
     public Categories(String name, int id){
@@ -25,12 +26,12 @@ public class Categories {
         return categoryID;
     }
 
-    public List<Categories> getCategorieslist() {
-        return categorieslist;
+    public void setMovieList(List<Movies> moviesList){
+        this.moviesList = moviesList;
     }
 
-    public void setCategorieslist(List<Categories> categorieslist) {
-        this.categorieslist = categorieslist;
+    public List<Movies> getMoviesList(){
+        return moviesList;
     }
 
     private List<Categories> categorieslist = new ArrayList<>();

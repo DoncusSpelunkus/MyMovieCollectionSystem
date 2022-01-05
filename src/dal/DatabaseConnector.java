@@ -6,10 +6,9 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 
 public class DatabaseConnector {
-    private SQLServerDataSource dataSource;
+    private SQLServerDataSource dataSource = new SQLServerDataSource();
 
     public DatabaseConnector() {
-        dataSource = new SQLServerDataSource();
         dataSource.setDatabaseName("MovieCollectionSystem");
         dataSource.setUser("CSe21B_16");
         dataSource.setPassword("CSe21B_16");

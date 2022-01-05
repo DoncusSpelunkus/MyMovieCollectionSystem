@@ -11,13 +11,13 @@ import java.util.List;
 public class CatMovieDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
 
-    // Method used to getting all the songs in the playlist from the database.
-    public List<Movies> getCategoriesMovie(int categoryID) {
+    // Method used to getting all the movies in the categories from the database.
+    public List<Movies> getCategoriesMovie(int categoryid) {
         List<Movies> newMovieList = new ArrayList();
         try (Connection con = db.getConnection()) {
             String query = "SELECT * FROM CatMovie INNER JOIN Movie ON CatMovie.movieid = Movie.id WHERE CatMovie.categoryid = ?";
             PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setInt(1, categoryID);
+            pstm.setInt(1, categoryid);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Movies movie = new Movies(rs.getInt("id"), rs.getString("name"), rs.getFloat("rating"), rs.getString("filelink"), rs.getDate("lastview"));
@@ -33,10 +33,10 @@ public class CatMovieDAO {
         }
     }
 
-    // Method used to delete songs from playlists in the database.
+    // Method used to delete movies from categories in the database.
     public void deleteMovieFromAllCategories(Movies selectedMovie) {
         try (Connection con = db.getConnection()) {
-            String query = "DELETE from CatMovie WHERE SongID = ?";
+            String query = "DELETE from CatMovie WHERE movieid = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1, selectedMovie.getMovieID());
             pstm.execute();
@@ -69,7 +69,7 @@ public class CatMovieDAO {
     // Method to delete a Movie from a Category.
     public void deleteFromCategories(Categories selectedCategories, Movies selectedMovie) {
         try (Connection con = db.getConnection()) {
-            String query = "DELETE from CatMovie WHERE PlaylistID = ? AND SongID = ?";
+            String query = "DELETE from CatMovie WHERE categoryid = ? AND movieid = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1, selectedCategories.getCategoryID());
             pstm.setInt(2, selectedMovie.getMovieID());

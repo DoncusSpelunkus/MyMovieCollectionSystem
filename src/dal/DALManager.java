@@ -26,17 +26,17 @@ public class DALManager implements DALFacade {
     @Override
     public void deleteMovie(Movies selectedMovie) {
         moviesDAO.deleteMovie(selectedMovie);
-        CatMovieDAO.deleteMovieFromAllCategories(selectedMovie);
+        catMovieDAO.deleteMovieFromAllCategories(selectedMovie);
     }
 
     @Override
     public Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview) {
-        return MoviesDAO.editMovies(selectedMovie, name, rating, filelink, lastview);
+        return moviesDAO.editMovies(selectedMovie, name, rating, filelink, lastview);
     }
 
     @Override
     public Movies addMovies(String name, float rating, String filelink, Date lastview) {
-        return MoviesDAO.addMovies(name, rating, filelink, lastview);
+        return moviesDAO.addMovies(name, rating, filelink, lastview);
     }
 
     @Override
@@ -60,9 +60,10 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public Movies addToCategories(Movies selectedCategories, Movies selectedMovie) {
-        return CatMovieDAO.addToCategories(selectedCategories, selectedMovie);
+    public Movies addToCategories(Categories selectedCategories, Movies selectedMovie) {
+        return catMovieDAO.addToCategories(selectedCategories, selectedMovie);
     }
+
     @Override
     public void deleteFromCategories(Categories selectedCategories, Movies selectedMovie){
         catMovieDAO.deleteFromCategories(selectedCategories, selectedMovie);
