@@ -1,4 +1,4 @@
 package bll;
 
-public class BLLManager {
+public class BLLManager implements BLLFacade{
 }

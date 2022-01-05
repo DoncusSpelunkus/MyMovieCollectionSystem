@@ -10,12 +10,40 @@ public class Movies {
     private String filelink;
     private Date lastview;
 
+    private Categories category1;
+    private Categories category2;
+    private Categories category3;
+
     public Movies(int id, String name, float rating, String filelink, Date lastview) {
         this.movieID = id;
         this.name = name;
         this.rating = rating;
         this.filelink = filelink;
         this.lastview = lastview;
+    }
+
+    public Categories getCategory1() {
+        return category1;
+    }
+
+    public void setCategory1(Categories category1) {
+        this.category1 = category1;
+    }
+
+    public Categories getCategory2() {
+        return category2;
+    }
+
+    public void setCategory2(Categories category2) {
+        this.category2 = category2;
+    }
+
+    public Categories getCategory3() {
+        return category3;
+    }
+
+    public void setCategory3(Categories category3) {
+        this.category3 = category3;
     }
 
     public int getMovieID() {
@@ -52,5 +80,10 @@ public class Movies {
 
     public void setLastview(Date lastview) {
         this.lastview = lastview;
+    }
+
+    public String getRatingToString(){
+        String ratingString = Float.toString(rating);
+        return ratingString;
     }
 }

@@ -1,18 +1,28 @@
 package gui.Controller;
 
 
+import be.Categories;
 import be.Movies;
 import gui.Model.MoviesModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-
-import java.awt.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 
 public class AddMoviesController {
 
     Stage stage;
+
+    @FXML
+    private ComboBox<Categories> category1Combo;
+
+    @FXML
+    private ComboBox<Categories> category2Combo;
+
+    @FXML
+    private ComboBox<Categories> category3Combo;
 
     @FXML
     private TextField movieTitle;
@@ -21,50 +31,67 @@ public class AddMoviesController {
     private TextField filePathText;
 
     @FXML
-    private TextField errorLabel2;
+    private Label errorLabel2;
 
     @FXML
     private TextField ratingText;
 
     private final MoviesModel moviesModel;
     private MainController mainController;
-    private Movies movie;
+    private Movies selectedMovie;
+    private Categories category1;
+    private Categories category2;
+    private Categories category3;
+    private boolean isEditing = false;
 
 
-    public AddMoviesController(){
+    public AddMoviesController() {
         moviesModel = new MoviesModel();
     }
 
-    public void setMyController(){
+    public void setMyController() {
         this.mainController = mainController;
     }
 
-    public void addMovie(ActionEvent event){
+    public void addMovie(ActionEvent event) {
 
         String name = movieTitle.getText().trim();
-        if(!isEditing){
-            if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0){
-                MoviesModel.addMovie(name, rating, filePathText.getText());
-
-                MoviesModel.addToCategory()
-                movieTitle.clear();
-                filePathText.clear();
-                moviesModel.getAllSongs().setAll();
-
-                mainController.refreshSongList();
-                errorLabel2.setText("Succesfully added song, congrats");
-
-
+        String rating = ratingText.getText().trim();
+        float ratingNo = Float.parseFloat(rating);
+        if (!isEditing) {
+            if (ratingNo >= 0.0 && ratingNo <= 10.0) {
+                if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
+                    MoviesModel.addMovie(name, ratingText.getText(), filePathText.getText());
+                    selectedMovie = moviesModel
+                    MoviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem(), );
+                    movieTitle.clear();
+                    filePathText.clear();
+                    errorLabel2.setText("Succesfully added song, congrats");
+                } else {
+                    errorLabel2.setText("Something went wrong, try again");
+                }
+            } else {
+                errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
             }
-            else {
-                errorLabel2.setText("Something went wrong, try again");
-            }
+        } else {
+            moviesModel.editMovies(selectedMovie, name, filePathText.getText());
+            moviesModel.editMoviesCategory(selectedMovie, category1Combo.getSelectionModel().getSelectedItem(), category2Combo.getSelectionModel().getSelectedItem(), category3Combo.getSelectionModel().getSelectedItem())
         }
-        else{
-            moviesModel.editSongs(songToBeEdited, length, name, artistString.getText(), categoryString.getText(), filePathString.getText());
-        }
-
     }
 
-
+    public void setEdit(Movies movie){
+        if(movie != null){
+            selectedMovie = movie;
+            isEditing = true;
+            movieTitle.setText(selectedMovie.getName());
+            ratingText.setText(selectedMovie.getRatingToString());
+            filePathText.setText(selectedMovie.getFilelink());
+            category3Combo.getSelectionModel().select(selectedMovie.getCategory3());
+            category2Combo.getSelectionModel().select(selectedMovie.getCategory2());
+            category1Combo.getSelectionModel().select(selectedMovie.getCategory1());
+        }
+        else {
+            errorLabel2.setText("Error: No movie selected");
+        }
+    }
 }
