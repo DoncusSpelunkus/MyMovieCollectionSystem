@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="120.0" prefWidth="850.0">
@@ -32,9 +31,9 @@
                <children>
                   <TableView fx:id="categoriesView" maxHeight="530.0" maxWidth="425.0" minHeight="530.0" minWidth="425.0" prefHeight="530.0" prefWidth="425.0">
                     <columns>
-                      <TableColumn fx:id="categoryNameColumn" prefWidth="75.0" text="Name" />
-                      <TableColumn fx:id="amountColumn" prefWidth="75.0" text="Amount" />
-                        <TableColumn fx:id="avgRatingColumn" prefWidth="75.0" text="Avg Rating" />
+                      <TableColumn fx:id="categoryNameColumn" prefWidth="274.40000611543655" text="Name" />
+                      <TableColumn fx:id="amountColumn" prefWidth="71.20001220703125" text="Amount" />
+                        <TableColumn fx:id="avgRatingColumn" prefWidth="77.5999755859375" text="Avg Rating" />
                     </columns>
                   </TableView>
                   <HBox prefWidth="390.0">
@@ -61,9 +60,10 @@
                <children>
                   <TableView fx:id="moviesView" maxHeight="530.0" maxWidth="425.0" minHeight="530.0" minWidth="425.0" prefHeight="530.0" prefWidth="425.0">
                     <columns>
-                      <TableColumn fx:id="movieNameColumn" prefWidth="75.0" text="Title" />
-                      <TableColumn fx:id="ratingColumn" prefWidth="75.0" text="Rating" />
-                        <TableColumn fx:id="directorColumn" prefWidth="75.0" text="Director" />
+                      <TableColumn fx:id="movieNameColumn" prefWidth="174.40003049373627" text="Title" />
+                        <TableColumn fx:id="lastViewedColumn" minWidth="0.0" prefWidth="79.199951171875" text="Last Viewed" />
+                      <TableColumn fx:id="ratingColumn" minWidth="0.0" prefWidth="72.0" text="Rating" />
+                        <TableColumn fx:id="ownRatingColumn" minWidth="4.79998779296875" prefWidth="96.800048828125" text="Own Rating" />
                     </columns>
                   </TableView>
                   <HBox prefWidth="390.0">
