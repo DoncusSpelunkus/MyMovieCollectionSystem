@@ -12,7 +12,7 @@ public class CatMovieDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
 
     // Method used to getting all the movies in the categories from the database.
-    public List<Movies> getCategoriesMovie(int categoryid) {
+    public List<Movies> getMovieCategories(int categoryid) {
         List<Movies> newMovieList = new ArrayList();
         try (Connection con = db.getConnection()) {
             String query = "SELECT * FROM CatMovie INNER JOIN Movie ON CatMovie.movieid = Movie.id WHERE CatMovie.categoryid = ?";

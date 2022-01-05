@@ -33,7 +33,4 @@ public class Categories {
     public List<Movies> getMoviesList(){
         return moviesList;
     }
-
-    private List<Categories> categorieslist = new ArrayList<>();
-
 }

@@ -1,8 +1,6 @@
 package dal;
 
 import be.Categories;
-import be.Movies;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class CategoriesDAO {
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
                     Categories category = new Categories(name, id);
-                    category.setMovieList(catMovieDAO.getCategoriesMovie(id));
+                    category.setMovieList(catMovieDAO.getMovieCategories(id));
                     allCategories.add(category);
                 }
             }
