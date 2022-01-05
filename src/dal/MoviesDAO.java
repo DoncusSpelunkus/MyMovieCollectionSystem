@@ -59,7 +59,7 @@ public class MoviesDAO {
     // Method used for editing the movies in the database.
     public Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview) {
         try (Connection con = db.getConnection()) {
-            String query = "UPDATE Movie set name = ?,rating = ?,filelink = ?,lastview = ?, WHERE id = ?";
+            String query = "UPDATE Movie set name = ?,rating = ?,filelink = ?,lastview = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, name);
             pstm.setFloat(2, rating);

@@ -24,7 +24,7 @@ public class CategoriesDAO {
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
                     Categories category = new Categories(name, id);
-                    category.setCategorieslist(CatMovieDAO.getCategoriesMovie(id));
+                    category.setMovieList(catMovieDAO.getCategoriesMovie(id));
                     allCategories.add(category);
                 }
             }
@@ -33,21 +33,6 @@ public class CategoriesDAO {
             return null;
         }
         return allCategories;
-    }
-
-    // Method used to update categories in the database.
-    public Categories updatePlaylist(Categories selectedCategories, String name) {
-        try (Connection con = db.getConnection()) {
-            String query = "UPDATE Category set name = ? WHERE id = ?";
-            PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setString(1, name);
-            pstm.setInt(2, selectedCategories.getCategoryID());
-            pstm.executeUpdate();
-            return new Categories(name,selectedCategories.getCategoryID());
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return null;
-        }
     }
 
     // Method used for making a new categories in the database.

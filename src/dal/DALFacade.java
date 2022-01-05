@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface DALFacade {
+
     List<Movies> getAllMovies();
 
     Movies addMovies(String name, float rating, String filelink, Date lastview);
@@ -23,7 +24,9 @@ public interface DALFacade {
 
     void deleteCategories(Categories selectedCategories);
 
-    Movies addToCategories(Movies selectedCategories, Movies selectedMovie);
-
     void deleteMovieFromAllCategories(Movies selectedMovie);
+
+    Movies addToCategories(Categories selectedCategories, Movies selectedMovie);
+
+    void deleteFromCategories(Categories selectedCategories, Movies selectedMovie);
 }
