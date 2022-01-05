@@ -23,6 +23,8 @@ public class DALManager implements DALFacade {
         return moviesDAO.getAllMovies();
     }
 
+
+
     @Override
     public void deleteMovie(Movies selectedMovie) {
         moviesDAO.deleteMovie(selectedMovie);

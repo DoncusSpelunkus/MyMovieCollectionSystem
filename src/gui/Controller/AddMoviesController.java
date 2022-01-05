@@ -11,6 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
+
 public class AddMoviesController {
 
     Stage stage;
@@ -61,9 +65,10 @@ public class AddMoviesController {
         if (!isEditing) {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
                 if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
-                    MoviesModel.addMovie(name, ratingText.getText(), filePathText.getText());
-                    selectedMovie = moviesModel
-                    MoviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem(), );
+                    moviesModel.addMovie(name, ratingNo, filePathText.getText(), Date.from(Instant.now()));
+                    moviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem());
+                    moviesModel.addToCategory(category2Combo.getSelectionModel().getSelectedItem());
+                    moviesModel.addToCategory(category3Combo.getSelectionModel().getSelectedItem());
                     movieTitle.clear();
                     filePathText.clear();
                     errorLabel2.setText("Succesfully added song, congrats");
@@ -74,8 +79,8 @@ public class AddMoviesController {
                 errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
             }
         } else {
-            moviesModel.editMovies(selectedMovie, name, filePathText.getText());
-            moviesModel.editMoviesCategory(selectedMovie, category1Combo.getSelectionModel().getSelectedItem(), category2Combo.getSelectionModel().getSelectedItem(), category3Combo.getSelectionModel().getSelectedItem())
+            moviesModel.editMovie(selectedMovie, name, ratingNo, filePathText.getText(), Date.from(Instant.now()));
+            moviesModel.editMoviesCategory(selectedMovie, category1Combo.getSelectionModel().getSelectedItem());
         }
     }
 

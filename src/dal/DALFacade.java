@@ -29,4 +29,6 @@ public interface DALFacade {
     Movies addToCategories(Categories selectedCategories, Movies selectedMovie);
 
     void deleteFromCategories(Categories selectedCategories, Movies selectedMovie);
+
+    int getCurrentMovieID();
 }

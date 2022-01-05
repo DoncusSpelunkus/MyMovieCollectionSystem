@@ -2,6 +2,10 @@ package bll;
 
 import be.Movies;
 
-public interface BLLFacade {
+import java.util.Date;
 
+public interface BLLFacade {
+    Movies addMovie(String name, float rating, String filelink, Date lastview);
+
+    int getCurrentMovieID();
 }
