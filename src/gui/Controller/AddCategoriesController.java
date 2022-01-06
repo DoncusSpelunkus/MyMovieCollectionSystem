@@ -38,7 +38,7 @@ public class AddCategoriesController {
                 categoriesModel.addCategory(name);
             }
             else {
-                categoriesModel.updateCategory(categoriesToBeEdited, name);
+                categoriesModel.editCategory(categoriesToBeEdited, name);
             }
         }
         controller.refreshCategory();
@@ -50,7 +50,7 @@ public class AddCategoriesController {
         if(selectedCategory != null){
             categoriesToBeEdited = selectedCategory;
             isEditing = true;
-            categoryName.setText(selectedCategory.getTitle());
+            categoryName.setText(selectedCategory.getName());
         }
         else{
             categoryName.setText("No Category selected, please select Category before termination");
