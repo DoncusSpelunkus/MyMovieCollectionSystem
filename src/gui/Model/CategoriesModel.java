@@ -18,9 +18,9 @@ public class CategoriesModel {
         categories = FXCollections.observableArrayList();
         logiclayer = new BLLManager();
     }
-    
+
     public void addCategory(String name){
-        logiclayer.addCategory(name);
+        logiclayer.makeCategories(name);
     }
 
     public ObservableList<Categories> getAllCategories() {
@@ -30,11 +30,11 @@ public class CategoriesModel {
     }
 
     public void deleteCategory(Categories selectedCategory){
-        logiclayer.deleteCategory(selectedCategory);
+        logiclayer.deleteCategories(selectedCategory);
     }
 
     public void editCategory(Categories selectedCategory, String name){
-        logiclayer.editCategory(selectedCategory, name);
+        logiclayer.updateCategories(selectedCategory, name);
     }
     
 }
