@@ -1,4 +1,6 @@
 package gui.Controller;
+import gui.Model.CategoriesModel;
+import gui.Model.MoviesModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,12 +73,15 @@ public class MainController implements Initializable {
 
     @FXML
     private void deleteCategoryBtn (ActionEvent actionEvent) {
-
+        CategoriesModel.deleteCategoryBtn(categoriesView.getSelectionModel().getSelectedItem());
+        categoriesView.getItems().remove(categoriesView.getSelectionModel().getSelectedIndex());
 
     }
 
     @FXML
     private void deleteMovieBtn (ActionEvent actionEvent) {
+        MoviesModel.deleteMovieBtn(moviesView.getSelectionModel().getSelectedItem());
+        moviesView.getItems().remove(moviesView.getSelectionModel().getSelectedIndex());
 
     }
 
