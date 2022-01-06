@@ -103,6 +103,7 @@ public class MainController implements Initializable {
     private void editCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupCategoriesWindow(true);
     }
+    @FXML
     private void setupCategoriesWindow(boolean edit) throws IOException, SQLServerException{
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../view/AddCategories.fxml"));
@@ -110,9 +111,9 @@ public class MainController implements Initializable {
         AddCategoriesController addCategories = fxmlLoader.getController();
         addCategories.setController(this);
         if (edit){
-            fxmlLoader.<addCategories>getController().setEdit(categoriesView.getSelectionModel().getSelectedItem());
+            fxmlLoader.<AddCategoriesController>getController().setEdit(categoriesView.getSelectionModel().getSelectedItem());
         }
-        fxmlLoader.<addCategories>getController();
+        fxmlLoader.<AddCategoriesController>getController();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
