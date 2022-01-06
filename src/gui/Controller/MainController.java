@@ -14,7 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.FormatterClosedException;
