@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -71,6 +72,7 @@ public class MainController implements Initializable {
     @FXML
     private void deleteCategoryBtn (ActionEvent actionEvent) {
 
+
     }
 
     @FXML
@@ -89,7 +91,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void newCategoryBtn (ActionEvent actionEvent) {
+    private void newCategoryBtn (ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("gui/View/AddCategories.fxml"));
         Parent root = loader.load();
@@ -100,7 +102,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void newMovieBtn (ActionEvent actionEvent) {
+    private void newMovieBtn (ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("gui/View/AddMovies.fxml"));
         Parent root = loader.load();
