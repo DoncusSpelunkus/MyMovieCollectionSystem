@@ -23,8 +23,8 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void deleteMovie(Movies selectedMovie){
-        dalFacade.deleteMovie(selectedMovie);
+    public void addMovie(String name, float rating, String filelink, Date lastview) {
+        dalFacade.addMovies(name, rating, filelink, lastview);
     }
 
     @Override
@@ -33,8 +33,39 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void addMovie(String name, float rating, String filelink, Date lastview) {
-        dalFacade.addMovies(name, rating, filelink, lastview);
+    public void deleteMovie(Movies selectedMovie){
+        dalFacade.deleteMovie(selectedMovie);
+        dalFacade.deleteMovieFromAllCategories(selectedMovie);
+    }
+
+    public List<Categories> getAllCategories(){
+        return dalFacade.getAllCategories();
+    }
+
+    @Override
+    public Categories makeCategories(String name) {
+        return dalFacade.makeCategories(name);
+    }
+
+    @Override
+    public Categories updateCategories(Categories selectedCategories, String name) {
+        return dalFacade.updateCategories(selectedCategories, name);
+    }
+
+    @Override
+    public void deleteCategories(Categories selectedCategories) {
+        dalFacade.deleteCategories(selectedCategories);
+    }
+
+
+    @Override
+    public void addToCategory(Categories selectedCategory, Movies selectedMovies){
+        dalFacade.addToCategories(selectedCategory, selectedMovies);
+    }
+
+    @Override
+    public void deleteFromCategories(Categories selectedCategories, Movies selectedMovie){
+        dalFacade.deleteFromCategories(selectedCategories, selectedMovie);
     }
 
     @Override
@@ -42,8 +73,4 @@ public class BLLManager implements BLLFacade{
         return dalFacade.getCurrentMovie();
     }
 
-    @Override
-    public void addToCategory(Categories selectedCategory, Movies selectedMovies){
-        dalFacade.addToCategories(selectedCategory, selectedMovies);
-    }
 }
