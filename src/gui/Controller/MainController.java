@@ -1,4 +1,5 @@
 package gui.Controller;
+import be.Movies;
 import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
 import be.Categories;
@@ -47,7 +48,7 @@ public class MainController implements Initializable {
         @FXML
         private TableColumn<?, ?> movieNameColumn;
         @FXML
-        private TableView<?> moviesView;
+        private TableView<Movies> moviesView;
         @FXML
         private Button newCategoryBtn;
         @FXML
@@ -120,18 +121,43 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void newMovieBtn (ActionEvent actionEvent) throws IOException {
-
-
+    private void newMovieBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
+        setupMoviesWindow(false);
     }
 
     @FXML
-    private void editMovieBtn (ActionEvent actionEvent) {
+    private void editMovieBtn (ActionEvent actionEvent) throws SQLServerException, IOException {
+        setupMoviesWindow(true);
+    }
 
+    @FXML
+    private void setupMoviesWindow(boolean edit) throws IOException, SQLServerException{
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../view/AddMovies.fxml"));
+        Parent root = fxmlLoader.load();
+        AddMoviesController addMovies = fxmlLoader.getController();
+        addMovies.setMyController(this);
+        if(edit){
+            fxmlLoader.<AddMoviesController>getController().setEdit(moviesView.getSelectionModel().getSelectedItem());
+        }
+        fxmlLoader.<AddMoviesController>getController();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
+    public void refreshCategory() throws SQLServerException {
+        if(categoriesView.getSelectionModel().getSelectedItem() != null){
+            int toSet = categoriesView.getSelectionModel().getSelectedIndex();
 
+            categoriesView.setItems(CategoriesModel.getAllCategories());
 
-
+            categoriesView.getSelectionModel().select(toSet);
+        }
+        else{
+            label.setText("Could not refresh playlist, please select one");
+        }
+    }
 }

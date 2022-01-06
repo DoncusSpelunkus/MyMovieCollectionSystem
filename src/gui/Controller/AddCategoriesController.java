@@ -55,7 +55,7 @@ public class AddCategoriesController {
         else{
             categoryName.setText("No Category selected, please select Category before termination");
         }
-        controller.refreshCategory
+        controller.refreshCategory();
     }
 
     public void closeACWindow(ActionEvent actionEvent) {

@@ -65,7 +65,7 @@ public class AddMoviesController {
         category3Combo.setVisibleRowCount(categories.size());
     }
 
-    public void setMyController() {
+    public void setMyController(MainController mainController) {
         this.mainController = mainController;
     }
 
