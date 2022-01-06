@@ -71,9 +71,11 @@ public class MainController implements Initializable {
         }
 
     private MainController mainController;
+    private CategoriesModel categoriesModel;
 
     public void setController(MainController mainController){
             this.mainController = mainController;
+            categoriesModel = new CategoriesModel();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -152,7 +154,7 @@ public class MainController implements Initializable {
         if(categoriesView.getSelectionModel().getSelectedItem() != null){
             int toSet = categoriesView.getSelectionModel().getSelectedIndex();
 
-            categoriesView.setItems(CategoriesModel.getAllCategories());
+            categoriesView.setItems(categoriesModel.getAllCategories());
 
             categoriesView.getSelectionModel().select(toSet);
         }
