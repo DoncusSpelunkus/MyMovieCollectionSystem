@@ -1,6 +1,8 @@
 package gui.Controller;
 import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
+import be.Categories;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +16,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.FormatterClosedException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -26,7 +29,7 @@ public class MainController implements Initializable {
         @FXML
         private TableColumn<?, ?> avgRatingColumn;
         @FXML
-        private TableView<?> categoriesView;
+        private TableView<Categories> categoriesView;
         @FXML
         private TableColumn<?, ?> categoryNameColumn;
         @FXML
@@ -66,6 +69,11 @@ public class MainController implements Initializable {
         void openAddMovies(ActionEvent event) {
         }
 
+    private MainController mainController;
+
+    public void setController(MainController mainController){
+            this.mainController = mainController;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -86,7 +94,33 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void editCategoryBtn (ActionEvent actionEvent) {
+    private void newCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
+        setupCategoriesWindow(false);
+    }
+    /*
+     addCategories.setEdit(this.categoriesView.getSelectionModel().getSelectedItem());*/
+    @FXML
+    private void editCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
+        setupCategoriesWindow(true);
+    }
+    private void setupCategoriesWindow(boolean edit) throws IOException, SQLServerException{
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../view/AddCategories.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        AddCategoriesController addCategories = fxmlLoader.getController();
+        addCategories.setController(this);
+        if (edit){
+            fxmlLoader.<addCategories>getController().setEdit(categoriesView.getSelectionModel().getSelectedItem());
+        }
+        fxmlLoader.<addCategories>getController();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    @FXML
+    private void newMovieBtn (ActionEvent actionEvent) throws IOException {
+
 
     }
 
@@ -95,27 +129,8 @@ public class MainController implements Initializable {
 
     }
 
-    @FXML
-    private void newCategoryBtn (ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("gui/View/AddCategories.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("New Category");
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 
-    @FXML
-    private void newMovieBtn (ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("gui/View/AddMovies.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("New Movie");
-        stage.setScene(new Scene(root));
-        stage.show();
 
-    }
+
 
 }

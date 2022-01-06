@@ -78,7 +78,9 @@ public class AddMoviesController {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
                 if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
                     moviesModel.addMovie(name, ratingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
-                    addCategoriesToMovie();
+                    if(!isEditing) {
+                        addCategoriesToMovie();
+                    }
                     movieTitle.clear();
                     filePathText.clear();
                     errorLabel2.setText("Succesfully added song, congrats");
@@ -141,9 +143,9 @@ public class AddMoviesController {
             movieTitle.setText(selectedMovie.getName());
             ratingText.setText(selectedMovie.getRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
-            category3Combo.getSelectionModel().select(selectedMovie.getCategory3());
-            category2Combo.getSelectionModel().select(selectedMovie.getCategory2());
-            category1Combo.getSelectionModel().select(selectedMovie.getCategory1());
+            category1Combo.setEditable(false);
+            category2Combo.setEditable(false);
+            category3Combo.setEditable(false);
         }
         else {
             errorLabel2.setText("Error: No movie selected");
