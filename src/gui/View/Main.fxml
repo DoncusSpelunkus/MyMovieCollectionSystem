@@ -59,9 +59,8 @@
                   <TableView fx:id="moviesView" maxHeight="530.0" maxWidth="425.0" minHeight="530.0" minWidth="425.0" prefHeight="530.0" prefWidth="425.0">
                     <columns>
                       <TableColumn fx:id="movieNameColumn" prefWidth="174.40003049373627" text="Title" />
-                        <TableColumn fx:id="lastViewedColumn" minWidth="0.0" prefWidth="79.199951171875" text="Last Viewed" />
-                      <TableColumn fx:id="ratingColumn" minWidth="0.0" prefWidth="72.0" text="Rating" />
-                        <TableColumn fx:id="ownRatingColumn" minWidth="4.79998779296875" prefWidth="96.800048828125" text="Own Rating" />
+                        <TableColumn fx:id="lastViewedColumn" minWidth="0.0" prefWidth="172.5" text="Last Viewed" />
+                      <TableColumn fx:id="ratingColumn" minWidth="0.0" prefWidth="77.0" text="Rating" />
                     </columns>
                   </TableView>
                   <HBox prefWidth="390.0">
