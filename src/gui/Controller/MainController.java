@@ -72,6 +72,7 @@ public class MainController implements Initializable {
 
     private MainController mainController;
     private CategoriesModel categoriesModel;
+    private MoviesModel moviesModel;
 
     public void setController(MainController mainController){
             this.mainController = mainController;
@@ -100,8 +101,7 @@ public class MainController implements Initializable {
     private void newCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupCategoriesWindow(false);
     }
-    /*
-     addCategories.setEdit(this.categoriesView.getSelectionModel().getSelectedItem());*/
+
     @FXML
     private void editCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupCategoriesWindow(true);
@@ -147,6 +147,10 @@ public class MainController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void refreshMovieList() throws SQLServerException{
+        moviesView.setItems(moviesModel.getAllMovies());
     }
 
 
