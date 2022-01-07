@@ -66,7 +66,7 @@ public class MainController implements Initializable {
 
         @FXML
         private TableColumn<?, ?> ratingColumn;
-        
+
         @FXML
         private TableView<Movies> moviesView;
 
@@ -189,7 +189,13 @@ public class MainController implements Initializable {
     private void populateMoviesView(){
         try {
             movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            lastViewedColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
+            ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
+            moviesView.setItems(observableListMovies);
+        }
+        catch (NullPointerException e) {
+            System.out.println(e);
         }
     }
     public void refreshCategory() throws SQLServerException {
