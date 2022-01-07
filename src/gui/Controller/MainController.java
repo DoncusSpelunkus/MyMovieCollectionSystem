@@ -4,6 +4,8 @@ import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
 import be.Categories;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,59 +29,90 @@ public class MainController implements Initializable {
 
         @FXML
         private TableColumn<?, ?> amountColumn;
+
         @FXML
         private TableColumn<?, ?> avgRatingColumn;
+
         @FXML
         private TableView<Categories> categoriesView;
+
         @FXML
         private TableColumn<?, ?> categoryNameColumn;
+
         @FXML
         private Button deleteCategoryBtn;
+
         @FXML
         private Button deleteMovieBtn;
+
         @FXML
         private TableColumn<?, ?> directorColumn;
+
         @FXML
         private Button editCategoryBtn;
+
         @FXML
         private Button editMovieBtn;
+
         @FXML
         private Label label;
+
         @FXML
         private TableColumn<?, ?> movieNameColumn;
+
         @FXML
         private TableView<Movies> moviesView;
+
         @FXML
         private Button newCategoryBtn;
+
         @FXML
         private Button newMovieBtn;
+
         @FXML
         private TableColumn<?, ?> ratingColumn;
+       
         @FXML
         private TextField searchField;
-        @FXML
-        void deleteCategory(ActionEvent event) {
-        }
-        @FXML
-        void deleteMovies(ActionEvent event) {
-        }
-        @FXML
-        void openAddCategories(ActionEvent event) {
-        }
-        @FXML
-        void openAddMovies(ActionEvent event) {
-        }
 
+
+
+    private ObservableList<Categories> observableListCategories = FXCollections.observableArrayList();
+    private ObservableList<Movies> observableListMovies = FXCollections.observableArrayList();
     private MainController mainController;
     private CategoriesModel categoriesModel;
     private MoviesModel moviesModel;
 
     public void setController(MainController mainController){
             this.mainController = mainController;
-            categoriesModel = new CategoriesModel();
     }
+
+    @FXML
+    void deleteCategory(ActionEvent event) {
+    }
+
+    @FXML
+    void deleteMovies(ActionEvent event) {
+    }
+
+    @FXML
+    void openAddCategories(ActionEvent event) {
+    }
+
+    @FXML
+    void openAddMovies(ActionEvent event) {
+    }
+
+    public MainController() {
+        moviesModel = new MoviesModel();
+        categoriesModel = new CategoriesModel();
+        observableListCategories = categoriesModel.getAllCategories();
+        observableListMovies = moviesModel.getAllMovies();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        populateCategoriesView();
 
     }
 
