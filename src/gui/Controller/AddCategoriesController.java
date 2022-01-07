@@ -59,7 +59,7 @@ public class AddCategoriesController {
         else{
             categoryName.setText("No Name has been entered, please enter name before termination");
         }
-        // controller.refreshCategory();
+        controller.refreshCategory();
     }
 
     public void closeACWindow(ActionEvent actionEvent) {

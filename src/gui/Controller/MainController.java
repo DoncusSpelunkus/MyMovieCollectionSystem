@@ -56,10 +56,16 @@ public class MainController implements Initializable {
         private Button editMovieBtn;
 
         @FXML
-        private Label label;
+        private Label errorlabel1;
 
         @FXML
         private TableColumn<?, ?> movieNameColumn;
+
+        @FXML
+        private TableColumn<?, ?> lastViewedColumn;
+
+        @FXML
+        private TableColumn<?, ?> ratingColumn;
 
         @FXML
         private TableView<Movies> moviesView;
@@ -69,9 +75,6 @@ public class MainController implements Initializable {
 
         @FXML
         private Button newMovieBtn;
-
-        @FXML
-        private TableColumn<?, ?> ratingColumn;
 
         @FXML
         private TextField searchField;
@@ -175,17 +178,26 @@ public class MainController implements Initializable {
     private void populateCategoriesView(){
         try {
             categoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            amountColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));
-            MusicCategortset.setCellValueFactory(new PropertyValueFactory<>("category"));
-            Musictimeset.setCellValueFactory(new PropertyValueFactory<>("timeToString"));
 
-            songlist.setItems(observableListSongs);
+            categoriesView.setItems(observableListCategories);
         }
         catch(NullPointerException e) {
-        System.out.println(e);
+            System.out.println(e);
         }
     }
 
+    private void populateMoviesView(){
+        try {
+            movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            lastViewedColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
+            ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+
+            moviesView.setItems(observableListMovies);
+        }
+        catch (NullPointerException e) {
+            System.out.println(e);
+        }
+    }
     public void refreshCategory() throws SQLServerException {
         if(categoriesView.getSelectionModel().getSelectedItem() != null){
             int toSet = categoriesView.getSelectionModel().getSelectedIndex();
@@ -195,7 +207,7 @@ public class MainController implements Initializable {
             categoriesView.getSelectionModel().select(toSet);
         }
         else{
-            // label.setText("Could not refresh playlist, please select one");
+            errorlabel1.setText("Could not refresh playlist, please select one");
         }
     }
 }
