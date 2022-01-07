@@ -13,7 +13,7 @@
    <children>
       <HBox prefHeight="120.0" prefWidth="850.0">
          <children>
-            <Label fx:id="errorLabel1">
+            <Label fx:id="errorLabel1" text=" ">
                <HBox.margin>
                   <Insets left="405.0" top="60.0" />
                </HBox.margin>
