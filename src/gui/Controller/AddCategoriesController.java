@@ -11,12 +11,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddCategoriesController {
+
     @FXML
     private Button addCategoryBtn;
+
     @FXML
     private Button cancelBtn2;
+
     @FXML
     private TextField categoryName;
+
     Stage stage;
     private boolean isEditing = false;
     private MainController controller;
@@ -55,7 +59,7 @@ public class AddCategoriesController {
         else{
             categoryName.setText("No Name has been entered, please enter name before termination");
         }
-        controller.refreshCategory();
+        // controller.refreshCategory();
     }
 
     public void closeACWindow(ActionEvent actionEvent) {

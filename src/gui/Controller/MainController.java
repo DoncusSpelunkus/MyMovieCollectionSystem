@@ -120,6 +120,7 @@ public class MainController implements Initializable {
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -163,7 +164,7 @@ public class MainController implements Initializable {
             categoriesView.getSelectionModel().select(toSet);
         }
         else{
-            label.setText("Could not refresh playlist, please select one");
+            // label.setText("Could not refresh playlist, please select one");
         }
     }
 }
