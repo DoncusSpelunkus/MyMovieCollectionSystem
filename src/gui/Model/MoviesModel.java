@@ -23,6 +23,9 @@ public class MoviesModel {
     public static void deleteMovieBtn(Object selectedItem) {
     }
 
+    public static void yesBtn(Object selectedItem) {
+    }
+
     public void addMovie(String name, float rating, String filelink, Date lastview){
         logiclayer.addMovie(name, rating, filelink, lastview);
     }
