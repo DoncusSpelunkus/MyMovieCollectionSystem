@@ -88,22 +88,6 @@ public class MainController implements Initializable {
             this.mainController = mainController;
     }
 
-    @FXML
-    void deleteCategory(ActionEvent event) {
-    }
-
-    @FXML
-    void deleteMovies(ActionEvent event) {
-    }
-
-    @FXML
-    void openAddCategories(ActionEvent event) {
-    }
-
-    @FXML
-    void openAddMovies(ActionEvent event) {
-    }
-
     public MainController() {
         moviesModel = new MoviesModel();
         categoriesModel = new CategoriesModel();
