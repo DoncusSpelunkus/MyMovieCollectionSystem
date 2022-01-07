@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -43,6 +44,9 @@ public class AddMoviesController {
     @FXML
     private TextField ratingText;
 
+    @FXML
+    private AnchorPane anchorPane;
+
     private MoviesModel moviesModel;
     private MainController mainController;
     private Movies selectedMovie;
@@ -68,6 +72,12 @@ public class AddMoviesController {
             filePathText.setText(selectedFile.getAbsolutePath());
             mediaPlayer = new MediaPlayer(new Media(new File(selectedFile.getAbsolutePath()).toURI().toString()));
         }
+    }
+
+    @FXML
+    public void closeAMWindow(ActionEvent event){
+        stage = (Stage) anchorPane.getScene().getWindow();
+        stage.close();
     }
 
     public AddMoviesController() {
@@ -180,4 +190,6 @@ public class AddMoviesController {
             moviesModel.addToCategory(category3Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
         }
     }
+
+
 }
