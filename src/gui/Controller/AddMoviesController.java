@@ -3,6 +3,7 @@ package gui.Controller;
 
 import be.Categories;
 import be.Movies;
+import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,6 +57,7 @@ public class AddMoviesController {
     private boolean isEditing = false;
     private ObservableList<Categories> categories;
     private MediaPlayer mediaPlayer;
+    private CategoriesModel categoriesModel;
 
 
 
@@ -81,15 +83,23 @@ public class AddMoviesController {
     }
 
     public AddMoviesController() {
+        categoriesModel = new CategoriesModel();
+        categories = categoriesModel.getAllCategories();
         moviesModel = new MoviesModel();
-        category1Combo.setItems(categories);
-        category1Combo.setVisibleRowCount(categories.size());
-        category2Combo.setVisible(false);
-        category2Combo.setItems(categories);
-        category2Combo.setVisibleRowCount(categories.size());
-        category3Combo.setVisible(false);
-        category3Combo.setItems(categories);
-        category3Combo.setVisibleRowCount(categories.size());
+        initializeComboxes();
+    }
+
+    private void initializeComboxes(){
+        if(category1Combo != null && category2Combo != null && category3Combo != null) {
+            category1Combo.setItems(categories);
+            category1Combo.setVisibleRowCount(categories.size());
+            category2Combo.setVisible(false);
+            category2Combo.setItems(categories);
+            category2Combo.setVisibleRowCount(categories.size());
+            category3Combo.setVisible(false);
+            category3Combo.setItems(categories);
+            category3Combo.setVisibleRowCount(categories.size());
+        }
     }
 
     public void setMyController(MainController mainController) {
