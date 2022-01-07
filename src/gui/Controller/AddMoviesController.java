@@ -3,16 +3,19 @@ package gui.Controller;
 
 import be.Categories;
 import be.Movies;
+import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionModel;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ComboBox;
 
+import java.io.File;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
@@ -42,6 +45,9 @@ public class AddMoviesController {
     @FXML
     private TextField ratingText;
 
+    @FXML
+    private AnchorPane anchorPane;
+
     private MoviesModel moviesModel;
     private MainController mainController;
     private Movies selectedMovie;
@@ -50,19 +56,50 @@ public class AddMoviesController {
     private Categories category3;
     private boolean isEditing = false;
     private ObservableList<Categories> categories;
+    private MediaPlayer mediaPlayer;
+    private CategoriesModel categoriesModel;
 
 
+
+    @FXML
+    private void chooseFileBTNPress(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Desktop"));
+        fileChooser.setTitle("Select movie");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            filePathText.setText(selectedFile.getAbsolutePath());
+            mediaPlayer = new MediaPlayer(new Media(new File(selectedFile.getAbsolutePath()).toURI().toString()));
+        }
+    }
+
+    @FXML
+    public void closeAMWindow(ActionEvent event){
+        stage = (Stage) anchorPane.getScene().getWindow();
+        stage.close();
+    }
 
     public AddMoviesController() {
+        categoriesModel = new CategoriesModel();
+        categories = categoriesModel.getAllCategories();
         moviesModel = new MoviesModel();
-        category1Combo.setItems(categories);
-        category1Combo.setVisibleRowCount(categories.size());
-        category2Combo.setVisible(false);
-        category2Combo.setItems(categories);
-        category2Combo.setVisibleRowCount(categories.size());
-        category3Combo.setVisible(false);
-        category3Combo.setItems(categories);
-        category3Combo.setVisibleRowCount(categories.size());
+        initializeComboxes();
+    }
+
+    private void initializeComboxes(){
+        if(category1Combo != null && category2Combo != null && category3Combo != null) {
+            category1Combo.setItems(categories);
+            category1Combo.setVisibleRowCount(categories.size());
+            category2Combo.setVisible(false);
+            category2Combo.setItems(categories);
+            category2Combo.setVisibleRowCount(categories.size());
+            category3Combo.setVisible(false);
+            category3Combo.setItems(categories);
+            category3Combo.setVisibleRowCount(categories.size());
+        }
     }
 
     public void setMyController(MainController mainController) {
@@ -163,4 +200,6 @@ public class AddMoviesController {
             moviesModel.addToCategory(category3Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
         }
     }
+
+
 }
