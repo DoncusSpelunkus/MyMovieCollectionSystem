@@ -109,7 +109,7 @@ public class MainController implements Initializable {
     @FXML
     private void setupCategoriesWindow(boolean edit) throws IOException, SQLServerException{
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../view/AddCategories.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("View/AddCategories.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         AddCategoriesController addCategories = fxmlLoader.getController();
         addCategories.setController(this);
@@ -135,7 +135,7 @@ public class MainController implements Initializable {
     @FXML
     private void setupMoviesWindow(boolean edit) throws IOException, SQLServerException{
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../view/AddMovies.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("View/AddMovies.fxml"));
         Parent root = fxmlLoader.load();
         AddMoviesController addMovies = fxmlLoader.getController();
         addMovies.setMyController(this);
