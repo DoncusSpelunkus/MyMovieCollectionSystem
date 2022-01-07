@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="304.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AddMoviesController">
+   <children>
+      <HBox layoutX="50.0" layoutY="14.0" prefHeight="20.0" prefWidth="200.0">
+         <children>
+            <HBox prefHeight="20.0" prefWidth="190.0" />
+         </children>
+      </HBox>
+      <Button fx:id="cancelBtn1" layoutX="36.0" layoutY="249.0" mnemonicParsing="false" onAction="#closeAMWindow" prefHeight="25.0" prefWidth="52.0" text="Cancel" />
+      <Button fx:id="addMovieBtn" layoutX="198.0" layoutY="249.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="52.0" text="Add" />
+      <Label fx:id="errorLabel2" layoutX="135.0" layoutY="15.0" />
+      <TextField fx:id="filePathText" layoutX="91.0" layoutY="112.0" prefHeight="25.0" prefWidth="117.5" />
+      <Label layoutX="26.0" layoutY="115.0" prefHeight="20.0" text="File Path:" />
+      <Label layoutX="49.0" layoutY="49.0" prefHeight="20.0" text="Title:" />
+      <TextField fx:id="movieTitle" layoutX="89.0" layoutY="46.0" prefHeight="25.0" prefWidth="150.0" />
+      <TextField fx:id="ratingText" layoutX="90.0" layoutY="77.0" />
+      <Label layoutX="38.0" layoutY="81.0" text="Rating:   " />
+      <ComboBox fx:id="category1Combo" layoutX="90.0" layoutY="145.0" onAction="#onSelectionCombo1" prefWidth="150.0" />
+      <ComboBox fx:id="category2Combo" layoutX="90.0" layoutY="177.0" onAction="#onSelectionCombo2" prefWidth="150.0" />
+      <ComboBox fx:id="category3Combo" layoutX="90.0" layoutY="210.0" onAction="#onSelectionCombo3" prefWidth="150.0" />
+      <Label layoutX="20.0" layoutY="149.0" text="Category 1" />
+      <Label layoutX="20.0" layoutY="181.0" text="Category 2" />
+      <Label layoutX="20.0" layoutY="214.0" text="Category 3" />
+   </children>
+</AnchorPane>
