@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import javafx.scene.control.*;
@@ -71,7 +72,7 @@ public class MainController implements Initializable {
 
         @FXML
         private TableColumn<?, ?> ratingColumn;
-       
+
         @FXML
         private TextField searchField;
 
@@ -97,7 +98,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         populateCategoriesView();
-
+        populateMoviesView();
     }
 
     @FXML
@@ -171,6 +172,19 @@ public class MainController implements Initializable {
         moviesView.setItems(moviesModel.getAllMovies());
     }
 
+    private void populateCategoriesView(){
+        try {
+            categoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            amountColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));
+            MusicCategortset.setCellValueFactory(new PropertyValueFactory<>("category"));
+            Musictimeset.setCellValueFactory(new PropertyValueFactory<>("timeToString"));
+
+            songlist.setItems(observableListSongs);
+        }
+        catch(NullPointerException e) {
+        System.out.println(e);
+        }
+    }
 
     public void refreshCategory() throws SQLServerException {
         if(categoriesView.getSelectionModel().getSelectedItem() != null){
