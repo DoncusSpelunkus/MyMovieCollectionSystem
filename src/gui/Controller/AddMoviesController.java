@@ -7,12 +7,13 @@ import gui.Model.MoviesModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.SelectionModel;
+import javafx.scene.control.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ComboBox;
 
+import java.io.File;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
@@ -50,8 +51,24 @@ public class AddMoviesController {
     private Categories category3;
     private boolean isEditing = false;
     private ObservableList<Categories> categories;
+    private MediaPlayer mediaPlayer;
 
 
+
+    @FXML
+    private void chooseFileBTNPress(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Desktop"));
+        fileChooser.setTitle("Select movie");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            filePathText.setText(selectedFile.getAbsolutePath());
+            mediaPlayer = new MediaPlayer(new Media(new File(selectedFile.getAbsolutePath()).toURI().toString()));
+        }
+    }
 
     public AddMoviesController() {
         moviesModel = new MoviesModel();
