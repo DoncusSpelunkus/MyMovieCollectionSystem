@@ -53,7 +53,7 @@ public class AddCategoriesController {
             categoryName.setText(selectedCategory.getName());
         }
         else{
-            categoryName.setText("No Category selected, please select Category before termination");
+            categoryName.setText("No Name has been entered, please enter name before termination");
         }
         controller.refreshCategory();
     }
