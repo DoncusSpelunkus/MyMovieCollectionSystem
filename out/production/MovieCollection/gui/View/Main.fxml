@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
    <children>
       <HBox prefHeight="120.0" prefWidth="850.0">
@@ -32,9 +31,6 @@
                <children>
                   <TableView fx:id="categoriesView" maxHeight="530.0" maxWidth="425.0" minHeight="530.0" minWidth="425.0" prefHeight="530.0" prefWidth="425.0">
                     <columns>
-                      <TableColumn fx:id="categoryNameColumn" prefWidth="274.40000611543655" text="Name" />
-                      <TableColumn fx:id="amountColumn" prefWidth="71.20001220703125" text="Amount" />
-                        <TableColumn fx:id="avgRatingColumn" prefWidth="77.5999755859375" text="Avg Rating" />
                       <TableColumn fx:id="categoryNameColumn" prefWidth="424.0" text="Name" />
                     </columns>
                   </TableView>
