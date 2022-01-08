@@ -198,6 +198,7 @@ public class MainController implements Initializable {
             System.out.println(e);
         }
     }
+
     public void refreshCategory() throws SQLServerException {
         if(categoriesView.getSelectionModel().getSelectedItem() != null){
             int toSet = categoriesView.getSelectionModel().getSelectedIndex();

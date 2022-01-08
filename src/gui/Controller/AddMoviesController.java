@@ -114,7 +114,7 @@ public class AddMoviesController {
         if (!isEditing) {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
                 if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
-                    moviesModel.addMovie(name, ratingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
+                    moviesModel.addMovie(name, ratingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
                     if(!isEditing) {
                         addCategoriesToMovie();
                     }
