@@ -33,4 +33,8 @@ public class Categories {
     public List<Movies> getMoviesList(){
         return moviesList;
     }
+
+    public String toString(){
+        return name;
+    }
 }
