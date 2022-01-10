@@ -5,9 +5,11 @@ import be.Categories;
 import be.Movies;
 import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -16,11 +18,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class AddMoviesController {
+public class AddMoviesController implements Initializable {
 
     Stage stage;
 
@@ -56,10 +61,23 @@ public class AddMoviesController {
     private Categories category3;
     private boolean isEditing = false;
     private ObservableList<Categories> categories;
+    private List<String> categoryNames;
     private MediaPlayer mediaPlayer;
     private CategoriesModel categoriesModel;
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initializeComboxes();
+    }
+
+    public AddMoviesController() {
+        categoriesModel = new CategoriesModel();
+        categories = categoriesModel.getAllCategories();
+        System.out.println(categories);
+        moviesModel = new MoviesModel();
+        // category1Combo = new ComboBox<>();
+    }
 
     @FXML
     private void chooseFileBTNPress(ActionEvent event) {
@@ -82,39 +100,18 @@ public class AddMoviesController {
         stage.close();
     }
 
-    public AddMoviesController() {
-        categoriesModel = new CategoriesModel();
-        categories = categoriesModel.getAllCategories();
-        moviesModel = new MoviesModel();
-        initializeComboxes();
-    }
-
-    private void initializeComboxes(){
-        if(category1Combo != null && category2Combo != null && category3Combo != null) {
-            category1Combo.setItems(categories);
-            category1Combo.setVisibleRowCount(categories.size());
-            category2Combo.setVisible(false);
-            category2Combo.setItems(categories);
-            category2Combo.setVisibleRowCount(categories.size());
-            category3Combo.setVisible(false);
-            category3Combo.setItems(categories);
-            category3Combo.setVisibleRowCount(categories.size());
-        }
-    }
-
     public void setMyController(MainController mainController) {
         this.mainController = mainController;
     }
 
     public void addMovie(ActionEvent event) {
-
         String name = movieTitle.getText().trim();
         String rating = ratingText.getText().trim();
         float ratingNo = Float.parseFloat(rating);
         if (!isEditing) {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
                 if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
-                    moviesModel.addMovie(name, ratingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
+                    moviesModel.addMovie(name, ratingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
                     if(!isEditing) {
                         addCategoriesToMovie();
                     }
@@ -137,13 +134,13 @@ public class AddMoviesController {
             category2Combo.setVisible(true);
             category2Combo.setEditable(true);
             category1 = category1Combo.getSelectionModel().getSelectedItem();
-            categories.remove(category1);
-
+            ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
+            copyCategories.remove(category1);
+            category2Combo.setItems(copyCategories);
         }
         else if (category1Combo.getSelectionModel().getSelectedItem() == null){
             category2Combo.setVisible(false);
             category2Combo.setEditable(false);
-            categories.add(category1);
         }
     }
 
@@ -153,20 +150,20 @@ public class AddMoviesController {
             category3Combo.setVisible(true);
             category3Combo.setEditable(true);
             category2 = category2Combo.getSelectionModel().getSelectedItem();
-            categories.remove(category2);
+            ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
+            copyCategories.remove(category1);
+            copyCategories.remove(category2);
+            category3Combo.setItems(copyCategories);
         }
         else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
             category3Combo.setVisible(false);
             category3Combo.setEditable(false);
-            categories.add(category2);
         }
     }
 
     public void onSelectionCombo3(ActionEvent event){
         if(category3Combo.getSelectionModel().getSelectedItem() != null){
             category2Combo.setEditable(false);
-            category3 = category3Combo.getSelectionModel().getSelectedItem();
-            categories.remove(category3);
         }
         else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
             categories.add(category3);
@@ -191,7 +188,7 @@ public class AddMoviesController {
 
     private void addCategoriesToMovie(){
         if(category1Combo != null) {
-            moviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
+            //moviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
         }
         if(category2Combo != null) {
             moviesModel.addToCategory(category2Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
@@ -201,5 +198,23 @@ public class AddMoviesController {
         }
     }
 
+    private void initializeComboxes(){
+        if(category1Combo != null && category2Combo != null && category3Combo != null) {
+            ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
+            category1Combo.setItems(copyCategories);
+             category2Combo.setVisible(false);
+            // category2Combo.setItems(categories);
+             category3Combo.setVisible(false);
+            // category3Combo.setItems(categories);
+        }
+    }
 
+    private void testComboxes() {
+        for (int i = 0; i < categories.size(); i++) {
+            categoryNames.add(categories.get(i).getName());
+        }
+        category1Combo.setValue(categories.get(1));
+
+    }
 }
+
