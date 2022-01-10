@@ -64,6 +64,7 @@ public class AddMoviesController implements Initializable {
     private List<String> categoryNames;
     private MediaPlayer mediaPlayer;
     private CategoriesModel categoriesModel;
+    private float ratingNo;
 
 
     @Override
@@ -74,7 +75,6 @@ public class AddMoviesController implements Initializable {
     public AddMoviesController() {
         categoriesModel = new CategoriesModel();
         categories = categoriesModel.getAllCategories();
-        System.out.println(categories);
         moviesModel = new MoviesModel();
         // category1Combo = new ComboBox<>();
     }
@@ -107,7 +107,7 @@ public class AddMoviesController implements Initializable {
     public void addMovie(ActionEvent event) {
         String name = movieTitle.getText().trim();
         String rating = ratingText.getText().trim();
-        float ratingNo = Float.parseFloat(rating);
+        convertTextToFloat(rating);
         if (!isEditing) {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
                 if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
@@ -129,44 +129,66 @@ public class AddMoviesController implements Initializable {
         }
     }
 
-    public void onSelectionCombo1(ActionEvent event){
-        if(category1Combo.getSelectionModel().getSelectedItem() != null){
-            category2Combo.setVisible(true);
-            category2Combo.setEditable(true);
-            category1 = category1Combo.getSelectionModel().getSelectedItem();
-            ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
-            copyCategories.remove(category1);
-            category2Combo.setItems(copyCategories);
+    private void convertTextToFloat(String rating){
+        try{
+            float ratingTemp = Float.parseFloat(rating);
+            ratingNo = ratingTemp;
         }
-        else if (category1Combo.getSelectionModel().getSelectedItem() == null){
-            category2Combo.setVisible(false);
-            category2Combo.setEditable(false);
+        catch (NumberFormatException e){
+            errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
+        }
+    }
+
+    public void onSelectionCombo1(ActionEvent event){
+        try {
+            if (category1Combo.getSelectionModel().getSelectedItem() != null) {
+                category2Combo.setVisible(true);
+                category2Combo.setEditable(true);
+                category1 = category1Combo.getSelectionModel().getSelectedItem();
+                ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
+                copyCategories.remove(category1);
+                category2Combo.setItems(copyCategories);
+            } else if (category1Combo.getSelectionModel().getSelectedItem() == null) {
+                category2Combo.setVisible(false);
+                category2Combo.setEditable(false);
+            }
+        }
+        catch (ClassCastException e){
+
         }
     }
 
     public void onSelectionCombo2(ActionEvent event){
-        if(category2Combo.getSelectionModel().getSelectedItem() != null){
-            category1Combo.setEditable(false);
-            category3Combo.setVisible(true);
-            category3Combo.setEditable(true);
-            category2 = category2Combo.getSelectionModel().getSelectedItem();
-            ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
-            copyCategories.remove(category1);
-            copyCategories.remove(category2);
-            category3Combo.setItems(copyCategories);
+        try {
+            if (category2Combo.getSelectionModel().getSelectedItem() != null) {
+                category1Combo.setEditable(false);
+                category3Combo.setVisible(true);
+                category3Combo.setEditable(true);
+                category2 = category2Combo.getSelectionModel().getSelectedItem();
+                ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
+                copyCategories.remove(category1);
+                copyCategories.remove(category2);
+                category3Combo.setItems(copyCategories);
+            } else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
+                category3Combo.setVisible(false);
+                category3Combo.setEditable(false);
+            }
         }
-        else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
-            category3Combo.setVisible(false);
-            category3Combo.setEditable(false);
+        catch (ClassCastException e){
+
         }
     }
 
     public void onSelectionCombo3(ActionEvent event){
-        if(category3Combo.getSelectionModel().getSelectedItem() != null){
-            category2Combo.setEditable(false);
+        try {
+            if (category3Combo.getSelectionModel().getSelectedItem() != null) {
+                category2Combo.setEditable(false);
+            } else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
+                categories.add(category3);
+            }
         }
-        else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
-            categories.add(category3);
+        catch (ClassCastException e){
+
         }
     }
 
@@ -188,7 +210,7 @@ public class AddMoviesController implements Initializable {
 
     private void addCategoriesToMovie(){
         if(category1Combo != null) {
-            //moviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
+            moviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
         }
         if(category2Combo != null) {
             moviesModel.addToCategory(category2Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
