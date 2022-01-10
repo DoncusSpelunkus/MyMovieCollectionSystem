@@ -106,8 +106,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void deleteCategoryBtn (ActionEvent actionEvent) {
-        CategoriesModel.deleteCategoryBtn(categoriesView.getSelectionModel().getSelectedItem());
-        categoriesView.getItems().remove(categoriesView.getSelectionModel().getSelectedIndex());
+        categoriesModel.deleteCategory(categoriesView.getSelectionModel().getSelectedItem());
 
     }
 
