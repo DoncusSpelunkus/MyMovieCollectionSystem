@@ -9,6 +9,7 @@ public class Movies {
     private float rating;
     private String filelink;
     private Date lastview;
+    private int IDinsideList = 0;
 
     private Categories category1;
     private Categories category2;
@@ -85,5 +86,13 @@ public class Movies {
     public String getRatingToString(){
         String ratingString = Float.toString(rating);
         return ratingString;
+    }
+
+    public int getIDinsideList() {
+        return IDinsideList;
+    }
+
+    public void setIDinsideList(int IDinsideList) {
+        this.IDinsideList = IDinsideList;
     }
 }

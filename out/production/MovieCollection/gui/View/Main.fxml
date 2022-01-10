@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
    <children>
-      <TableView fx:id="categoriesView" layoutX="14.0" layoutY="68.0" maxHeight="570.0" maxWidth="559.0" minHeight="530.0" minWidth="128.0" prefHeight="546.0" prefWidth="169.0">
+      <TableView fx:id="categoriesView" layoutX="14.0" layoutY="68.0" maxHeight="570.0" maxWidth="559.0" minHeight="530.0" minWidth="128.0" onMouseClicked="#categorySelect" prefHeight="546.0" prefWidth="169.0">
          <columns>
           <TableColumn fx:id="categoryNameColumn" prefWidth="172.0000057220459" text="Name" />
          </columns>
@@ -29,10 +29,9 @@
       <Button fx:id="deleteCategoryBtn" layoutX="14.0" layoutY="634.0" mnemonicParsing="false" onAction="#deleteCategoryBtn" text="Delete" />
       <Label fx:id="errorLabel1" layoutX="425.0" layoutY="50.0" text=" " />
       <TextField fx:id="searchField" layoutX="664.0" layoutY="24.0" />
-      <TableView layoutX="200.0" layoutY="68.0" prefHeight="546.0" prefWidth="194.0">
+      <TableView fx:id="moviesInCategory" layoutX="200.0" layoutY="68.0" prefHeight="546.0" prefWidth="194.0">
         <columns>
-          <TableColumn prefWidth="97.5999755859375" text="C1" />
-          <TableColumn prefWidth="93.60003662109375" text="C2" />
+          <TableColumn fx:id="moviesInCategoryName" prefWidth="193.59998168945313" text="Name" />
         </columns>
       </TableView>
       <Button fx:id="addToCategory" layoutX="425.0" layoutY="81.0" mnemonicParsing="false" onAction="#addToCategoryPress" text="Add" />

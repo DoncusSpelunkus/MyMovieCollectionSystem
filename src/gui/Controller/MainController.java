@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,14 +22,20 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.FormatterClosedException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+        @FXML
+        private TableView<Movies> moviesInCategory;
+
+        @FXML
+        private TableColumn<?, ?> moviesInCategoryName;
 
         @FXML
         private TableColumn<?, ?> amountColumn;
@@ -83,8 +90,8 @@ public class MainController implements Initializable {
 
 
 
-    private ObservableList<Categories> observableListCategories = FXCollections.observableArrayList();
-    private ObservableList<Movies> observableListMovies = FXCollections.observableArrayList();
+    private ObservableList<Categories> observableListCategories;
+    private ObservableList<Movies> observableListMovies;
     private MainController mainController;
     private CategoriesModel categoriesModel;
     private MoviesModel moviesModel;
@@ -104,6 +111,7 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         populateCategoriesView();
         populateMoviesView();
+        populateMoviesInCategoryView();
     }
 
     @FXML
@@ -114,19 +122,20 @@ public class MainController implements Initializable {
                 refreshCategory();
             }}
         catch (NullPointerException | SQLServerException ex){
-            System.out.println("ERROR: NO PLAYLIST SELECTED");
+            errorlabel1.setText("ERROR: NO PLAYLIST SELECTED");
         }
     }
 
     @FXML
-    private void deleteCategoryBtn (ActionEvent actionEvent) {
+    private void deleteCategoryBtn (ActionEvent actionEvent) throws SQLServerException {
         categoriesModel.deleteCategory(categoriesView.getSelectionModel().getSelectedItem());
-
+        refreshCategory();
     }
 
     @FXML
-    private void deleteMovieBtn (ActionEvent actionEvent) {
+    private void deleteMovieBtn (ActionEvent actionEvent) throws SQLServerException {
         moviesModel.deleteMovie(moviesView.getSelectionModel().getSelectedItem());
+        refreshMovieList();
     }
 
     @FXML
@@ -153,6 +162,11 @@ public class MainController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void categorySelect(MouseEvent mouseEvent){
+        fillCurrentPlaylist();
     }
 
     @FXML
@@ -215,8 +229,18 @@ public class MainController implements Initializable {
             categoriesView.setItems(sortedData);
         }
         catch(NullPointerException e) {
-            System.out.println(e);
+            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
         }
+    }
+
+    private void populateMoviesInCategoryView(){
+        try {
+            moviesInCategoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        }
+        catch (NullPointerException e){
+            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
+        }
+
     }
 
     private void populateMoviesView(){
@@ -255,7 +279,7 @@ public class MainController implements Initializable {
 
 }
         catch (NullPointerException e) {
-            System.out.println(e);
+            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
         }
     }
 
@@ -265,5 +289,22 @@ public class MainController implements Initializable {
 
     public void refreshCategory() throws SQLServerException {
         categoriesView.setItems(categoriesModel.getAllCategories());
+    }
+
+    private void fillCurrentPlaylist(){
+        try{ List<Movies> moviesInList = categoriesView.getSelectionModel().getSelectedItem().getMoviesList();
+            if(moviesInList.size() != 0) {
+                for (int i = moviesInList.size() - 1; i >= 0; i--) { // for loop for getting each element of the playlist into the tableview and sets the ID for each one
+                    moviesInList.get(i).setIDinsideList(moviesInList.size() - i);
+                    moviesInCategory.setItems(FXCollections.observableArrayList(moviesInList));
+                }
+            }
+            else {
+                moviesInCategory.getItems().clear();
+            }
+        }
+        catch(NullPointerException ex){
+            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
+        }
     }
 }
