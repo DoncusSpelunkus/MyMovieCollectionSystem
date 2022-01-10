@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -18,25 +17,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
-import java.util.List;
-import java.util.ResourceBundle;
 
-public class AddMoviesController implements Initializable {
+public class AddMoviesController {
 
     Stage stage;
-
-    @FXML
-    private ComboBox<Categories> category1Combo;
-
-    @FXML
-    private ComboBox<Categories> category2Combo;
-
-    @FXML
-    private ComboBox<Categories> category3Combo;
 
     @FXML
     private TextField movieTitle;
@@ -56,27 +43,12 @@ public class AddMoviesController implements Initializable {
     private MoviesModel moviesModel;
     private MainController mainController;
     private Movies selectedMovie;
-    private Categories category1;
-    private Categories category2;
-    private Categories category3;
     private boolean isEditing = false;
-    private ObservableList<Categories> categories;
-    private List<String> categoryNames;
     private MediaPlayer mediaPlayer;
-    private CategoriesModel categoriesModel;
     private float ratingNo;
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        initializeComboxes();
-    }
-
     public AddMoviesController() {
-        categoriesModel = new CategoriesModel();
-        categories = categoriesModel.getAllCategories();
         moviesModel = new MoviesModel();
-        // category1Combo = new ComboBox<>();
     }
 
     @FXML
@@ -112,9 +84,6 @@ public class AddMoviesController implements Initializable {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
                 if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
                     moviesModel.addMovie(name, ratingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
-                    if(!isEditing) {
-                        addCategoriesToMovie();
-                    }
                     movieTitle.clear();
                     filePathText.clear();
                     errorLabel2.setText("Succesfully added song, congrats");
@@ -127,6 +96,8 @@ public class AddMoviesController implements Initializable {
         } else {
             moviesModel.editMovie(selectedMovie, name, ratingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
         }
+        stage = (Stage) anchorPane.getScene().getWindow();
+        stage.close();
     }
 
     private void convertTextToFloat(String rating){
@@ -139,59 +110,6 @@ public class AddMoviesController implements Initializable {
         }
     }
 
-    public void onSelectionCombo1(ActionEvent event){
-        try {
-            if (category1Combo.getSelectionModel().getSelectedItem() != null) {
-                category2Combo.setVisible(true);
-                category2Combo.setEditable(true);
-                category1 = category1Combo.getSelectionModel().getSelectedItem();
-                ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
-                copyCategories.remove(category1);
-                category2Combo.setItems(copyCategories);
-            } else if (category1Combo.getSelectionModel().getSelectedItem() == null) {
-                category2Combo.setVisible(false);
-                category2Combo.setEditable(false);
-            }
-        }
-        catch (ClassCastException e){
-
-        }
-    }
-
-    public void onSelectionCombo2(ActionEvent event){
-        try {
-            if (category2Combo.getSelectionModel().getSelectedItem() != null) {
-                category1Combo.setEditable(false);
-                category3Combo.setVisible(true);
-                category3Combo.setEditable(true);
-                category2 = category2Combo.getSelectionModel().getSelectedItem();
-                ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
-                copyCategories.remove(category1);
-                copyCategories.remove(category2);
-                category3Combo.setItems(copyCategories);
-            } else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
-                category3Combo.setVisible(false);
-                category3Combo.setEditable(false);
-            }
-        }
-        catch (ClassCastException e){
-
-        }
-    }
-
-    public void onSelectionCombo3(ActionEvent event){
-        try {
-            if (category3Combo.getSelectionModel().getSelectedItem() != null) {
-                category2Combo.setEditable(false);
-            } else if (category2Combo.getSelectionModel().getSelectedItem() == null) {
-                categories.add(category3);
-            }
-        }
-        catch (ClassCastException e){
-
-        }
-    }
-
     public void setEdit(Movies movie){
         if(movie != null){
             selectedMovie = movie;
@@ -199,44 +117,10 @@ public class AddMoviesController implements Initializable {
             movieTitle.setText(selectedMovie.getName());
             ratingText.setText(selectedMovie.getRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
-            category1Combo.setEditable(false);
-            category2Combo.setEditable(false);
-            category3Combo.setEditable(false);
         }
         else {
             errorLabel2.setText("Error: No movie selected");
         }
-    }
-
-    private void addCategoriesToMovie(){
-        if(category1Combo != null) {
-            moviesModel.addToCategory(category1Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
-        }
-        if(category2Combo != null) {
-            moviesModel.addToCategory(category2Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
-        }
-        if(category3Combo != null) {
-            moviesModel.addToCategory(category3Combo.getSelectionModel().getSelectedItem(), moviesModel.getCurrentMovie());
-        }
-    }
-
-    private void initializeComboxes(){
-        if(category1Combo != null && category2Combo != null && category3Combo != null) {
-            ObservableList<Categories> copyCategories = FXCollections.observableArrayList(categories);
-            category1Combo.setItems(copyCategories);
-             category2Combo.setVisible(false);
-            // category2Combo.setItems(categories);
-             category3Combo.setVisible(false);
-            // category3Combo.setItems(categories);
-        }
-    }
-
-    private void testComboxes() {
-        for (int i = 0; i < categories.size(); i++) {
-            categoryNames.add(categories.get(i).getName());
-        }
-        category1Combo.setValue(categories.get(1));
-
     }
 }
 
