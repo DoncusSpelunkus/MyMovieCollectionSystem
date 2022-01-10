@@ -3,6 +3,7 @@ package gui.Controller;
 
 import be.Categories;
 import be.Movies;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
 import javafx.collections.FXCollections;
@@ -76,7 +77,7 @@ public class AddMoviesController {
         this.mainController = mainController;
     }
 
-    public void addMovie(ActionEvent event) {
+    public void addMovie(ActionEvent event) throws SQLServerException {
         String name = movieTitle.getText().trim();
         String rating = ratingText.getText().trim();
         convertTextToFloat(rating);
@@ -96,6 +97,7 @@ public class AddMoviesController {
         } else {
             moviesModel.editMovie(selectedMovie, name, ratingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
         }
+        mainController.refreshMovieList();
         stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();
     }

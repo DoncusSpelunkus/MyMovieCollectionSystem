@@ -29,12 +29,12 @@
       <Button fx:id="deleteCategoryBtn" layoutX="14.0" layoutY="634.0" mnemonicParsing="false" onAction="#deleteCategoryBtn" text="Delete" />
       <Label fx:id="errorLabel1" layoutX="425.0" layoutY="50.0" text=" " />
       <TextField fx:id="searchField" layoutX="664.0" layoutY="24.0" />
-      <TableView layoutX="200.0" layoutY="68.0" prefHeight="546.0" prefWidth="200.0">
+      <TableView layoutX="200.0" layoutY="68.0" prefHeight="546.0" prefWidth="194.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="97.5999755859375" text="C1" />
+          <TableColumn prefWidth="93.60003662109375" text="C2" />
         </columns>
       </TableView>
-      <Button layoutX="425.0" layoutY="68.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="addToCategory" layoutX="425.0" layoutY="81.0" mnemonicParsing="false" onAction="#addToCategoryPress" text="Add" />
    </children>
 </AnchorPane>

@@ -107,6 +107,18 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    private void addToCategoryPress (ActionEvent actionEvent) {
+        try{
+            if (moviesView.getSelectionModel().getSelectedIndex() != -1) {
+                moviesModel.addToCategory(categoriesView.getSelectionModel().getSelectedItem(), moviesView.getSelectionModel().getSelectedItem());
+                refreshCategory();
+            }}
+        catch (NullPointerException | SQLServerException ex){
+            System.out.println("ERROR: NO PLAYLIST SELECTED");
+        }
+    }
+
+    @FXML
     private void deleteCategoryBtn (ActionEvent actionEvent) {
         categoriesModel.deleteCategory(categoriesView.getSelectionModel().getSelectedItem());
 
@@ -168,14 +180,6 @@ public class MainController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    public void refreshMovieList() throws SQLServerException{
-        moviesView.setItems(moviesModel.getAllMovies());
-    }
-
-    public void refreshCategory() throws SQLServerException {
-        categoriesView.setItems(categoriesModel.getAllCategories());
     }
 
     private void populateCategoriesView(){
@@ -253,5 +257,13 @@ public class MainController implements Initializable {
         catch (NullPointerException e) {
             System.out.println(e);
         }
+    }
+
+    public void refreshMovieList() throws SQLServerException{
+        moviesView.setItems(moviesModel.getAllMovies());
+    }
+
+    public void refreshCategory() throws SQLServerException {
+        categoriesView.setItems(categoriesModel.getAllCategories());
     }
 }
