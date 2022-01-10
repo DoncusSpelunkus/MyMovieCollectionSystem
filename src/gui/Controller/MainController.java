@@ -113,9 +113,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void deleteMovieBtn (ActionEvent actionEvent) {
-        MoviesModel.deleteMovieBtn(moviesView.getSelectionModel().getSelectedItem());
-        moviesView.getItems().remove(moviesView.getSelectionModel().getSelectedIndex());
-
+        moviesModel.deleteMovie(moviesView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
