@@ -6,6 +6,8 @@ import be.Categories;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -175,11 +177,41 @@ public class MainController implements Initializable {
         moviesView.setItems(moviesModel.getAllMovies());
     }
 
+    public void refreshCategory() throws SQLServerException {
+        categoriesView.setItems(categoriesModel.getAllCategories());
+    }
+
     private void populateCategoriesView(){
         try {
             categoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
             categoriesView.setItems(observableListCategories);
+
+            //initial filtered list
+            FilteredList<Categories> searchFilter = new FilteredList<>(observableListCategories, b -> true);
+            searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+                searchFilter.setPredicate(categories -> {
+
+                    // if search value is empty then it displays the songs as it is.
+                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                        try {
+                            refreshCategory();
+                        } catch (SQLServerException e) {
+                            e.printStackTrace();
+                        }
+                        return true;
+                    }
+                    String searchWord = newValue.toLowerCase();
+                    if (categories.getName().toLowerCase().indexOf(searchWord) > -1) {
+                        return true; // data will change if song found
+                    } else
+                        return false;
+                });
+            });
+            SortedList<Categories> sortedData = new SortedList<>(searchFilter);
+            // binds the sorted result set with the table view;
+            sortedData.comparatorProperty().bind(categoriesView.comparatorProperty());
+            categoriesView.setItems(sortedData);
         }
         catch(NullPointerException e) {
             System.out.println(e);
@@ -193,22 +225,36 @@ public class MainController implements Initializable {
             ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
 
             moviesView.setItems(observableListMovies);
-        }
+
+            //initial filtered list
+            FilteredList<Movies> searchFilter = new FilteredList<>(observableListMovies, b -> true);
+            searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+                searchFilter.setPredicate(movie -> {
+
+            // if search value is empty then it displays the songs as it is.
+            if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                try {
+                    refreshMovieList();
+                } catch (SQLServerException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+            String searchWord = newValue.toLowerCase();
+            if (movie.getName().toLowerCase().indexOf(searchWord) > -1) {
+                return true; // data will change if song found
+            } else
+                return false;
+        });
+    });
+    SortedList<Movies> sortedData = new SortedList<>(searchFilter);
+    // binds the sorted result set with the table view;
+            sortedData.comparatorProperty().bind(moviesView.comparatorProperty());
+            moviesView.setItems(sortedData);
+
+}
         catch (NullPointerException e) {
             System.out.println(e);
-        }
-    }
-
-    public void refreshCategory() throws SQLServerException {
-        if(categoriesView.getSelectionModel().getSelectedItem() != null){
-            int toSet = categoriesView.getSelectionModel().getSelectedIndex();
-
-            categoriesView.setItems(categoriesModel.getAllCategories());
-
-            categoriesView.getSelectionModel().select(toSet);
-        }
-        else{
-            errorlabel1.setText("Could not refresh playlist, please select one");
         }
     }
 }
