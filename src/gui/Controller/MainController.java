@@ -269,8 +269,7 @@ public class MainController implements Initializable {
             // binds the sorted result set with the table view;
             sortedData.comparatorProperty().bind(moviesView.comparatorProperty());
             moviesView.setItems(sortedData);
-
-}
+        }
         catch (NullPointerException e) {
             errorLabel1.setText("Hey you got a: Nullpointerexception...congrats");
         }

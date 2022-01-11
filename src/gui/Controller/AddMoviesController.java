@@ -90,17 +90,17 @@ public class AddMoviesController {
         if (!isEditing) {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
                 if (personalRating >= 0.0 && personalRating <= 10.0) {
-                if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
+                    if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
                     moviesModel.addMovie(name, ratingNo, personalRating, filePathText.getText(), Date.valueOf(LocalDate.now()));
                     movieTitle.clear();
                     filePathText.clear();
                     errorLabel2.setText("Succesfully added song, congrats");
+                    } else {
+                        errorLabel2.setText("Something went wrong, try again");
+                    }
                 } else {
-                    errorLabel2.setText("Something went wrong, try again");
+                    errorLabel2.setText("Invalid input: Personal rating must have a valid number between 0.0 and 10.0");
                 }
-            } else {
-                errorLabel2.setText("Invalid input: Personal rating must have a valid number between 0.0 and 10.0");
-            }
             } else {
                 errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
             }
@@ -146,4 +146,3 @@ public class AddMoviesController {
         }
     }
 }
-
