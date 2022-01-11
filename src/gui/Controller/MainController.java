@@ -209,11 +209,6 @@ public class MainController implements Initializable {
 
                     // if search value is empty then it displays the songs as it is.
                     if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                        try {
-                            refreshCategory();
-                        } catch (SQLServerException e) {
-                            e.printStackTrace();
-                        }
                         return true;
                     }
                     String searchWord = newValue.toLowerCase();
@@ -258,11 +253,6 @@ public class MainController implements Initializable {
 
             // if search value is empty then it displays the songs as it is.
             if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                try {
-                    refreshMovieList();
-                } catch (SQLServerException e) {
-                    e.printStackTrace();
-                }
                 return true;
             }
             String searchWord = newValue.toLowerCase();
