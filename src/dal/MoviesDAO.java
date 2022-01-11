@@ -23,10 +23,11 @@ public class MoviesDAO {
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
                     float rating = rs.getFloat("rating");
+                    float prating = rs.getFloat("prating");
                     String filelink = rs.getString("filelink");
                     Date lastview = rs.getDate("lastview");
 
-                    Movies movie = new Movies(id, name,rating,filelink,lastview);// Creating a movie object from the retrieved values
+                    Movies movie = new Movies(id, name,rating,prating,filelink,lastview);// Creating a movie object from the retrieved values
                     movieList.add(movie); // Adding the movie to  list
                 }
             }
@@ -38,35 +39,37 @@ public class MoviesDAO {
     }
 
     // Method used for adding movies from user input into the database.
-    public void addMovies(String name, float rating, String filelink, Date lastview) {
-        String sqlStatement = "INSERT INTO Movie(name, rating, filelink, lastview) VALUES (?,?,?,?)";
+    public void addMovies(String name, float rating, float prating, String filelink, Date lastview) {
+        String sqlStatement = "INSERT INTO Movie(name, rating, prating, filelink, lastview) VALUES (?,?,?,?,?)";
         try(Connection con = db.getConnection()){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, name);
             pstm.setFloat(2, rating);
-            pstm.setString(3, filelink);
-            pstm.setDate(4, lastview);
+            pstm.setFloat(3, prating);
+            pstm.setString(4, filelink);
+            pstm.setDate(5, lastview);
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch(SQLException ex) {
             System.out.println(ex);
         }
-        Movies movie = new Movies(1,name,rating,filelink,lastview); // Creating a new movie object
+        Movies movie = new Movies(1,name,rating,prating,filelink,lastview); // Creating a new movie object
         getCurrentMovie(movie);
     }
 
     // Method used for editing the movies in the database.
-    public Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview) {
+    public Movies editMovies(Movies selectedMovie, String name, float rating, float prating, String filelink, Date lastview) {
         try (Connection con = db.getConnection()) {
-            String query = "UPDATE Movie set name = ?,rating = ?,filelink = ?,lastview = ? WHERE id = ?";
+            String query = "UPDATE Movie set name = ?,rating = ?,prating = ?,filelink = ?,lastview = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, name);
             pstm.setFloat(2, rating);
-            pstm.setString(3, filelink);
-            pstm.setDate(4, lastview);
-            pstm.setInt(5, selectedMovie.getMovieID());
+            pstm.setFloat(3, prating);
+            pstm.setString(4, filelink);
+            pstm.setDate(5, lastview);
+            pstm.setInt(6, selectedMovie.getMovieID());
             pstm.executeUpdate();
-            return new Movies(selectedMovie.getMovieID(),name,rating,filelink,lastview);
+            return new Movies(selectedMovie.getMovieID(),name,rating,prating,filelink,lastview);
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;

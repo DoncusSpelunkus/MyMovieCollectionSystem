@@ -9,9 +9,9 @@ import java.util.List;
 public interface BLLFacade {
     List<Movies> getAllMovies();
 
-    void addMovie(String name, float rating, String filelink, Date lastview);
+    void addMovie(String name, float rating, float prating, String filelink, Date lastview);
 
-    void editMovie(Movies selectedMovie, String name, float rating, String filelink, Date lastview);
+    void editMovie(Movies selectedMovie, String name, float rating, float prating, String filelink, Date lastview);
 
     void deleteMovie(Movies selectedMovie);
 

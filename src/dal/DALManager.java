@@ -30,13 +30,13 @@ public class DALManager implements DALFacade {
     }
 
     @Override
-    public Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview) {
-        return moviesDAO.editMovies(selectedMovie, name, rating, filelink, lastview);
+    public Movies editMovies(Movies selectedMovie, String name, float rating, float prating, String filelink, Date lastview) {
+        return moviesDAO.editMovies(selectedMovie, name, rating, prating, filelink, lastview);
     }
 
     @Override
-    public void addMovies(String name, float rating, String filelink, Date lastview) {
-        moviesDAO.addMovies(name, rating, filelink, lastview);
+    public void addMovies(String name, float rating, float prating, String filelink, Date lastview) {
+        moviesDAO.addMovies(name, rating, prating, filelink, lastview);
     }
 
     @Override

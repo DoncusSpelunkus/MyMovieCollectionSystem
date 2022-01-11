@@ -39,6 +39,9 @@ public class AddMoviesController {
     private TextField ratingText;
 
     @FXML
+    private TextField personalRatingText;
+
+    @FXML
     private AnchorPane anchorPane;
 
     private MoviesModel moviesModel;
@@ -47,6 +50,7 @@ public class AddMoviesController {
     private boolean isEditing = false;
     private MediaPlayer mediaPlayer;
     private float ratingNo;
+    private float personalRating;
 
     public AddMoviesController() {
         moviesModel = new MoviesModel();
@@ -80,11 +84,14 @@ public class AddMoviesController {
     public void addMovie(ActionEvent event) throws SQLServerException {
         String name = movieTitle.getText().trim();
         String rating = ratingText.getText().trim();
+        String prating = personalRatingText.getText().trim();
         convertTextToFloat(rating);
+        convertPTextToFloat(prating);
         if (!isEditing) {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
+                if (personalRating >= 0.0 && personalRating <= 10.0) {
                 if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
-                    moviesModel.addMovie(name, ratingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
+                    moviesModel.addMovie(name, ratingNo, personalRating, filePathText.getText(), Date.valueOf(LocalDate.now()));
                     movieTitle.clear();
                     filePathText.clear();
                     errorLabel2.setText("Succesfully added song, congrats");
@@ -92,10 +99,13 @@ public class AddMoviesController {
                     errorLabel2.setText("Something went wrong, try again");
                 }
             } else {
+                errorLabel2.setText("Invalid input: Personal rating must have a valid number between 0.0 and 10.0");
+            }
+            } else {
                 errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
             }
         } else {
-            moviesModel.editMovie(selectedMovie, name, ratingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
+            moviesModel.editMovie(selectedMovie, name, ratingNo, personalRating, filePathText.getText(), (Date) Date.from(Instant.now()));
         }
         mainController.refreshMovieList();
         stage = (Stage) anchorPane.getScene().getWindow();
@@ -112,12 +122,23 @@ public class AddMoviesController {
         }
     }
 
+    private void convertPTextToFloat(String prating){
+        try{
+            float pRatingTemp = Float.parseFloat(prating);
+            personalRating = pRatingTemp;
+        }
+        catch (NumberFormatException e){
+            errorLabel2.setText("Invalid input: Personal rating must have a valid number between 0.0 and 10.0");
+        }
+    }
+
     public void setEdit(Movies movie){
         if(movie != null){
             selectedMovie = movie;
             isEditing = true;
             movieTitle.setText(selectedMovie.getName());
             ratingText.setText(selectedMovie.getRatingToString());
+            personalRatingText.setText(selectedMovie.getPRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
         }
         else {

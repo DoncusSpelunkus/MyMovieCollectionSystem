@@ -7,6 +7,7 @@ public class Movies {
     private final int movieID;
     private String name;
     private float rating;
+    private float prating;
     private String filelink;
     private Date lastview;
     private int IDinsideList = 0;
@@ -15,10 +16,11 @@ public class Movies {
     private Categories category2;
     private Categories category3;
 
-    public Movies(int id, String name, float rating, String filelink, Date lastview) {
+    public Movies(int id, String name, float rating, float prating, String filelink, Date lastview) {
         this.movieID = id;
         this.name = name;
         this.rating = rating;
+        this.prating = prating;
         this.filelink = filelink;
         this.lastview = lastview;
     }
@@ -67,6 +69,14 @@ public class Movies {
         this.rating = rating;
     }
 
+    public float getPRating() {
+        return prating;
+    }
+
+    public void setPRating(float prating) {
+        this.prating = prating;
+    }
+
     public String getFilelink() {
         return filelink;
     }
@@ -86,6 +96,11 @@ public class Movies {
     public String getRatingToString(){
         String ratingString = Float.toString(rating);
         return ratingString;
+    }
+
+    public String getPRatingToString(){
+        String pRatingString = Float.toString(prating);
+        return pRatingString;
     }
 
     public int getIDinsideList() {

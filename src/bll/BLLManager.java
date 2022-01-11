@@ -23,13 +23,13 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void addMovie(String name, float rating, String filelink, Date lastview) {
-        dalFacade.addMovies(name, rating, filelink, lastview);
+    public void addMovie(String name, float rating, float prating, String filelink, Date lastview) {
+        dalFacade.addMovies(name, rating, prating, filelink, lastview);
     }
 
     @Override
-    public void editMovie(Movies selectedMovie, String name, float rating, String filelink, Date lastview){
-        dalFacade.editMovies(selectedMovie, name, rating, filelink, lastview);
+    public void editMovie(Movies selectedMovie, String name, float rating, float prating, String filelink, Date lastview){
+        dalFacade.editMovies(selectedMovie, name, rating, prating, filelink, lastview);
     }
 
     @Override

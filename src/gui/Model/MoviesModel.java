@@ -26,8 +26,8 @@ public class MoviesModel {
     public static void yesBtn(Object selectedItem) {
     }
 
-    public void addMovie(String name, float rating, String filelink, Date lastview){
-        logiclayer.addMovie(name, rating, filelink, lastview);
+    public void addMovie(String name, float rating, float prating, String filelink, Date lastview){
+        logiclayer.addMovie(name, rating, prating, filelink, lastview);
     }
 
     public Movies getCurrentMovie(){
@@ -44,8 +44,8 @@ public class MoviesModel {
         logiclayer.deleteMovie(selectedMovie);
     }
 
-    public void editMovie(Movies selectedMovie, String name, float rating, String filelink, Date lastview){
-        logiclayer.editMovie(selectedMovie, name, rating, filelink, lastview);
+    public void editMovie(Movies selectedMovie, String name, float rating, float prating, String filelink, Date lastview){
+        logiclayer.editMovie(selectedMovie, name, rating, prating, filelink, lastview);
     }
 
     public void addToCategory(Categories selectedCategory, Movies selectedMovie){

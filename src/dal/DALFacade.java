@@ -10,9 +10,9 @@ public interface DALFacade {
 
     List<Movies> getAllMovies();
 
-    void addMovies(String name, float rating, String filelink, Date lastview);
+    void addMovies(String name, float rating, float prating, String filelink, Date lastview);
 
-    Movies editMovies(Movies selectedMovie, String name, float rating, String filelink, Date lastview);
+    Movies editMovies(Movies selectedMovie, String name, float rating, float prating, String filelink, Date lastview);
 
     void deleteMovie(Movies selectedMovie);
 

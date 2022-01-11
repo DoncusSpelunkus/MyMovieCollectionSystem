@@ -20,7 +20,7 @@ public class CatMovieDAO {
             pstm.setInt(1, categoryid);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Movies movie = new Movies(rs.getInt("id"), rs.getString("name"), rs.getFloat("rating"), rs.getString("filelink"), rs.getDate("lastview"));
+                Movies movie = new Movies(rs.getInt("id"), rs.getString("name"), rs.getFloat("rating"), rs.getFloat("prating"), rs.getString("filelink"), rs.getDate("lastview"));
                 newMovieList.add(movie);
             }
             return newMovieList;

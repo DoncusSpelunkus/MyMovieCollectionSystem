@@ -65,7 +65,7 @@ public class MainController implements Initializable {
         private Button editMovieBtn;
 
         @FXML
-        private Label errorlabel1;
+        private Label errorLabel1;
 
         @FXML
         private TableColumn<?, ?> movieNameColumn;
@@ -75,6 +75,9 @@ public class MainController implements Initializable {
 
         @FXML
         private TableColumn<?, ?> ratingColumn;
+
+        @FXML
+        private TableColumn<?, ?> pRatingColumn;
 
         @FXML
         private TableView<Movies> moviesView;
@@ -122,7 +125,7 @@ public class MainController implements Initializable {
                 refreshCategory();
             }}
         catch (NullPointerException | SQLServerException ex){
-            errorlabel1.setText("ERROR: NO PLAYLIST SELECTED");
+            errorLabel1.setText("ERROR: NO PLAYLIST SELECTED");
         }
     }
 
@@ -224,7 +227,7 @@ public class MainController implements Initializable {
             categoriesView.setItems(sortedData);
         }
         catch(NullPointerException e) {
-            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
+            errorLabel1.setText("Hey you got a: Nullpointerexception...congrats");
         }
     }
 
@@ -233,9 +236,8 @@ public class MainController implements Initializable {
             moviesInCategoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
         }
         catch (NullPointerException e){
-            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
+            errorLabel1.setText("Hey you got a: Nullpointerexception...congrats");
         }
-
     }
 
     private void populateMoviesView(){
@@ -243,6 +245,7 @@ public class MainController implements Initializable {
             movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             lastViewedColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
             ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+            pRatingColumn.setCellValueFactory(new PropertyValueFactory<>("prating"));
 
             moviesView.setItems(observableListMovies);
 
@@ -251,25 +254,25 @@ public class MainController implements Initializable {
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
                 searchFilter.setPredicate(movie -> {
 
-            // if search value is empty then it displays the songs as it is.
-            if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                return true;
-            }
-            String searchWord = newValue.toLowerCase();
-            if (movie.getName().toLowerCase().indexOf(searchWord) > -1) {
-                return true; // data will change if song found
-            } else
-                return false;
-        });
-    });
-    SortedList<Movies> sortedData = new SortedList<>(searchFilter);
-    // binds the sorted result set with the table view;
+                // if search value is empty then it displays the songs as it is.
+                if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                    return true;
+                }
+                String searchWord = newValue.toLowerCase();
+                if (movie.getName().toLowerCase().indexOf(searchWord) > -1) {
+                    return true; // data will change if song found
+                } else
+                    return false;
+                });
+            });
+            SortedList<Movies> sortedData = new SortedList<>(searchFilter);
+            // binds the sorted result set with the table view;
             sortedData.comparatorProperty().bind(moviesView.comparatorProperty());
             moviesView.setItems(sortedData);
 
 }
         catch (NullPointerException e) {
-            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
+            errorLabel1.setText("Hey you got a: Nullpointerexception...congrats");
         }
     }
 
@@ -294,7 +297,7 @@ public class MainController implements Initializable {
             }
         }
         catch(NullPointerException ex){
-            errorlabel1.setText("Hey you got a: Nullpointerexception...congrats");
+            errorLabel1.setText("Hey you got a: Nullpointerexception...congrats");
         }
     }
 }
