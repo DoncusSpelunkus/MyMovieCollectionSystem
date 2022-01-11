@@ -11,8 +11,8 @@ import java.io.IOException;
 public class MainApp extends Application{
     @Override
     public void start(Stage stage) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("View/Main.fxml"));
-        Scene scene = new Scene(root,850, 700);
+        Parent root = FXMLLoader.load(getClass().getResource("View/Startup.fxml"));
+        Scene scene = new Scene(root,420, 500);
         stage.setTitle("Movie Collection System");
         stage.setScene(scene);
         stage.setResizable(false);

@@ -92,12 +92,12 @@ public class MainController implements Initializable {
 
     private ObservableList<Categories> observableListCategories;
     private ObservableList<Movies> observableListMovies;
-    private MainController mainController;
+    private StartupController startupController;
     private CategoriesModel categoriesModel;
     private MoviesModel moviesModel;
 
-    public void setController(MainController mainController){
-            this.mainController = mainController;
+    public void setController(StartupController StartupController){
+            this.startupController = StartupController;
     }
 
     public MainController() {
