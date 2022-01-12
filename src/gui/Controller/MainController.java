@@ -98,6 +98,8 @@ public class MainController implements Initializable {
     private StartupController startupController;
     private CategoriesModel categoriesModel;
     private MoviesModel moviesModel;
+    private TableView.TableViewSelectionModel<Categories> selectionModel;
+    private int currentCategory;
 
     public void setController(StartupController StartupController){
             this.startupController = StartupController;
@@ -115,6 +117,7 @@ public class MainController implements Initializable {
         populateCategoriesView();
         populateMoviesView();
         populateMoviesInCategoryView();
+        selectionModel = categoriesView.getSelectionModel();
     }
 
     @FXML
@@ -123,9 +126,10 @@ public class MainController implements Initializable {
             if (moviesView.getSelectionModel().getSelectedIndex() != -1) {
                 moviesModel.addToCategory(categoriesView.getSelectionModel().getSelectedItem(), moviesView.getSelectionModel().getSelectedItem());
                 refreshCategory();
+                fillCurrentPlaylist();
             }}
         catch (NullPointerException | SQLServerException ex){
-            errorLabel1.setText("ERROR: NO PLAYLIST SELECTED");
+            errorLabel1.setText("ERROR: CATEGORY SELECTED");
         }
     }
 
@@ -169,6 +173,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void categorySelect(MouseEvent mouseEvent){
+        currentCategory = selectionModel.getSelectedIndex();
         fillCurrentPlaylist();
     }
 
@@ -284,6 +289,7 @@ public class MainController implements Initializable {
     }
 
     private void fillCurrentPlaylist(){
+        categoriesView.getSelectionModel().select(currentCategory);
         try{ List<Movies> moviesInList = categoriesView.getSelectionModel().getSelectedItem().getMoviesList();
             if(moviesInList.size() != 0) {
                 for (int i = moviesInList.size() - 1; i >= 0; i--) { // for loop for getting each element of the playlist into the tableview and sets the ID for each one
