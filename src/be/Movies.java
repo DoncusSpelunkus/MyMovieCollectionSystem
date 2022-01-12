@@ -110,4 +110,8 @@ public class Movies {
     public void setIDinsideList(int IDinsideList) {
         this.IDinsideList = IDinsideList;
     }
+
+    public String toString(){
+        return name;
+    }
 }

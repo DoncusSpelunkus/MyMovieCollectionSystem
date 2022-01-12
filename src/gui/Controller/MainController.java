@@ -133,7 +133,20 @@ public class MainController implements Initializable {
         }
     }
 
-
+    @FXML
+    private void removeCategoryBtn (ActionEvent actionEvent) {
+        try {
+            if (moviesInCategory.getSelectionModel().getSelectedIndex() != -1){
+                moviesModel.deleteFromCategories(categoriesView.getSelectionModel().getSelectedItem(), moviesInCategory.getSelectionModel().getSelectedItem());
+                System.out.println(categoriesView.getSelectionModel().getSelectedItem());
+                System.out.println(moviesInCategory.getSelectionModel().getSelectedItem());
+                refreshCategory();
+                fillCurrentPlaylist();
+            }
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     @FXML
     private void deleteCategoryBtn (ActionEvent actionEvent) throws SQLServerException {

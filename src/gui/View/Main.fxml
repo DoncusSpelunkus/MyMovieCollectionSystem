@@ -40,6 +40,6 @@
       <Text layoutX="68.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" />
       <Text layoutX="641.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" />
       <Text layoutX="424.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
-      <Button fx:id="removeCategoryBtn" layoutX="261.0" layoutY="665.0" mnemonicParsing="false" onAction="#removeCategoryBtn" text="Remove" />
+      <Button fx:id="removeCategoryBtns" layoutX="261.0" layoutY="665.0" mnemonicParsing="false" onAction="#removeCategoryBtn" text="Remove" />
    </children>
 </AnchorPane>
