@@ -20,9 +20,9 @@
       <TableView fx:id="moviesView" layoutX="499.0" layoutY="68.0" maxHeight="546.0" maxWidth="762.0" minHeight="530.0" minWidth="212.0" prefHeight="546.0" prefWidth="315.0">
         <columns>
           <TableColumn fx:id="movieNameColumn" prefWidth="95.99996948242188" text="Title" />
-            <TableColumn fx:id="lastViewedColumn" minWidth="0.0" prefWidth="100.7999267578125" text="Last Viewed" />
-          <TableColumn fx:id="ratingColumn" minWidth="0.0" prefWidth="57.5" text="Rating" />
-            <TableColumn fx:id="ratingColumn1" minWidth="0.0" prefWidth="57.5" text="Personal" />
+            <TableColumn fx:id="lastViewedColumn" minWidth="0.0" prefWidth="108.1788330078125" text="Last Viewed" />
+          <TableColumn fx:id="ratingColumn" minWidth="0.0" prefWidth="56.2430419921875" text="Rating" />
+            <TableColumn fx:id="ratingColumn1" minWidth="0.0" prefWidth="53.2569580078125" text="Personal" />
         </columns>
       </TableView>
       <Button fx:id="newCategoryBtn" layoutX="121.0" layoutY="634.0" mnemonicParsing="false" onAction="#newCategoryBtn" prefHeight="25.0" prefWidth="40.0" text="New" />

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="420.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
+<AnchorPane prefHeight="420.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
    <children>
       <Label layoutX="105.0" layoutY="25.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile">
          <font>
@@ -25,7 +25,7 @@
       <TableView fx:id="startupTable" layoutX="127.0" layoutY="58.0" prefHeight="278.0" prefWidth="242.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="83.19995880126953" text="Name" />
-          <TableColumn fx:id="ratingColumn" prefWidth="70.4000244140625" text="Rating" />
+          <TableColumn fx:id="ratingColumn" prefWidth="70.4000244140625" text="Personal" />
             <TableColumn fx:id="lastViewColumn" prefWidth="89.5999755859375" text="Last viewed" />
         </columns>
       </TableView>

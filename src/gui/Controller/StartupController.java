@@ -78,7 +78,7 @@ public class StartupController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("PRating"));
         lastViewColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
 
 
