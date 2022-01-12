@@ -129,9 +129,11 @@ public class MainController implements Initializable {
                 fillCurrentPlaylist();
             }}
         catch (NullPointerException | SQLServerException ex){
-            errorLabel1.setText("ERROR: CATEGORY SELECTED");
+            errorLabel1.setText("error: No movie or Category selected, please select one of each");
         }
     }
+
+
 
     @FXML
     private void deleteCategoryBtn (ActionEvent actionEvent) throws SQLServerException {
