@@ -20,7 +20,7 @@ public class CatMovieDAO {
             pstm.setInt(1, categoryid);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Movies movie = new Movies(rs.getInt("id"), rs.getString("name"), rs.getFloat("rating"), rs.getFloat("prating"), rs.getString("filelink"), rs.getDate("lastview"));
+                Movies movie = new Movies(rs.getInt("movieid"), rs.getString("name"), rs.getFloat("rating"), rs.getFloat("prating"), rs.getString("filelink"), rs.getDate("lastview"));
                 newMovieList.add(movie);
             }
             return newMovieList;
@@ -69,7 +69,7 @@ public class CatMovieDAO {
     // Method to delete a Movie from a Category.
     public void deleteFromCategories(Categories selectedCategories, Movies selectedMovie) {
         try (Connection con = db.getConnection()) {
-            String query = "DELETE from CatMovie WHERE categoryid = ? AND movieid = ?";
+            String query = "DELETE from CatMovie WHERE categoryID = ? AND movieID = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1, selectedCategories.getCategoryID());
             pstm.setInt(2, selectedMovie.getMovieID());
