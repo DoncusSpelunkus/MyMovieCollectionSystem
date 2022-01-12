@@ -51,5 +51,9 @@ public class MoviesModel {
     public void addToCategory(Categories selectedCategory, Movies selectedMovie){
         logiclayer.addToCategory(selectedCategory, selectedMovie);
     }
+
+    public void deleteFromCategories(Categories selectedCategory, Movies selectedMovie){
+        logiclayer.deleteFromCategories(selectedCategory,selectedMovie);
+    }
 }
 

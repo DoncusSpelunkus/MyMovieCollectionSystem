@@ -129,7 +129,22 @@ public class MainController implements Initializable {
                 fillCurrentPlaylist();
             }}
         catch (NullPointerException | SQLServerException ex){
-            errorLabel1.setText("ERROR: CATEGORY SELECTED");
+            errorLabel1.setText("error: No movie or Category selected, please select one of each");
+        }
+    }
+
+    @FXML
+    private void removeCategoryBtn (ActionEvent actionEvent) {
+        try {
+            if (moviesInCategory.getSelectionModel().getSelectedIndex() != -1){
+                moviesModel.deleteFromCategories(categoriesView.getSelectionModel().getSelectedItem(), moviesInCategory.getSelectionModel().getSelectedItem());
+                System.out.println(categoriesView.getSelectionModel().getSelectedItem());
+                System.out.println(moviesInCategory.getSelectionModel().getSelectedItem());
+                refreshCategory();
+                fillCurrentPlaylist();
+            }
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
         }
     }
 
