@@ -77,7 +77,7 @@ public class MainController implements Initializable {
         private TableColumn<?, ?> ratingColumn;
 
         @FXML
-        private TableColumn<?, ?> pRatingColumn;
+        private TableColumn<?, ?> ratingColumn1;
 
         @FXML
         private TableView<Movies> moviesView;
@@ -245,7 +245,7 @@ public class MainController implements Initializable {
             movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             lastViewedColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
             ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-            pRatingColumn.setCellValueFactory(new PropertyValueFactory<>("prating"));
+            ratingColumn1.setCellValueFactory(new PropertyValueFactory<>("PRating"));
 
             moviesView.setItems(observableListMovies);
 

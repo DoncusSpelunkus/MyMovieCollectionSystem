@@ -1,13 +1,9 @@
 package gui.Controller;
 
 
-import be.Categories;
 import be.Movies;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -50,7 +46,7 @@ public class AddMoviesController {
     private boolean isEditing = false;
     private MediaPlayer mediaPlayer;
     private float ratingNo;
-    private float personalRating;
+    private float pRatingNo;
 
     public AddMoviesController() {
         moviesModel = new MoviesModel();
@@ -89,9 +85,9 @@ public class AddMoviesController {
         convertPTextToFloat(prating);
         if (!isEditing) {
             if (ratingNo >= 0.0 && ratingNo <= 10.0) {
-                if (personalRating >= 0.0 && personalRating <= 10.0) {
+                if (pRatingNo >= 0.0 && pRatingNo <= 10.0) {
                     if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
-                    moviesModel.addMovie(name, ratingNo, personalRating, filePathText.getText(), Date.valueOf(LocalDate.now()));
+                    moviesModel.addMovie(name, ratingNo, pRatingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
                     movieTitle.clear();
                     filePathText.clear();
                     errorLabel2.setText("Succesfully added song, congrats");
@@ -105,7 +101,7 @@ public class AddMoviesController {
                 errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
             }
         } else {
-            moviesModel.editMovie(selectedMovie, name, ratingNo, personalRating, filePathText.getText(), (Date) Date.from(Instant.now()));
+            moviesModel.editMovie(selectedMovie, name, ratingNo, pRatingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
         }
         mainController.refreshMovieList();
         stage = (Stage) anchorPane.getScene().getWindow();
@@ -125,7 +121,7 @@ public class AddMoviesController {
     private void convertPTextToFloat(String prating){
         try{
             float pRatingTemp = Float.parseFloat(prating);
-            personalRating = pRatingTemp;
+            pRatingNo = pRatingTemp;
         }
         catch (NumberFormatException e){
             errorLabel2.setText("Invalid input: Personal rating must have a valid number between 0.0 and 10.0");
