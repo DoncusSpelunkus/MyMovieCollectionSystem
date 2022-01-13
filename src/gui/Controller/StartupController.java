@@ -73,6 +73,8 @@ public class StartupController implements Initializable {
     @FXML
     void yes(ActionEvent event) {
         moviesModel.deleteMovie(startupTable.getSelectionModel().getSelectedItem());
+
+
     }
 
     @Override

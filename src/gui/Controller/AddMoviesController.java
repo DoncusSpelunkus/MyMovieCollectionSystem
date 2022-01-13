@@ -91,6 +91,8 @@ public class AddMoviesController {
                     movieTitle.clear();
                     filePathText.clear();
                     errorLabel2.setText("Succesfully added song, congrats");
+                    stage = (Stage) anchorPane.getScene().getWindow();
+                    stage.close();
                     } else {
                         errorLabel2.setText("Something went wrong, try again");
                     }
@@ -102,10 +104,10 @@ public class AddMoviesController {
             }
         } else {
             moviesModel.editMovie(selectedMovie, name, ratingNo, pRatingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
+            stage = (Stage) anchorPane.getScene().getWindow();
+            stage.close();
         }
         mainController.refreshMovieList();
-        stage = (Stage) anchorPane.getScene().getWindow();
-        stage.close();
     }
 
     private void convertTextToFloat(String rating){
