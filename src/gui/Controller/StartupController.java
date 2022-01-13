@@ -65,6 +65,9 @@ public class StartupController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        Node n = (Node) event.getSource();
+        Stage stage1 = (Stage) n.getScene().getWindow();
+        stage1.close();
     }
 
     @FXML
