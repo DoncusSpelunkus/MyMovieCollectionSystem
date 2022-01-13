@@ -69,10 +69,7 @@ public class StartupController implements Initializable {
 
     @FXML
     void yes(ActionEvent event) {
-        ObservableList<Movies> listToBeDeleted = selectionModel.getSelectedItems();
-        for (int i = 0; i < listToBeDeleted.size(); i++) {
-            moviesModel.deleteMovie(listToBeDeleted.get(i));
-        }
+        moviesModel.deleteMovie(startupTable.getSelectionModel().getSelectedItem());
     }
 
     @Override
