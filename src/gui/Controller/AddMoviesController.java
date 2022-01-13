@@ -139,8 +139,5 @@ public class AddMoviesController {
             personalRatingText.setText(selectedMovie.getPRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
         }
-        else {
-            errorLabel2.setText("Error: No movie selected");
-        }
     }
 }

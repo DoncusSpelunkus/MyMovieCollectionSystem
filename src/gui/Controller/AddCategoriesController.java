@@ -56,9 +56,6 @@ public class AddCategoriesController {
             isEditing = true;
             categoryName.setText(selectedCategory.getName());
         }
-        else{
-            categoryName.setText("No Name has been entered, please enter name before termination");
-        }
         controller.refreshCategory();
     }
 
