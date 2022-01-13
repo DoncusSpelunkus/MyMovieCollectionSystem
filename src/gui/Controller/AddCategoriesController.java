@@ -50,11 +50,13 @@ public class AddCategoriesController {
         stage = (Stage) n.getScene().getWindow();
         stage.close();
     }
+
     public void setEdit(Categories selectedCategory) throws SQLServerException{
         if(selectedCategory != null){
             categoriesToBeEdited = selectedCategory;
             isEditing = true;
             categoryName.setText(selectedCategory.getName());
+            addCategoryBtn.setText("Edit");
         }
         controller.refreshCategory();
     }

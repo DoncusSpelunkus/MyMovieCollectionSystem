@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="420.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
+<AnchorPane prefHeight="420.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
    <children>
       <Label layoutX="105.0" layoutY="25.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile">
          <font>
@@ -21,7 +21,7 @@
       </Label>
       <Button fx:id="yesBtn" layoutX="275.0" layoutY="370.0" mnemonicParsing="false" onAction="#yes" text="Yes" />
       <Button fx:id="noBtn" layoutX="175.0" layoutY="370.0" mnemonicParsing="false" onAction="#no" text="No" />
-      <Label fx:id="errorLabel3" layoutX="240.0" layoutY="10.0" />
+      <Label fx:id="errorLabel3" layoutX="127.0" layoutY="16.0" textFill="RED" />
       <TableView fx:id="startupTable" layoutX="127.0" layoutY="58.0" prefHeight="278.0" prefWidth="242.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="83.19995880126953" text="Name" />

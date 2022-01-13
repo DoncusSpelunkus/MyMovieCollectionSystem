@@ -23,6 +23,9 @@ public class AddMoviesController {
     Stage stage;
 
     @FXML
+    private Button addMovieBtn;
+
+    @FXML
     private TextField movieTitle;
 
     @FXML
@@ -138,6 +141,7 @@ public class AddMoviesController {
             ratingText.setText(selectedMovie.getRatingToString());
             personalRatingText.setText(selectedMovie.getPRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
+            addMovieBtn.setText("Edit");
         }
     }
 }
