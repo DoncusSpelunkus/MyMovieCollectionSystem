@@ -110,6 +110,7 @@ public class MainController implements Initializable {
         categoriesModel = new CategoriesModel();
         observableListCategories = categoriesModel.getAllCategories();
         observableListMovies = moviesModel.getAllMovies();
+
     }
 
     @Override
