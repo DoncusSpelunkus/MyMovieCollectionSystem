@@ -91,6 +91,7 @@ public class StartupController implements Initializable {
 
     private void makeList() throws IOException {
         ObservableList<Movies> listOfMovies = moviesModel.getAllMovies();
+        displayList = FXCollections.observableArrayList();
         LocalDate today = LocalDate.now();
         for (int i = 0; i < listOfMovies.size(); i++) {
             LocalDate dateOfMovie = listOfMovies.get(i).getLastview().toLocalDate();
