@@ -6,21 +6,21 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
+<AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
    <children>
-      <Label layoutX="145.0" layoutY="69.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile">
+      <Label layoutX="85.0" layoutY="70.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="220.0" layoutY="369.0" prefHeight="45.0" prefWidth="130.0" text="Wanna delete them?">
+      <Label layoutX="165.0" layoutY="375.0" prefHeight="45.0" prefWidth="130.0" text="Wanna delete them?">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="yesBtn" layoutX="315.0" layoutY="414.0" mnemonicParsing="false" onAction="#yes" text="Yes" />
-      <Button fx:id="noBtn" layoutX="215.0" layoutY="414.0" mnemonicParsing="false" onAction="#no" text="No" />
+      <Button fx:id="yesBtn" layoutX="250.0" layoutY="415.0" mnemonicParsing="false" onAction="#yes" text="Yes" />
+      <Button fx:id="noBtn" layoutX="175.0" layoutY="415.0" mnemonicParsing="false" onAction="#no" text="No" />
       <Label fx:id="errorLabel3" layoutX="167.0" layoutY="60.0" textFill="RED" />
-      <CheckListView fx:id="checkListView" layoutX="203.0" layoutY="96.0" prefHeight="277.0" prefWidth="164.0" />
+      <CheckListView fx:id="checkListView" layoutX="145.0" layoutY="100.0" prefHeight="275.0" prefWidth="165.0" />
    </children>
 </AnchorPane>
