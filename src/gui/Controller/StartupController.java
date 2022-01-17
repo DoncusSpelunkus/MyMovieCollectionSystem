@@ -32,8 +32,6 @@ import java.util.stream.Collectors;
 
 public class StartupController implements Initializable {
 
-    Stage stage1;
-
     @FXML
     private Label errorLabel3;
 
@@ -57,7 +55,7 @@ public class StartupController implements Initializable {
     }
 
     @FXML
-    private void no(ActionEvent event) throws IOException {
+    private void goToMainBTNPRess(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../view/Main.fxml"));
         Parent root = (Parent) fxmlLoader.load();
@@ -74,7 +72,7 @@ public class StartupController implements Initializable {
     }
 
     @FXML
-    private void yes(ActionEvent event) throws IOException {
+    private void confirmBTNPress(ActionEvent event) throws IOException {
         ObservableList<Movies> deletionList = checkListView.getCheckModel().getCheckedItems();
         for (int i = 0; i < deletionList.size(); i++) {
             moviesModel.deleteMovie(deletionList.get(i));
@@ -103,18 +101,5 @@ public class StartupController implements Initializable {
             }
         }
         checkListView.setItems(displayList);
-    }
-
-    private void goToMain() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../view/Main.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        MainController main = fxmlLoader.getController();
-        main.setController(this);
-        fxmlLoader.<AddCategoriesController>getController();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 }

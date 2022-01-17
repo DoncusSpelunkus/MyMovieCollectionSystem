@@ -58,6 +58,9 @@ public class AddMoviesController implements Initializable {
     @FXML
     private CheckComboBox<Categories> checkCombo;
 
+    @FXML
+    private Label checkComboLabel;
+
 
 
     private MoviesModel moviesModel;
@@ -160,6 +163,9 @@ public class AddMoviesController implements Initializable {
             ratingText.setText(selectedMovie.getRatingToString());
             personalRatingText.setText(selectedMovie.getPRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
+            checkCombo.setVisible(false);
+            checkComboLabel.setVisible(false);
+            errorLabel2.setText("Edit mode: Enabled");
             addMovieBtn.setText("Edit");
         }
     }

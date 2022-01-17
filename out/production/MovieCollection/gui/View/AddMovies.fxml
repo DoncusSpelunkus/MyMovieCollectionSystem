@@ -20,7 +20,7 @@
       <Label layoutX="81.0" layoutY="82.0" text="Rating:" />
       <Button fx:id="fileChooserBTN" layoutX="205.0" layoutY="138.0" mnemonicParsing="false" onAction="#chooseFileBTNPress" prefHeight="26.0" prefWidth="65.0" text="Choose" />
       <Label layoutX="32.0" layoutY="112.0" text="Personal Rating:" />
-      <Label layoutX="18.0" layoutY="172.0" text="Choose categories:" />
+      <Label fx:id="checkComboLabel" layoutX="18.0" layoutY="172.0" text="Choose categories:" />
       <CheckComboBox fx:id="checkCombo" layoutX="122.0" layoutY="168.0" prefHeight="26.0" prefWidth="148.0" />
    </children>
 </AnchorPane>
