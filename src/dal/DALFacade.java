@@ -30,5 +30,4 @@ public interface DALFacade {
 
     void deleteFromCategories(Categories selectedCategories, Movies selectedMovie);
 
-    Movies getCurrentMovie();
 }

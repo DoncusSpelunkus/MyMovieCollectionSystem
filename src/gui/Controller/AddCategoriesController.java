@@ -58,6 +58,7 @@ public class AddCategoriesController {
             categoriesToBeEdited = selectedCategory;
             isEditing = true;
             categoryName.setText(selectedCategory.getName());
+            errorLabel4.setText("Edit mode: Enabled");
             addCategoryBtn.setText("Edit");
         }
         controller.refreshCategory();

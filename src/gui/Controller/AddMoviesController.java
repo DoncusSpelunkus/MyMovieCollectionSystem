@@ -1,24 +1,31 @@
 package gui.Controller;
 
 
+import be.Categories;
 import be.Movies;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.CheckComboBox;
 
 import java.io.File;
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class AddMoviesController {
+public class AddMoviesController implements Initializable {
 
     Stage stage;
 
@@ -43,31 +50,39 @@ public class AddMoviesController {
     @FXML
     private AnchorPane anchorPane;
 
+    @FXML
+    private CheckComboBox<Categories> checkCombo;
+
+    @FXML
+    private Label checkComboLabel;
+
+
+
     private MoviesModel moviesModel;
+    private CategoriesModel categoriesModel;
+    private ObservableList<Categories> categories;
     private MainController mainController;
     private Movies selectedMovie;
     private boolean isEditing = false;
-    private MediaPlayer mediaPlayer;
     private float ratingNo;
     private float pRatingNo;
 
     public AddMoviesController() {
         moviesModel = new MoviesModel();
+        categoriesModel = new CategoriesModel();
+        categories = categoriesModel.getAllCategories();
     }
 
     @FXML
     private void chooseFileBTNPress(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Desktop"));
-        fileChooser.setTitle("Select movie");
+        File file = fileChooser.showOpenDialog(null);
+        String path = file.getPath();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            filePathText.setText(selectedFile.getAbsolutePath());
-            mediaPlayer = new MediaPlayer(new Media(new File(selectedFile.getAbsolutePath()).toURI().toString()));
-        }
+        File filestring = new File(path);
+        filePathText.setText(filestring.getAbsolutePath());
     }
 
     @FXML
@@ -91,9 +106,10 @@ public class AddMoviesController {
                 if (pRatingNo >= 0.0 && pRatingNo <= 10.0) {
                     if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
                     moviesModel.addMovie(name, ratingNo, pRatingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
+                    addInitCategories();
                     movieTitle.clear();
                     filePathText.clear();
-                    errorLabel2.setText("Succesfully added song, congrats");
+                    mainController.setErrorLabel1("Successfully added movie, congrats");
                     stage = (Stage) anchorPane.getScene().getWindow();
                     stage.close();
                     } else {
@@ -141,7 +157,30 @@ public class AddMoviesController {
             ratingText.setText(selectedMovie.getRatingToString());
             personalRatingText.setText(selectedMovie.getPRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
+            checkCombo.setVisible(false);
+            checkComboLabel.setVisible(false);
+            errorLabel2.setText("Edit mode: Enabled");
             addMovieBtn.setText("Edit");
         }
+        else {
+            errorLabel2.setText("You must select a movie to be able to edit");
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        checkCombo.getItems().addAll(categories);
+    }
+
+    private void addInitCategories() throws SQLServerException {
+        List<Categories> selectedCategories = checkCombo.getCheckModel().getCheckedItems();
+        List<Movies> listToGetLastestMovie = moviesModel.getAllMovies();
+        Comparator<Movies> sortedList = Comparator.comparing(Movies::getMovieID);
+        listToGetLastestMovie.sort(sortedList);
+        Movies currentMovie = listToGetLastestMovie.get(listToGetLastestMovie.size()-1);
+        for (int i = 0; i < selectedCategories.size(); i++) {
+            moviesModel.addToCategory(selectedCategories.get(i), currentMovie);
+        }
+        mainController.refreshCategory();
     }
 }

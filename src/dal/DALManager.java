@@ -74,8 +74,4 @@ public class DALManager implements DALFacade {
         catMovieDAO.deleteMovieFromAllCategories(selectedMovie);
     }
 
-    @Override
-    public Movies getCurrentMovie() {
-        return getCurrentMovie();
-    }
 }

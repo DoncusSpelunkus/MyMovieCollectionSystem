@@ -13,25 +13,14 @@ public class MoviesModel {
 
     private ObservableList<Movies> movies;
     private BLLFacade logiclayer;
-    private Movies currentMovie;
 
     public MoviesModel(){
         movies = FXCollections.observableArrayList();
         logiclayer = new BLLManager();
     }
 
-    public static void deleteMovieBtn(Object selectedItem) {
-    }
-
-    public static void yesBtn(Object selectedItem) {
-    }
-
     public void addMovie(String name, float rating, float prating, String filelink, Date lastview){
         logiclayer.addMovie(name, rating, prating, filelink, lastview);
-    }
-
-    public Movies getCurrentMovie(){
-        return logiclayer.getCurrentMovie();
     }
 
     public ObservableList<Movies> getAllMovies() {

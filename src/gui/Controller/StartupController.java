@@ -11,25 +11,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.controlsfx.control.CheckListView;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class StartupController implements Initializable {
-
-    Stage stage1;
 
     @FXML
     private Label errorLabel3;
@@ -37,24 +28,16 @@ public class StartupController implements Initializable {
     @FXML
     private CheckListView<Movies> checkListView;
 
-    @FXML
-    private Button noBtn;
-
-    @FXML
-    private Button yesBtn;
-
-    @FXML
-    private AnchorPane anchorPane;
 
     private ObservableList<Movies> displayList;
     private MoviesModel moviesModel;
 
-    public StartupController() throws IOException {
+    public StartupController(){
         moviesModel = new MoviesModel();
     }
 
     @FXML
-    private void no(ActionEvent event) throws IOException {
+    private void goToMainBTNPRess(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../view/Main.fxml"));
         Parent root = (Parent) fxmlLoader.load();
@@ -71,7 +54,7 @@ public class StartupController implements Initializable {
     }
 
     @FXML
-    private void yes(ActionEvent event) throws IOException {
+    private void confirmBTNPress(ActionEvent event) throws IOException {
         ObservableList<Movies> deletionList = checkListView.getCheckModel().getCheckedItems();
         for (int i = 0; i < deletionList.size(); i++) {
             moviesModel.deleteMovie(deletionList.get(i));
@@ -85,7 +68,7 @@ public class StartupController implements Initializable {
         try {
             makeList();
         } catch (IOException e) {
-            e.printStackTrace();
+            errorLabel3.setText("You got an error at: Initialization");
         }
     }
 
@@ -100,18 +83,5 @@ public class StartupController implements Initializable {
             }
         }
         checkListView.setItems(displayList);
-    }
-
-    private void goToMain() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../view/Main.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        MainController main = fxmlLoader.getController();
-        main.setController(this);
-        fxmlLoader.<AddCategoriesController>getController();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 }

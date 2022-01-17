@@ -26,6 +26,4 @@ public interface BLLFacade {
     void addToCategory(Categories selectedCategory, Movies selectedMovie);
 
     void deleteFromCategories(Categories selectedCategories, Movies selectedMovie);
-
-    Movies getCurrentMovie();
 }
