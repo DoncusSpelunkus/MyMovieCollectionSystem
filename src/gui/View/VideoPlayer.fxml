@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.VideoPlayerController">
+   <bottom>
+      <VBox prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <HBox prefHeight="40.0" prefWidth="600.0">
+            <Button mnemonicParsing="false" text="Play"/>
+            <Button mnemonicParsing="false" text="Pause"/>
+            <Button contentDisplay="RIGHT" mnemonicParsing="false" text="Close" textAlignment="RIGHT"/>
+         </HBox>
+      </VBox>
+   </bottom>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <MediaView fitHeight="200.0" fitWidth="200.0"/>
+      </StackPane>
+   </center>
+</BorderPane>

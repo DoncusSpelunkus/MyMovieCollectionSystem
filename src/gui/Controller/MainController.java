@@ -191,6 +191,14 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    public void mouseClicked(MouseEvent e){
+        if (e.getClickCount() == 2 && !e.isConsumed()) {
+            e.consume();
+        }
+
+    }
+
+    @FXML
     private void newMovieBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupMoviesWindow(false);
     }
