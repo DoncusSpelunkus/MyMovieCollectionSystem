@@ -7,11 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddCategoriesController {
 
+    public Label errorLabel4;
     @FXML
     private Button addCategoryBtn;
 
@@ -50,14 +52,13 @@ public class AddCategoriesController {
         stage = (Stage) n.getScene().getWindow();
         stage.close();
     }
+
     public void setEdit(Categories selectedCategory) throws SQLServerException{
         if(selectedCategory != null){
             categoriesToBeEdited = selectedCategory;
             isEditing = true;
             categoryName.setText(selectedCategory.getName());
-        }
-        else{
-            categoryName.setText("No Name has been entered, please enter name before termination");
+            addCategoryBtn.setText("Edit");
         }
         controller.refreshCategory();
     }

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
@@ -29,8 +30,11 @@
       <Button fx:id="newCategoryBtn" layoutX="125.0" layoutY="665.0" mnemonicParsing="false" onAction="#newCategoryBtn" prefHeight="26.0" prefWidth="46.0" text="New" />
       <Button fx:id="editCategoryBtn" layoutX="75.0" layoutY="665.0" mnemonicParsing="false" onAction="#editCategoryBtn" prefHeight="25.0" prefWidth="40.0" text="Edit" />
       <Button fx:id="deleteCategoryBtn" layoutX="15.0" layoutY="665.0" mnemonicParsing="false" onAction="#deleteCategoryBtn" text="Delete" />
-      <Label fx:id="errorLabel1" layoutX="425.0" layoutY="50.0" text=" " />
-      <TextField fx:id="searchField" layoutX="365.0" layoutY="45.0" />
+      <Label fx:id="errorLabel1" layoutX="55.0" layoutY="40.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <TextField fx:id="searchField" layoutX="369.0" layoutY="53.0" />
       <TableView fx:id="moviesInCategory" layoutX="200.0" layoutY="110.0" prefHeight="546.0" prefWidth="194.0">
         <columns>
           <TableColumn fx:id="moviesInCategoryName" prefWidth="193.59998168945313" text="Name" />

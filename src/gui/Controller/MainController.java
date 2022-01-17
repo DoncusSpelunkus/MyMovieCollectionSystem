@@ -110,6 +110,7 @@ public class MainController implements Initializable {
         categoriesModel = new CategoriesModel();
         observableListCategories = categoriesModel.getAllCategories();
         observableListMovies = moviesModel.getAllMovies();
+
     }
 
     @Override
@@ -165,7 +166,12 @@ public class MainController implements Initializable {
 
     @FXML
     private void editCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
-        setupCategoriesWindow(true);
+        if(categoriesView.getSelectionModel().getSelectedItem() != null) {
+            setupCategoriesWindow(true);
+        }
+        else{
+            errorLabel1.setText("Error: No category selected");
+        }
     }
     @FXML
     private void setupCategoriesWindow(boolean edit) throws IOException, SQLServerException{
@@ -205,7 +211,13 @@ public class MainController implements Initializable {
 
     @FXML
     private void editMovieBtn (ActionEvent actionEvent) throws SQLServerException, IOException {
-        setupMoviesWindow(true);
+        if (moviesView.getSelectionModel().getSelectedItem() != null) {
+            setupMoviesWindow(true);
+        }
+        else {
+            errorLabel1.setText("Error: No movie selected");
+        }
+
     }
 
     @FXML
