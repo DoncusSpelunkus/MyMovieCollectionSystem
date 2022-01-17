@@ -112,7 +112,7 @@ public class AddMoviesController implements Initializable {
                     addInitCategories();
                     movieTitle.clear();
                     filePathText.clear();
-                    mainController.setErrorLabel1("Succesfully added song, congrats");
+                    mainController.setErrorLabel1("Successfully added movie, congrats");
                     stage = (Stage) anchorPane.getScene().getWindow();
                     stage.close();
                     } else {
