@@ -21,8 +21,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.FormatterClosedException;
@@ -90,6 +94,9 @@ public class MainController implements Initializable {
 
         @FXML
         private TextField searchField;
+
+        private MediaPlayer mediaPlayer;
+
 
 
 
@@ -200,6 +207,9 @@ public class MainController implements Initializable {
     public void mouseClicked(MouseEvent e){
         if (e.getClickCount() == 2 && !e.isConsumed()) {
             e.consume();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("gui/View/VideoPlayer.fxml"));
+
         }
 
     }
