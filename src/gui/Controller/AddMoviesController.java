@@ -6,15 +6,12 @@ import be.Movies;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
@@ -24,11 +21,9 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class AddMoviesController implements Initializable {
 
@@ -69,7 +64,6 @@ public class AddMoviesController implements Initializable {
     private MainController mainController;
     private Movies selectedMovie;
     private boolean isEditing = false;
-    private MediaPlayer mediaPlayer;
     private float ratingNo;
     private float pRatingNo;
 

@@ -37,31 +37,10 @@ public class MainController implements Initializable {
         private TableColumn<?, ?> moviesInCategoryName;
 
         @FXML
-        private TableColumn<?, ?> amountColumn;
-
-        @FXML
-        private TableColumn<?, ?> avgRatingColumn;
-
-        @FXML
         private TableView<Categories> categoriesView;
 
         @FXML
         private TableColumn<?, ?> categoryNameColumn;
-
-        @FXML
-        private Button deleteCategoryBtn;
-
-        @FXML
-        private Button deleteMovieBtn;
-
-        @FXML
-        private TableColumn<?, ?> directorColumn;
-
-        @FXML
-        private Button editCategoryBtn;
-
-        @FXML
-        private Button editMovieBtn;
 
         @FXML
         private Label errorLabel1;
@@ -80,12 +59,6 @@ public class MainController implements Initializable {
 
         @FXML
         private TableView<Movies> moviesView;
-
-        @FXML
-        private Button newCategoryBtn;
-
-        @FXML
-        private Button newMovieBtn;
 
         @FXML
         private TextField searchField;
