@@ -321,6 +321,10 @@ public class MainController implements Initializable {
         categoriesView.setItems(categoriesModel.getAllCategories());
     }
 
+    public void setErrorLabel1(String textToDisplay){
+        errorLabel1.setText(textToDisplay);
+    }
+
     private void fillCurrentPlaylist(){
         categoriesView.getSelectionModel().select(currentCategory);
         try{ List<Movies> moviesInList = categoriesView.getSelectionModel().getSelectedItem().getMoviesList();

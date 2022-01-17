@@ -20,12 +20,6 @@ public class MoviesModel {
         logiclayer = new BLLManager();
     }
 
-    public static void deleteMovieBtn(Object selectedItem) {
-    }
-
-    public static void yesBtn(Object selectedItem) {
-    }
-
     public void addMovie(String name, float rating, float prating, String filelink, Date lastview){
         logiclayer.addMovie(name, rating, prating, filelink, lastview);
     }

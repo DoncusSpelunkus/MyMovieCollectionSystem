@@ -1,24 +1,33 @@
 package gui.Controller;
 
 
+import be.Categories;
 import be.Movies;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import gui.Model.CategoriesModel;
 import gui.Model.MoviesModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.CheckComboBox;
 
 import java.io.File;
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class AddMoviesController {
+public class AddMoviesController implements Initializable {
 
     Stage stage;
 
@@ -43,7 +52,14 @@ public class AddMoviesController {
     @FXML
     private AnchorPane anchorPane;
 
+    @FXML
+    private CheckComboBox<Categories> checkCombo;
+
+
+
     private MoviesModel moviesModel;
+    private CategoriesModel categoriesModel;
+    private ObservableList<Categories> categories;
     private MainController mainController;
     private Movies selectedMovie;
     private boolean isEditing = false;
@@ -53,6 +69,8 @@ public class AddMoviesController {
 
     public AddMoviesController() {
         moviesModel = new MoviesModel();
+        categoriesModel = new CategoriesModel();
+        categories = categoriesModel.getAllCategories();
     }
 
     @FXML
@@ -91,9 +109,10 @@ public class AddMoviesController {
                 if (pRatingNo >= 0.0 && pRatingNo <= 10.0) {
                     if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
                     moviesModel.addMovie(name, ratingNo, pRatingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
+                    addInitCategories();
                     movieTitle.clear();
                     filePathText.clear();
-                    errorLabel2.setText("Succesfully added song, congrats");
+                    mainController.setErrorLabel1("Succesfully added song, congrats");
                     stage = (Stage) anchorPane.getScene().getWindow();
                     stage.close();
                     } else {
@@ -142,6 +161,18 @@ public class AddMoviesController {
             personalRatingText.setText(selectedMovie.getPRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
             addMovieBtn.setText("Edit");
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        checkCombo.getItems().addAll(categories);
+    }
+
+    private void addInitCategories(){
+        List<Categories> selectedCategories = checkCombo.getCheckModel().getCheckedItems();
+        for (int i = 0; i < selectedCategories.size(); i++) {
+            moviesModel.addToCategory(selectedCategories.get(i), moviesModel.getCurrentMovie());
         }
     }
 }
