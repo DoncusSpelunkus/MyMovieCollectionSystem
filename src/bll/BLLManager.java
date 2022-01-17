@@ -68,9 +68,4 @@ public class BLLManager implements BLLFacade{
         dalFacade.deleteFromCategories(selectedCategories, selectedMovie);
     }
 
-    @Override
-    public Movies getCurrentMovie() {
-        return dalFacade.getCurrentMovie();
-    }
-
 }

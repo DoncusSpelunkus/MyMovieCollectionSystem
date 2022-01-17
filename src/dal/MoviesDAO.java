@@ -10,6 +10,7 @@ import java.util.List;
 
 public class MoviesDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
+    private Movies currentMovie;
 
     // Method used to get all the movies from the database.
     public List<Movies> getAllMovies() {
@@ -54,7 +55,7 @@ public class MoviesDAO {
             System.out.println(ex);
         }
         Movies movie = new Movies(1,name,rating,prating,filelink,lastview); // Creating a new movie object
-        getCurrentMovie(movie);
+        currentMovie = movie;
     }
 
     // Method used for editing the movies in the database.
@@ -87,9 +88,4 @@ public class MoviesDAO {
             System.out.println(ex);
         }
     }
-
-    public Movies getCurrentMovie(Movies movie){
-        return movie;
-    }
-
 }

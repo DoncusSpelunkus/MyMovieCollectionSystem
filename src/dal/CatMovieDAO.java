@@ -49,6 +49,7 @@ public class CatMovieDAO {
 
     // Method used to add movies to categories in the database.
     public Movies addToCategories(Categories selectedCategories, Movies selectedMovie) {
+        System.out.println(selectedCategories.getName() + selectedMovie.getMovieID());
         String sql = "INSERT INTO CatMovie(categoryid,movieid) VALUES (?,?)";
         try (Connection con = db.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(sql);

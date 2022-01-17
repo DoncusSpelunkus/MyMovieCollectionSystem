@@ -24,8 +24,11 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AddMoviesController implements Initializable {
 
@@ -166,10 +169,15 @@ public class AddMoviesController implements Initializable {
         checkCombo.getItems().addAll(categories);
     }
 
-    private void addInitCategories(){
+    private void addInitCategories() throws SQLServerException {
         List<Categories> selectedCategories = checkCombo.getCheckModel().getCheckedItems();
+        List<Movies> listToGetLastestMovie = moviesModel.getAllMovies();
+        Comparator<Movies> sortedList = Comparator.comparing(Movies::getMovieID);
+        listToGetLastestMovie.sort(sortedList);
+        Movies currentMovie = listToGetLastestMovie.get(listToGetLastestMovie.size()-1);
         for (int i = 0; i < selectedCategories.size(); i++) {
-            moviesModel.addToCategory(selectedCategories.get(i), moviesModel.getCurrentMovie());
+            moviesModel.addToCategory(selectedCategories.get(i), currentMovie);
         }
+        mainController.refreshCategory();
     }
 }
