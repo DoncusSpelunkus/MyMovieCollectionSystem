@@ -11,23 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.controlsfx.control.CheckListView;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 
 public class StartupController implements Initializable {
@@ -38,19 +28,11 @@ public class StartupController implements Initializable {
     @FXML
     private CheckListView<Movies> checkListView;
 
-    @FXML
-    private Button noBtn;
-
-    @FXML
-    private Button yesBtn;
-
-    @FXML
-    private AnchorPane anchorPane;
 
     private ObservableList<Movies> displayList;
     private MoviesModel moviesModel;
 
-    public StartupController() throws IOException {
+    public StartupController(){
         moviesModel = new MoviesModel();
     }
 
@@ -86,7 +68,7 @@ public class StartupController implements Initializable {
         try {
             makeList();
         } catch (IOException e) {
-            e.printStackTrace();
+            errorLabel3.setText("You got an error at: Initialization");
         }
     }
 

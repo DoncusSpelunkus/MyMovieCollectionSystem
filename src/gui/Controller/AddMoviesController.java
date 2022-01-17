@@ -168,6 +168,9 @@ public class AddMoviesController implements Initializable {
             errorLabel2.setText("Edit mode: Enabled");
             addMovieBtn.setText("Edit");
         }
+        else {
+            errorLabel2.setText("You must select a movie to be able to edit");
+        }
     }
 
     @Override
