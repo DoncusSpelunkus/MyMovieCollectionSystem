@@ -4,12 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="161.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AddCategoriesController">
+<AnchorPane prefHeight="161.0" prefWidth="250.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AddCategoriesController">
    <children>
       <Button fx:id="addCategoryBtn" layoutX="150.0" layoutY="95.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="52.0" text="Add" />
-      <Button fx:id="cancelBtn2" layoutX="50.0" layoutY="95.0" mnemonicParsing="false" onAction="#closeACWindow" prefHeight="25.0" prefWidth="52.0" text="Cancel" />
+      <Button fx:id="cancelBtn2" layoutX="50.0" layoutY="95.0" mnemonicParsing="false" onAction="#closeACWindow" prefHeight="26.0" prefWidth="58.0" text="Cancel" />
       <TextField fx:id="categoryName" layoutX="50.0" layoutY="55.0" />
       <Label fx:id="errorLabel4" layoutX="50.0" layoutY="30.0" textFill="RED" />
+      <Text fill="WHITE" layoutX="85.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category Name" />
    </children>
 </AnchorPane>
