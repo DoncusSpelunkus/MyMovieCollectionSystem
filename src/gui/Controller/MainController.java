@@ -283,6 +283,8 @@ public class MainController implements Initializable {
                 String searchWord = newValue.toLowerCase();
                 if (movie.getName().toLowerCase().indexOf(searchWord) > -1) {
                     return true; // data will change if song found
+                } else if (movie.getRatingToString().toLowerCase().indexOf(searchWord) > -1) {
+                    return true; // data will change if song found
                 } else
                     return false;
                 });
@@ -297,7 +299,7 @@ public class MainController implements Initializable {
         }
     }
 
-    public void refreshMovieList() throws SQLServerException{
+    public void refreshMovieList() throws SQLServerException {
         moviesView.setItems(moviesModel.getAllMovies());
     }
 
