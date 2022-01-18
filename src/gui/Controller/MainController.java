@@ -15,19 +15,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import javafx.scene.control.*;
-
-import java.io.File;
 
 import java.io.IOException;
 import java.net.URL;
@@ -312,6 +307,24 @@ public class MainController implements Initializable {
     }
 
     private void fillCurrentCategory(){
+        categoriesView.getSelectionModel().select(currentCategory);
+        try{ List<Movies> moviesInList = categoriesView.getSelectionModel().getSelectedItem().getMoviesList();
+            if(moviesInList.size() != 0) {
+                for (int i = moviesInList.size() - 1; i >= 0; i--) { // for loop for getting each element of the playlist into the tableview and sets the ID for each one
+                    moviesInList.get(i).setIDinsideList(moviesInList.size() - i);
+                    moviesInCategory.setItems(FXCollections.observableArrayList(moviesInList));
+                }
+            }
+            else {
+                moviesInCategory.getItems().clear();
+            }
+        }
+        catch(NullPointerException ex){
+            errorLabel1.setText("Hey you got a: Nullpointerexception filling the current movie in categories list");
+        }
+    }
+
+    private void fillCurrentCategoryFilter(String something){
         categoriesView.getSelectionModel().select(currentCategory);
         try{ List<Movies> moviesInList = categoriesView.getSelectionModel().getSelectedItem().getMoviesList();
             if(moviesInList.size() != 0) {
