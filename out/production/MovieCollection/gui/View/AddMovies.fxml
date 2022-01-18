@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="280.0" prefWidth="307.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AddMoviesController">
+<AnchorPane fx:id="anchorPane" prefHeight="280.0" prefWidth="305.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AddMoviesController">
    <children>
       <Button fx:id="cancelBtn1" layoutX="121.0" layoutY="200.0" mnemonicParsing="false" onAction="#closeAMWindow" prefHeight="26.0" prefWidth="65.0" text="Cancel" />
       <Button fx:id="addMovieBtn" layoutX="218.0" layoutY="200.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="52.0" text="Add" />
       <Label fx:id="errorLabel2" layoutX="85.0" layoutY="14.0" textFill="RED" />
-      <TextField fx:id="filePathText" editable="false" layoutX="122.0" layoutY="138.0" prefHeight="26.0" prefWidth="81.0" />
-      <Label layoutX="69.0" layoutY="141.0" prefHeight="20.0" text="File Path:" textFill="WHITE" />
-      <Label layoutX="92.0" layoutY="50.0" prefHeight="20.0" text="Title:" textFill="WHITE" />
-      <TextField fx:id="movieTitle" layoutX="122.0" layoutY="47.0" prefHeight="26.0" prefWidth="148.0" />
-      <TextField fx:id="ratingText" layoutX="122.0" layoutY="78.0" prefHeight="26.0" prefWidth="148.0" />
-      <TextField fx:id="personalRatingText" layoutX="122.0" layoutY="108.0" prefHeight="26.0" prefWidth="148.0" />
-      <Label layoutX="81.0" layoutY="82.0" text="Rating:" textFill="WHITE" />
-      <Button fx:id="fileChooserBTN" layoutX="205.0" layoutY="138.0" mnemonicParsing="false" onAction="#chooseFileBTNPress" prefHeight="26.0" prefWidth="65.0" text="Choose" />
-      <Label layoutX="32.0" layoutY="112.0" text="Personal Rating:" textFill="WHITE" />
-      <Label fx:id="checkComboLabel" layoutX="14.0" layoutY="172.0" text="Choose categories:" textFill="WHITE" />
-      <CheckComboBox fx:id="checkCombo" layoutX="122.0" layoutY="168.0" prefHeight="26.0" prefWidth="148.0" />
+      <TextField fx:id="filePathText" editable="false" layoutX="120.0" layoutY="140.0" prefHeight="26.0" prefWidth="80.0" />
+      <Label layoutX="70.0" layoutY="140.0" prefHeight="20.0" text="File Path:" textFill="WHITE" />
+      <Label layoutX="90.0" layoutY="50.0" prefHeight="20.0" text="Title:" textFill="WHITE" />
+      <TextField fx:id="movieTitle" layoutX="120.0" layoutY="50.0" prefHeight="26.0" prefWidth="150.0" />
+      <TextField fx:id="ratingText" layoutX="120.0" layoutY="80.0" prefHeight="26.0" prefWidth="150.0" />
+      <TextField fx:id="personalRatingText" layoutX="120.0" layoutY="110.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="80.0" layoutY="80.0" text="Rating:" textFill="WHITE" />
+      <Button fx:id="fileChooserBTN" layoutX="205.0" layoutY="140.0" mnemonicParsing="false" onAction="#chooseFileBTNPress" prefHeight="26.0" prefWidth="65.0" text="Choose" />
+      <Label layoutX="30.0" layoutY="110.0" text="Personal Rating:" textFill="WHITE" />
+      <Label fx:id="checkComboLabel" layoutX="15.0" layoutY="170.0" text="Choose categories:" textFill="WHITE" />
+      <CheckComboBox fx:id="checkCombo" layoutX="120.0" layoutY="170.0" prefHeight="26.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
