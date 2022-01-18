@@ -81,6 +81,9 @@ public class StartupController implements Initializable {
             if (dateOfMovie.isBefore(today.minusYears(20))){
                 displayList.add(listOfMovies.get(i));
             }
+            if (listOfMovies.get(i).getPRating() < 6.0){
+                displayList.add(listOfMovies.get(i));
+            }
         }
         checkListView.setItems(displayList);
     }
