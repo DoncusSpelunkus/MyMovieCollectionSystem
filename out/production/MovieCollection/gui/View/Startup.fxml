@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="450.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
    <children>
-      <Label layoutX="75.0" layoutY="70.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile" textFill="WHITE">
+      <Label layoutX="56.0" layoutY="65.0" prefHeight="25.0" prefWidth="324.0" text="These movies are either old or poorly rated" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

@@ -8,8 +8,8 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="280.0" prefWidth="307.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AddMoviesController">
    <children>
-      <Button fx:id="cancelBtn1" layoutX="69.0" layoutY="226.0" mnemonicParsing="false" onAction="#closeAMWindow" prefHeight="26.0" prefWidth="65.0" text="Cancel" />
-      <Button fx:id="addMovieBtn" layoutX="218.0" layoutY="226.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="52.0" text="Add" />
+      <Button fx:id="cancelBtn1" layoutX="121.0" layoutY="200.0" mnemonicParsing="false" onAction="#closeAMWindow" prefHeight="26.0" prefWidth="65.0" text="Cancel" />
+      <Button fx:id="addMovieBtn" layoutX="218.0" layoutY="200.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="52.0" text="Add" />
       <Label fx:id="errorLabel2" layoutX="85.0" layoutY="14.0" textFill="RED" />
       <TextField fx:id="filePathText" editable="false" layoutX="122.0" layoutY="138.0" prefHeight="26.0" prefWidth="81.0" />
       <Label layoutX="69.0" layoutY="141.0" prefHeight="20.0" text="File Path:" textFill="WHITE" />
