@@ -9,17 +9,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="850.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
+<AnchorPane prefHeight="700.0" prefWidth="850.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
    <children>
-      <TableView fx:id="categoriesView" layoutX="15.0" layoutY="110.0" maxHeight="570.0" maxWidth="559.0" minHeight="530.0" minWidth="128.0" onMouseClicked="#categorySelect" prefHeight="546.0" prefWidth="169.0">
+      <TableView fx:id="categoriesView" layoutX="15.0" layoutY="110.0" maxHeight="570.0" maxWidth="560.0" minHeight="530.0" minWidth="130.0" onMouseClicked="#categorySelect" prefHeight="545.0" prefWidth="170.0">
          <columns>
           <TableColumn fx:id="categoryNameColumn" prefWidth="172.0000057220459" text="Name" />
          </columns>
       </TableView>
-      <Button fx:id="newMovieBtn" layoutX="605.0" layoutY="665.0" mnemonicParsing="false" onAction="#newMovieBtn" prefHeight="26.0" prefWidth="46.0" text="New" />
+      <Button fx:id="newMovieBtn" layoutX="605.0" layoutY="665.0" mnemonicParsing="false" onAction="#newMovieBtn" prefHeight="25.0" prefWidth="46.0" text="New" />
       <Button fx:id="editMovieBtn" layoutX="560.0" layoutY="665.0" mnemonicParsing="false" onAction="#editMovieBtn" prefHeight="25.0" prefWidth="40.0" text="Edit" />
       <Button fx:id="deleteMovieBtn" layoutX="500.0" layoutY="665.0" mnemonicParsing="false" onAction="#deleteMovieBtn" text="Delete" />
-      <TableView fx:id="moviesView" layoutX="500.0" layoutY="110.0" maxHeight="546.0" maxWidth="762.0" minHeight="530.0" minWidth="212.0" prefHeight="546.0" prefWidth="315.0">
+      <TableView fx:id="moviesView" layoutX="500.0" layoutY="110.0" maxHeight="546.0" maxWidth="762.0" minHeight="530.0" minWidth="212.0" onMouseClicked="#mouseClicked" prefHeight="546.0" prefWidth="315.0">
         <columns>
           <TableColumn fx:id="movieNameColumn" prefWidth="95.99996948242188" text="Title" />
             <TableColumn fx:id="lastViewedColumn" minWidth="0.0" prefWidth="108.1788330078125" text="Last Viewed" />
@@ -33,17 +33,18 @@
       <Label fx:id="errorLabel1" layoutX="55.0" layoutY="40.0" textFill="RED">
          <font>
             <Font name="System Bold" size="16.0" />
-         </font></Label>
-      <TextField fx:id="searchField" layoutX="369.0" layoutY="53.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchField" layoutX="370.0" layoutY="55.0" />
       <TableView fx:id="moviesInCategory" layoutX="200.0" layoutY="110.0" prefHeight="546.0" prefWidth="194.0">
         <columns>
           <TableColumn fx:id="moviesInCategoryName" prefWidth="193.59998168945313" text="Name" />
         </columns>
       </TableView>
       <Button fx:id="addToCategory" layoutX="425.0" layoutY="125.0" mnemonicParsing="false" onAction="#addToCategoryPress" text="Add" />
-      <Text fill="WHITE" layoutX="73.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" />
-      <Text fill="WHITE" layoutX="640.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" />
-      <Text fill="WHITE" layoutX="425.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
+      <Text fill="WHITE" layoutX="70.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" />
+      <Text fill="WHITE" layoutX="640.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" />
+      <Text fill="WHITE" layoutX="425.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
       <Button fx:id="removeCategoryBtns" layoutX="260.0" layoutY="665.0" mnemonicParsing="false" onAction="#removeCategoryBtn" text="Remove" />
    </children>
 </AnchorPane>

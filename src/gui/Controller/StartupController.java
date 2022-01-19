@@ -40,7 +40,7 @@ public class StartupController implements Initializable {
     private void goToMainBTNPRess(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../view/Main.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
+        Parent root = fxmlLoader.load();
         MainController main = fxmlLoader.getController();
         main.setController(this);
         fxmlLoader.<AddCategoriesController>getController();
