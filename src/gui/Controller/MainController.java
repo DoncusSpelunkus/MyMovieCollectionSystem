@@ -130,7 +130,7 @@ public class MainController implements Initializable {
                 fillCurrentCategory();
             }
             else{
-                errorLabel1.setText("Error: No movie selected");
+                errorLabel1.setText("Error: No movie or category selected");
             }
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();
