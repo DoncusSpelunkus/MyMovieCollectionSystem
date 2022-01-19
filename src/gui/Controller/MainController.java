@@ -149,6 +149,8 @@ public class MainController implements Initializable {
         if(moviesView.getSelectionModel().getSelectedItem() != null){
         moviesModel.deleteMovie(moviesView.getSelectionModel().getSelectedItem());
         refreshMovieList();
+        refreshCategory();
+        fillCurrentCategory();
         }
         else{
             errorLabel1.setText("Error: No movie selected");
