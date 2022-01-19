@@ -110,9 +110,12 @@ public class MainController implements Initializable {
                 moviesModel.addToCategory(categoriesView.getSelectionModel().getSelectedItem(), moviesView.getSelectionModel().getSelectedItem());
                 refreshCategory();
                 fillCurrentCategory();
-            }}
-        catch (NullPointerException | SQLServerException ex){
-            errorLabel1.setText("error: No movie or Category selected, please select one of each");
+            }
+        else{
+                errorLabel1.setText("Error: No movie or Category selected, please select one of each");
+            }
+        } catch (NullPointerException | SQLServerException ex){
+            errorLabel1.setText("Error: Nullpointerexception or SQLServerException detected");
         }
     }
 
@@ -123,6 +126,9 @@ public class MainController implements Initializable {
                 moviesModel.deleteFromCategories(categoriesView.getSelectionModel().getSelectedItem(), moviesInCategory.getSelectionModel().getSelectedItem());
                 refreshCategory();
                 fillCurrentCategory();
+            }
+            else{
+                errorLabel1.setText("Error: No movie selected");
             }
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();
@@ -190,17 +196,23 @@ public class MainController implements Initializable {
 
     @FXML
     public void playMovieBtn (ActionEvent actionEvent) throws IOException {
+        try {
         if(moviesView.getSelectionModel().getSelectedItem() != null){
         playMovies(moviesView.getSelectionModel().getSelectedItem());
         }
         else{
                 errorLabel1.setText("Error: No movie selected");
         }
+        }
+        catch(IllegalArgumentException a) {
+            errorLabel1.setText("Error: File is not on this computer");
+        }
     }
     public void playMovies(Movies movies) throws IOException {
         File file = new File(movies.getFilelink());
         Desktop.getDesktop().open(file);
     }
+
     @FXML
     private void newMovieBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupMoviesWindow(false);
@@ -315,14 +327,14 @@ public class MainController implements Initializable {
     public void refreshMovieList() throws SQLServerException {
         try{ moviesView.setItems(moviesModel.getAllMovies());
     } catch (Exception e) {
-            errorLabel1.setText("Could not refresh Movie list");
+            errorLabel1.setText("Error: Could not refresh Movie list");
         }
     }
 
         public void refreshCategory() throws SQLServerException {
         try{ categoriesView.setItems(categoriesModel.getAllCategories());
     } catch (Exception e) {
-            errorLabel1.setText("Could not refresh Category list");
+            errorLabel1.setText("Error: Could not refresh Category list");
         }
     }
 
