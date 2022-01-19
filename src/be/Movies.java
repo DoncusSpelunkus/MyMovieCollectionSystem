@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class Movies {
 
+    // This makes sure we have a template for the movies.
+
     private final int movieID;
     private String name;
     private float rating;

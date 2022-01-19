@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface DALFacade {
 
+    // This makes sure we pass through the information correctly.
+
     List<Movies> getAllMovies();
 
     void addMovies(String name, float rating, float prating, String filelink, Date lastview);

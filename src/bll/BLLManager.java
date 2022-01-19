@@ -10,6 +10,8 @@ import java.util.List;
 
 public class BLLManager implements BLLFacade{
 
+    // This makes sure we pass through the information correctly.
+
     private DALFacade dalFacade;
 
 

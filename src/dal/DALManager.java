@@ -8,6 +8,8 @@ import java.util.List;
 
 public class DALManager implements DALFacade {
 
+    // This makes sure we pass through the information correctly.
+
     private MoviesDAO moviesDAO;
     private CategoriesDAO categoriesDAO;
     private CatMovieDAO catMovieDAO;

@@ -26,6 +26,8 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -189,20 +191,18 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void mouseClicked (MouseEvent event) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../view/VideoPlayer.fxml"));
-            Parent root = fxmlLoader.load();
-            VideoPlayerController videoPlayer = fxmlLoader.getController();
-            videoPlayer.setController(this);
-            fxmlLoader.<VideoPlayerController>getController().setEdit(moviesView.getSelectionModel().getSelectedItem());
-            fxmlLoader.<VideoPlayerController>getController();
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+    public void playMovieBtn (ActionEvent actionEvent) throws IOException {
+        if(moviesView.getSelectionModel().getSelectedItem() != null){
+        playMovies(moviesView.getSelectionModel().getSelectedItem());
+        }
+        else{
+                errorLabel1.setText("Error: No movie selected");
+        }
     }
-
+    public void playMovies(Movies movies) throws IOException {
+        File file = new File(movies.getFilelink());
+        Desktop.getDesktop().open(file);
+    }
     @FXML
     private void newMovieBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupMoviesWindow(false);
@@ -234,6 +234,7 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 
     private void populateCategoriesView(){
         try {

@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Categories {
 
+    // This makes sure we have a template for the categories.
+
     private String name;
     private List<Movies> moviesList = new ArrayList<>();
     private final int categoryID;
