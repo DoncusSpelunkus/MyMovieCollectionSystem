@@ -1,3 +1,6 @@
+/* Here we have our CSS that makes our program look a bit better than just a plain
+ white program*/
+
 .root{
     -fx-background-color: #262626;
 }
