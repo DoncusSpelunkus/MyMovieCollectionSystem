@@ -29,13 +29,21 @@ public class VideoPlayerController implements Initializable {
     @FXML
     private MediaView mediaView;
 
+    private MainController controller;
+
     public VideoPlayerController(MediaView mediaView) {
         this.mediaView = mediaView;
+    }
+
+    public void setController(MainController controller) {
+        this.controller = controller;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+
 }
 

@@ -79,6 +79,7 @@ public class MainController implements Initializable {
     private ObservableList<Categories> observableListCategories;
     private ObservableList<Movies> observableListMovies;
     private StartupController startupController;
+
     private CategoriesModel categoriesModel;
     private MoviesModel moviesModel;
     private TableView.TableViewSelectionModel<Categories> selectionModel;
@@ -197,13 +198,13 @@ public class MainController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("/View/VideoPlayer.fxml"));
             Parent root = fxmlLoader.load();
             VideoPlayerController videoPlayer = fxmlLoader.getController();
+            videoPlayer.setController(this);
+            fxmlLoader.<VideoPlayerController>getController();
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            Node n = (Node) event.getSource();
-            Stage stage1 = (Stage) n.getScene().getWindow();
-            }
+    }
 
     @FXML
     private void newMovieBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
