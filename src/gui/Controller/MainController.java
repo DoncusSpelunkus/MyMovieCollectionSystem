@@ -192,17 +192,23 @@ public class MainController implements Initializable {
 
     @FXML
     public void playMovieBtn (ActionEvent actionEvent) throws IOException {
+        try {
         if(moviesView.getSelectionModel().getSelectedItem() != null){
         playMovies(moviesView.getSelectionModel().getSelectedItem());
         }
         else{
                 errorLabel1.setText("Error: No movie selected");
         }
+        }
+        catch(IllegalArgumentException a) {
+            errorLabel1.setText("File is not on this computer");
+        }
     }
     public void playMovies(Movies movies) throws IOException {
         File file = new File(movies.getFilelink());
         Desktop.getDesktop().open(file);
     }
+
     @FXML
     private void newMovieBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupMoviesWindow(false);
