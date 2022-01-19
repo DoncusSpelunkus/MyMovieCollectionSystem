@@ -53,11 +53,6 @@ public class AddMoviesController implements Initializable {
     @FXML
     private CheckComboBox<Categories> checkCombo;
 
-    @FXML
-    private Label checkComboLabel;
-
-
-
     private MoviesModel moviesModel;
     private CategoriesModel categoriesModel;
     private ObservableList<Categories> categories;
@@ -153,12 +148,11 @@ public class AddMoviesController implements Initializable {
         if(movie != null){
             selectedMovie = movie;
             isEditing = true;
+            getCategories();
             movieTitle.setText(selectedMovie.getName());
             ratingText.setText(selectedMovie.getRatingToString());
             personalRatingText.setText(selectedMovie.getPRatingToString());
             filePathText.setText(selectedMovie.getFilelink());
-            checkCombo.setVisible(false);
-            checkComboLabel.setVisible(false);
             errorLabel2.setText("Edit mode: Enabled");
             addMovieBtn.setText("Edit");
         }
@@ -183,4 +177,18 @@ public class AddMoviesController implements Initializable {
         }
         mainController.refreshCategory();
     }
+
+    private void getCategories(){
+        if(isEditing == true){
+            for (int i = 0; i < categories.size(); i++) {
+                for (int j = 0; j < categories.get(i).getMoviesList().size(); j++) {
+                    if (selectedMovie.getMovieID() == categories.get(i).getMoviesList().get(j).getMovieID()){
+                        checkCombo.getCheckModel().check(categories.get(i));
+                    }
+                }
+            }
+        }
+    }
+
+
 }
