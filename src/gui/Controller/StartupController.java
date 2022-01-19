@@ -36,6 +36,15 @@ public class StartupController implements Initializable {
         moviesModel = new MoviesModel();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            makeList();
+        } catch (IOException e) {
+            errorLabel3.setText("You got an error at: Initialization");
+        }
+    }
+
     @FXML
     private void goToMainBTNPRess(ActionEvent event) throws IOException { // Opens the main window
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -63,14 +72,6 @@ public class StartupController implements Initializable {
         makeList();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
-            makeList();
-        } catch (IOException e) {
-            errorLabel3.setText("You got an error at: Initialization");
-        }
-    }
 
     private void makeList() throws IOException { // makes the list to display
         ObservableList<Movies> listOfMovies = moviesModel.getAllMovies();

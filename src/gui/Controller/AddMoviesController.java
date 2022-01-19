@@ -71,6 +71,15 @@ public class AddMoviesController implements Initializable {
         categories = categoriesModel.getAllCategories();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        checkCombo.getItems().addAll(categories); // sets the items inside the checkcombobox
+    }
+
+    public void setMyController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
     @FXML // Method to open the file explorer and making the filepath into a string
     private void chooseFileBTNPress(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -84,17 +93,13 @@ public class AddMoviesController implements Initializable {
     }
 
     @FXML // Closes the addmovies window
-    public void closeAMWindow(ActionEvent event){
+    private void closeAMWindow(ActionEvent event){
         stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();
     }
 
-    public void setMyController(MainController mainController) {
-        this.mainController = mainController;
-    }
-
-
-    public void addMovie(ActionEvent event) throws SQLServerException { // The method for when you push the add button
+    @FXML
+    private void addMovie(ActionEvent event) throws SQLServerException { // The method for when you push the add button
         String name = movieTitle.getText().trim();
         String rating = ratingText.getText().trim();
         String prating = personalRatingText.getText().trim(); // Gets the text from the fields to the appropriate variable
@@ -164,10 +169,6 @@ public class AddMoviesController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        checkCombo.getItems().addAll(categories); // sets the items inside the checkcombobox
-    }
 
     private void addInitCategories() throws SQLServerException { // The method finds the newly created movie and matches it with catgories selected in the checkcombobox
         List<Categories> selectedCategories = checkCombo.getCheckModel().getCheckedItems();

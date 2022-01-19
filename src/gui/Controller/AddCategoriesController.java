@@ -29,7 +29,7 @@ public class AddCategoriesController {
     private final CategoriesModel categoriesModel;
     private Categories categoriesToBeEdited;
 
-    public AddCategoriesController(){
+    public AddCategoriesController() {
         categoriesModel = new CategoriesModel();
     }
 
@@ -37,9 +37,10 @@ public class AddCategoriesController {
         this.controller = controller;
     }
 
-    public void addCategory(ActionEvent actionEvent) throws SQLServerException { // adds the new category
+    @FXML
+    private void addCategory(ActionEvent actionEvent) throws SQLServerException { // adds the new category
         String name = categoryName.getText().trim();
-        if(name.length() > 0 && name.length() < 50) {
+        if (name.length() > 0 && name.length() < 50) {
             if (!isEditing) { // checks if in edit mode
                 categoriesModel.addCategory(name);
                 Node n = (Node) actionEvent.getSource();
@@ -51,12 +52,22 @@ public class AddCategoriesController {
                 stage = (Stage) n.getScene().getWindow();
                 stage.close();
             }
-        } else{errorLabel4.setText("A name haven't been input, please input a name");        }
+        } else {
+            errorLabel4.setText("A name haven't been input, please input a name");
+        }
         controller.refreshCategory();
     }
 
-    public void setEdit(Categories selectedCategory) throws SQLServerException{ // sets up edit mode
-        if(selectedCategory != null){
+    @FXML
+    private void closeACWindow(ActionEvent actionEvent) { // closes the window
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+
+
+    public void setEdit(Categories selectedCategory) throws SQLServerException { // sets up edit mode
+        if (selectedCategory != null) {
             categoriesToBeEdited = selectedCategory;
             isEditing = true;
             categoryName.setText(selectedCategory.getName());
@@ -65,11 +76,5 @@ public class AddCategoriesController {
         }
         controller.refreshCategory();
     }
-
-    public void closeACWindow(ActionEvent actionEvent) { // closes the window
-        Node n = (Node) actionEvent.getSource();
-        Stage stage = (Stage) n.getScene().getWindow();
-        stage.close();
-        }
-    }
+}
 

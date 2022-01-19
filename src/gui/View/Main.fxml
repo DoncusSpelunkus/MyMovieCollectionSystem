@@ -44,7 +44,7 @@
       <Text fill="WHITE" layoutX="70.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" />
       <Text fill="WHITE" layoutX="640.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" />
       <Text fill="WHITE" layoutX="425.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
-      <Button fx:id="removeCategoryBtns" layoutX="260.0" layoutY="665.0" mnemonicParsing="false" onAction="#removeCategoryBtn" text="Remove" />
+      <Button fx:id="removeCategoryBtns" layoutX="260.0" layoutY="665.0" mnemonicParsing="false" onAction="#removeFromCategoryBtn" text="Remove" />
       <Button fx:id="playMovieBtn" layoutX="769.0" layoutY="665.0" mnemonicParsing="false" onAction="#playMovieBtn" prefHeight="25.0" prefWidth="46.0" text="Play" />
    </children>
 </AnchorPane>
