@@ -126,6 +126,9 @@ public class MainController implements Initializable {
                 refreshCategory();
                 fillCurrentCategory();
             }
+            else{
+                errorLabel1.setText("Error: No movie selected");
+            }
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();
         }
