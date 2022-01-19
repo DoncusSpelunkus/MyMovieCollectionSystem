@@ -7,6 +7,9 @@ import java.sql.Date;
 import java.util.List;
 
 public interface BLLFacade {
+
+    // This makes sure we pass through the information correctly.
+
     List<Movies> getAllMovies();
 
     void addMovie(String name, float rating, float prating, String filelink, Date lastview);

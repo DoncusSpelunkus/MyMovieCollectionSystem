@@ -190,17 +190,37 @@ public class MainController implements Initializable {
 
     @FXML
     public void mouseClicked (MouseEvent event) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../view/VideoPlayer.fxml"));
-            Parent root = fxmlLoader.load();
-            VideoPlayerController videoPlayer = fxmlLoader.getController();
-            videoPlayer.setController(this);
-            fxmlLoader.<VideoPlayerController>getController().setEdit(moviesView.getSelectionModel().getSelectedItem());
-            fxmlLoader.<VideoPlayerController>getController();
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../view/VideoPlayer.fxml"));
+        Parent root = fxmlLoader.load();
+        VideoPlayerController videoPlayer = fxmlLoader.getController();
+        videoPlayer.setController(this);
+        fxmlLoader.<VideoPlayerController>getController().setEdit(moviesView.getSelectionModel().getSelectedItem());
+        fxmlLoader.<VideoPlayerController>getController();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void playMovieBtn (ActionEvent actionEvent) throws IOException {
+        if(moviesView.getSelectionModel().getSelectedItem() != null){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../view/VideoPlayer.fxml"));
+        Parent root = fxmlLoader.load();
+        VideoPlayerController videoPlayer = fxmlLoader.getController();
+        videoPlayer.setController(this);
+        fxmlLoader.<VideoPlayerController>getController().setEdit(moviesView.getSelectionModel().getSelectedItem());
+        fxmlLoader.<VideoPlayerController>getController();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        }
+        else{
+                errorLabel1.setText("Error: No movie selected");
+        }
     }
 
     @FXML
