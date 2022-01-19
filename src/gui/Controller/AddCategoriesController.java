@@ -37,10 +37,10 @@ public class AddCategoriesController {
         this.controller = controller;
     }
 
-    public void addCategory(ActionEvent actionEvent) throws SQLServerException {
+    public void addCategory(ActionEvent actionEvent) throws SQLServerException { // adds the new category
         String name = categoryName.getText().trim();
         if(name.length() > 0 && name.length() < 50) {
-            if (!isEditing) {
+            if (!isEditing) { // checks if in edit mode
                 categoriesModel.addCategory(name);
                 Node n = (Node) actionEvent.getSource();
                 stage = (Stage) n.getScene().getWindow();
@@ -55,7 +55,7 @@ public class AddCategoriesController {
         controller.refreshCategory();
     }
 
-    public void setEdit(Categories selectedCategory) throws SQLServerException{
+    public void setEdit(Categories selectedCategory) throws SQLServerException{ // sets up edit mode
         if(selectedCategory != null){
             categoriesToBeEdited = selectedCategory;
             isEditing = true;
@@ -66,7 +66,7 @@ public class AddCategoriesController {
         controller.refreshCategory();
     }
 
-    public void closeACWindow(ActionEvent actionEvent) {
+    public void closeACWindow(ActionEvent actionEvent) { // closes the window
 
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();

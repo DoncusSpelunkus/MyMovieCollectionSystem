@@ -34,10 +34,8 @@ public class VideoPlayerController implements Initializable {
     private Movies movie;
 
     public VideoPlayerController() {
-        this.mediaView = mediaView;
+
     }
-
-
 
     public void setEdit(Movies selectedMovie){
         movie = selectedMovie;
