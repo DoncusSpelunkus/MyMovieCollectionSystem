@@ -53,6 +53,9 @@ public class AddMoviesController implements Initializable {
     @FXML
     private CheckComboBox<Categories> checkCombo;
 
+    @FXML
+    private Label checkComboLabel;
+
     private MoviesModel moviesModel;
     private CategoriesModel categoriesModel;
     private ObservableList<Categories> categories;
@@ -68,7 +71,7 @@ public class AddMoviesController implements Initializable {
         categories = categoriesModel.getAllCategories();
     }
 
-    @FXML
+    @FXML // Method to open the file explorer and making the filepath into a string
     private void chooseFileBTNPress(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
@@ -80,7 +83,7 @@ public class AddMoviesController implements Initializable {
         filePathText.setText(filestring.getAbsolutePath());
     }
 
-    @FXML
+    @FXML // Closes the addmovies window
     public void closeAMWindow(ActionEvent event){
         stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();
@@ -90,25 +93,24 @@ public class AddMoviesController implements Initializable {
         this.mainController = mainController;
     }
 
-    public void addMovie(ActionEvent event) throws SQLServerException {
+
+    public void addMovie(ActionEvent event) throws SQLServerException { // The method for when you push the add button
         String name = movieTitle.getText().trim();
         String rating = ratingText.getText().trim();
-        String prating = personalRatingText.getText().trim();
+        String prating = personalRatingText.getText().trim(); // Gets the text from the fields to the appropriate variable
         convertTextToFloat(rating);
         convertPTextToFloat(prating);
-        if (!isEditing) {
-            if (ratingNo >= 0.0 && ratingNo <= 10.0) {
+        if (!isEditing) { // Checks if the window is in edit mode
+            if (ratingNo >= 0.0 && ratingNo <= 10.0) { // The 3 if statements here check that the inputted values are valid
                 if (pRatingNo >= 0.0 && pRatingNo <= 10.0) {
-                    if (name.length() > 0 && name.length() < 50 && filePathText != null && filePathText.getText().length() != 0) {
+                    if (name.length() > 0 && name.length() < 51 && filePathText != null && filePathText.getText().length() != 0) {
                     moviesModel.addMovie(name, ratingNo, pRatingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
-                    addInitCategories();
-                    movieTitle.clear();
-                    filePathText.clear();
-                    mainController.setErrorLabel1("Successfully added movie, congrats");
+                    addInitCategories(); // runs the method to match up initial categories
+                    mainController.setErrorLabel1("Successfully added movie, congrats"); // Displays the message in the main window and closes the addmovies window
                     stage = (Stage) anchorPane.getScene().getWindow();
                     stage.close();
                     } else {
-                        errorLabel2.setText("Something went wrong, try again");
+                        errorLabel2.setText("Name and file path has to not be empty (Name is max 50 chars), try again");
                     }
                 } else {
                     errorLabel2.setText("Invalid input: Personal rating must have a valid number between 0.0 and 10.0");
@@ -116,17 +118,15 @@ public class AddMoviesController implements Initializable {
             } else {
                 errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
             }
-        } else {
+        } else { // This runs if the window is in edit mode
             moviesModel.editMovie(selectedMovie, name, ratingNo, pRatingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
-
-
             stage = (Stage) anchorPane.getScene().getWindow();
             stage.close();
         }
         mainController.refreshMovieList();
     }
 
-    private void convertTextToFloat(String rating){
+    private void convertTextToFloat(String rating){ // Converts rating field string into a float
         try{
             float ratingTemp = Float.parseFloat(rating);
             ratingNo = ratingTemp;
@@ -136,7 +136,7 @@ public class AddMoviesController implements Initializable {
         }
     }
 
-    private void convertPTextToFloat(String prating){
+    private void convertPTextToFloat(String prating){ // Converts prating field string into a float
         try{
             float pRatingTemp = Float.parseFloat(prating);
             pRatingNo = pRatingTemp;
@@ -146,11 +146,12 @@ public class AddMoviesController implements Initializable {
         }
     }
 
-    public void setEdit(Movies movie){
+    public void setEdit(Movies movie){ // Sets the window to edit mode and pulls the needed info about the selected movie on the view
         if(movie != null){
             selectedMovie = movie;
             isEditing = true;
-            getCategories();
+            checkCombo.setVisible(false);
+            checkComboLabel.setVisible(false);
             movieTitle.setText(selectedMovie.getName());
             ratingText.setText(selectedMovie.getRatingToString());
             personalRatingText.setText(selectedMovie.getPRatingToString());
@@ -165,10 +166,10 @@ public class AddMoviesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        checkCombo.getItems().addAll(categories);
+        checkCombo.getItems().addAll(categories); // sets the items inside the checkcombobox
     }
 
-    private void addInitCategories() throws SQLServerException {
+    private void addInitCategories() throws SQLServerException { // The method finds the newly created movie and matches it with catgories selected in the checkcombobox
         List<Categories> selectedCategories = checkCombo.getCheckModel().getCheckedItems();
         List<Movies> listToGetLastestMovie = moviesModel.getAllMovies();
         Comparator<Movies> sortedList = Comparator.comparing(Movies::getMovieID);
@@ -178,17 +179,5 @@ public class AddMoviesController implements Initializable {
             moviesModel.addToCategory(selectedCategories.get(i), currentMovie);
         }
         mainController.refreshCategory();
-    }
-
-    private void getCategories(){
-        if(isEditing){
-            for (int i = 0; i < categories.size(); i++) {
-                for (int j = 0; j < categories.get(i).getMoviesList().size(); j++) {
-                    if (selectedMovie.getMovieID() == categories.get(i).getMoviesList().get(j).getMovieID()){
-                        checkCombo.getCheckModel().check(categories.get(i));
-                    }
-                }
-            }
-        }
     }
 }
