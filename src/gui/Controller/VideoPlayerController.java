@@ -1,4 +1,5 @@
 package gui.Controller;
+import be.Movies;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.media.MediaView;
@@ -30,9 +31,16 @@ public class VideoPlayerController implements Initializable {
     private MediaView mediaView;
 
     private MainController controller;
+    private Movies movie;
 
-    public VideoPlayerController(MediaView mediaView) {
+    public VideoPlayerController() {
         this.mediaView = mediaView;
+    }
+
+    
+
+    public void setEdit(Movies selectedMovie){
+        movie = selectedMovie;
     }
 
     public void setController(MainController controller) {

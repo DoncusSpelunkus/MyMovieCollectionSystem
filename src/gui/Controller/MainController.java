@@ -72,10 +72,6 @@ public class MainController implements Initializable {
         private MediaPlayer mediaPlayer;
 
 
-
-
-
-
     private ObservableList<Categories> observableListCategories;
     private ObservableList<Movies> observableListMovies;
     private StartupController startupController;
@@ -193,12 +189,13 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void mouseClicked (ActionEvent event) throws IOException {
+    public void mouseClicked (MouseEvent event) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/View/VideoPlayer.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("../view/VideoPlayer.fxml"));
             Parent root = fxmlLoader.load();
             VideoPlayerController videoPlayer = fxmlLoader.getController();
             videoPlayer.setController(this);
+            fxmlLoader.<VideoPlayerController>getController().setEdit(moviesView.getSelectionModel().getSelectedItem());
             fxmlLoader.<VideoPlayerController>getController();
             Stage stage = new Stage();
             Scene scene = new Scene(root);
