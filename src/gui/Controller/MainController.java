@@ -90,8 +90,6 @@ public class MainController implements Initializable {
     }
 
     public MainController() {
-        this.mediaView = mediaView;
-        this.mediaPlayer = mediaPlayer;
         moviesModel = new MoviesModel();
         categoriesModel = new CategoriesModel();
         observableListCategories = categoriesModel.getAllCategories();
@@ -108,7 +106,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void addToCategoryPress (ActionEvent actionEvent) {
+    private void addToCategoryPress (ActionEvent actionEvent) { // add movie to the category
         try{
             if (moviesView.getSelectionModel().getSelectedIndex() != -1) {
                 moviesModel.addToCategory(categoriesView.getSelectionModel().getSelectedItem(), moviesView.getSelectionModel().getSelectedItem());
@@ -124,7 +122,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void removeCategoryBtn (ActionEvent actionEvent) {
+    private void removeCategoryBtn (ActionEvent actionEvent) { // Removes the movie from the category
         try {
             if (moviesInCategory.getSelectionModel().getSelectedIndex() != -1){
                 moviesModel.deleteFromCategories(categoriesView.getSelectionModel().getSelectedItem(), moviesInCategory.getSelectionModel().getSelectedItem());
@@ -140,7 +138,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void deleteCategoryBtn (ActionEvent actionEvent) throws SQLServerException {
+    private void deleteCategoryBtn (ActionEvent actionEvent) throws SQLServerException { // Deletes the selected category
         if(categoriesView.getSelectionModel().getSelectedItem() != null){
         categoriesModel.deleteCategory(categoriesView.getSelectionModel().getSelectedItem());
         refreshCategory();
@@ -151,7 +149,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void deleteMovieBtn (ActionEvent actionEvent) throws SQLServerException {
+    private void deleteMovieBtn (ActionEvent actionEvent) throws SQLServerException { // Deletes the selected movie
         if(moviesView.getSelectionModel().getSelectedItem() != null){
         moviesModel.deleteMovie(moviesView.getSelectionModel().getSelectedItem());
         refreshMovieList();
@@ -162,12 +160,12 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void newCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
+    private void newCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException { // opens the new category in non-edit mode
         setupCategoriesWindow(false);
     }
 
     @FXML
-    private void editCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
+    private void editCategoryBtn (ActionEvent actionEvent) throws IOException, SQLServerException { // opens the new category in edit mode
         if(categoriesView.getSelectionModel().getSelectedItem() != null) {
             setupCategoriesWindow(true);
         }
