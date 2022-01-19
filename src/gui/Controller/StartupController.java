@@ -37,7 +37,7 @@ public class StartupController implements Initializable {
     }
 
     @FXML
-    private void goToMainBTNPRess(ActionEvent event) throws IOException {
+    private void goToMainBTNPRess(ActionEvent event) throws IOException { // Opens the main window
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../view/Main.fxml"));
         Parent root = fxmlLoader.load();
@@ -54,7 +54,7 @@ public class StartupController implements Initializable {
     }
 
     @FXML
-    private void confirmBTNPress(ActionEvent event) throws IOException {
+    private void confirmBTNPress(ActionEvent event) throws IOException { // Deletes the selected movies
         ObservableList<Movies> deletionList = checkListView.getCheckModel().getCheckedItems();
         for (int i = 0; i < deletionList.size(); i++) {
             moviesModel.deleteMovie(deletionList.get(i));
@@ -72,13 +72,13 @@ public class StartupController implements Initializable {
         }
     }
 
-    private void makeList() throws IOException {
+    private void makeList() throws IOException { // makes the list to display
         ObservableList<Movies> listOfMovies = moviesModel.getAllMovies();
         displayList = FXCollections.observableArrayList();
         LocalDate today = LocalDate.now();
         for (int i = 0; i < listOfMovies.size(); i++) {
             LocalDate dateOfMovie = listOfMovies.get(i).getLastview().toLocalDate();
-            if (dateOfMovie.isBefore(today.minusYears(20)) && listOfMovies.get(i).getPRating() < 6.0){
+            if (dateOfMovie.isBefore(today.minusYears(2)) && listOfMovies.get(i).getPRating() < 6.0){
                 displayList.add(listOfMovies.get(i));
             }
         }

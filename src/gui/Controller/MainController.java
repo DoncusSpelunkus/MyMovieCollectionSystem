@@ -191,13 +191,13 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void categorySelect(MouseEvent mouseEvent){
+    public void categorySelect(MouseEvent mouseEvent){ // gets the currently selected category
         currentCategory = selectionModel.getSelectedIndex();
         fillCurrentCategory();
     }
 
     @FXML
-    public void playMovieBtn (ActionEvent actionEvent) throws IOException {
+    public void playMovieBtn (ActionEvent actionEvent) throws IOException { // Gets the currently selected item to run the play method
         try {
         if(moviesView.getSelectionModel().getSelectedItem() != null){
         playMovies(moviesView.getSelectionModel().getSelectedItem());
@@ -210,19 +210,19 @@ public class MainController implements Initializable {
             errorLabel1.setText("Error: File is not on this computer");
         }
     }
-    public void playMovies(Movies movies) throws IOException {
+    public void playMovies(Movies movies) throws IOException { // Plays the movie with the systems mediaplayer
         File file = new File(movies.getFilelink());
         Desktop.getDesktop().open(file);
         Movies selectedMovie = moviesView.getSelectionModel().getSelectedItem();
         moviesModel.editMovie(selectedMovie, selectedMovie.getName(), selectedMovie.getRating(), selectedMovie.getPRating(), selectedMovie.getFilelink(), Date.valueOf(LocalDate.now()));
     }
 
-    @FXML
+    @FXML // opens the new movie menu in non-edit mode
     private void newMovieBtn (ActionEvent actionEvent) throws IOException, SQLServerException {
         setupMoviesWindow(false);
     }
 
-    @FXML
+    @FXML // opens the new movie menu in edit mode
     private void editMovieBtn (ActionEvent actionEvent) throws SQLServerException, IOException {
         if (moviesView.getSelectionModel().getSelectedItem() != null) {
             setupMoviesWindow(true);
@@ -250,7 +250,7 @@ public class MainController implements Initializable {
     }
 
 
-    private void populateCategoriesView(){
+    private void populateCategoriesView(){ // populates the categories view and adds a searchfilter
         try {
             categoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -282,7 +282,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private void populateMoviesInCategoryView(){
+    private void populateMoviesInCategoryView(){ // populates the movies in category view
         try {
             moviesInCategoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
         }
@@ -291,7 +291,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private void populateMoviesView(){
+    private void populateMoviesView(){ // populates the movies view and adds a searchfilter
         try {
             movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             lastViewedColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
@@ -328,25 +328,25 @@ public class MainController implements Initializable {
         }
     }
 
-    public void refreshMovieList() throws SQLServerException {
+    public void refreshMovieList() throws SQLServerException { // Refreshes the movie view
         try{ moviesView.setItems(moviesModel.getAllMovies());
     } catch (Exception e) {
             errorLabel1.setText("Error: Could not refresh Movie list");
         }
     }
 
-        public void refreshCategory() throws SQLServerException {
+        public void refreshCategory() throws SQLServerException { // refreshes the category view
         try{ categoriesView.setItems(categoriesModel.getAllCategories());
     } catch (Exception e) {
             errorLabel1.setText("Error: Could not refresh Category list");
         }
     }
 
-    public void setErrorLabel1(String textToDisplay){
+    public void setErrorLabel1(String textToDisplay){ // Sets the text in the error label
         errorLabel1.setText(textToDisplay);
     }
 
-    private void fillCurrentCategory(){
+    private void fillCurrentCategory(){ // fills the current category view with a list from the category selected
         categoriesView.getSelectionModel().select(currentCategory);
         try{ List<Movies> moviesInList = categoriesView.getSelectionModel().getSelectedItem().getMoviesList();
             if(moviesInList.size() != 0) {
