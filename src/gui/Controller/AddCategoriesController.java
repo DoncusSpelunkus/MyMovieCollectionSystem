@@ -42,15 +42,17 @@ public class AddCategoriesController {
         if(name.length() > 0 && name.length() < 50) {
             if (!isEditing) {
                 categoriesModel.addCategory(name);
-            }
-            else {
+                Node n = (Node) actionEvent.getSource();
+                stage = (Stage) n.getScene().getWindow();
+                stage.close();
+            } else {
                 categoriesModel.editCategory(categoriesToBeEdited, name);
+                Node n = (Node) actionEvent.getSource();
+                stage = (Stage) n.getScene().getWindow();
+                stage.close();
             }
-        }
+        } else{errorLabel4.setText("A name haven't been input, please input a name");        }
         controller.refreshCategory();
-        Node n = (Node) actionEvent.getSource();
-        stage = (Stage) n.getScene().getWindow();
-        stage.close();
     }
 
     public void setEdit(Categories selectedCategory) throws SQLServerException{

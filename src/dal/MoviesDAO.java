@@ -1,8 +1,6 @@
 package dal;
 
-import be.Categories;
-import be.Movies;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import be.Movies;;
 import javafx.collections.FXCollections;
 
 import java.sql.*;

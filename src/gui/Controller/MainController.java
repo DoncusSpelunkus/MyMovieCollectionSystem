@@ -25,6 +25,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -133,14 +134,24 @@ public class MainController implements Initializable {
 
     @FXML
     private void deleteCategoryBtn (ActionEvent actionEvent) throws SQLServerException {
+        if(categoriesView.getSelectionModel().getSelectedItem() != null){
         categoriesModel.deleteCategory(categoriesView.getSelectionModel().getSelectedItem());
         refreshCategory();
+        }
+        else{
+            errorLabel1.setText("Error: No category selected");
+        }
     }
 
     @FXML
     private void deleteMovieBtn (ActionEvent actionEvent) throws SQLServerException {
+        if(moviesView.getSelectionModel().getSelectedItem() != null){
         moviesModel.deleteMovie(moviesView.getSelectionModel().getSelectedItem());
         refreshMovieList();
+        }
+        else{
+            errorLabel1.setText("Error: No movie selected");
+        }
     }
 
     @FXML
@@ -207,7 +218,6 @@ public class MainController implements Initializable {
         else {
             errorLabel1.setText("Error: No movie selected");
         }
-
     }
 
     @FXML
@@ -289,6 +299,8 @@ public class MainController implements Initializable {
                 String searchWord = newValue.toLowerCase();
                 if (movie.getName().toLowerCase().indexOf(searchWord) > -1) {
                     return true; // data will change if song found
+                } else if (movie.getRatingToString().toLowerCase().indexOf(searchWord) > -1) {
+                    return true; // data will change if song found
                 } else
                     return false;
                 });
@@ -303,12 +315,18 @@ public class MainController implements Initializable {
         }
     }
 
-    public void refreshMovieList() throws SQLServerException{
-        moviesView.setItems(moviesModel.getAllMovies());
+    public void refreshMovieList() throws SQLServerException {
+        try{ moviesView.setItems(moviesModel.getAllMovies());
+    } catch (Exception e) {
+            errorLabel1.setText("Could not refresh Movie list");
+        }
     }
 
-    public void refreshCategory() throws SQLServerException {
-        categoriesView.setItems(categoriesModel.getAllCategories());
+        public void refreshCategory() throws SQLServerException {
+        try{ categoriesView.setItems(categoriesModel.getAllCategories());
+    } catch (Exception e) {
+            errorLabel1.setText("Could not refresh Category list");
+        }
     }
 
     public void setErrorLabel1(String textToDisplay){

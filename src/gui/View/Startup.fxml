@@ -6,19 +6,19 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
+<AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="450.0" stylesheets="@../Css/Beautification.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.StartupController">
    <children>
-      <Label layoutX="75.0" layoutY="70.0" prefHeight="25.0" prefWidth="300.0" text="These movies have been here awhile">
+      <Label layoutX="50.0" layoutY="65.0" prefHeight="27.0" prefWidth="355.0" text="These movies are either old or poorly rated" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="155.0" layoutY="375.0" prefHeight="45.0" prefWidth="130.0" text="Wanna delete them?">
+      <Label layoutX="155.0" layoutY="375.0" prefHeight="45.0" prefWidth="130.0" text="Wanna delete them?" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="confirmBTN" layoutX="246.0" layoutY="415.0" mnemonicParsing="false" onAction="#confirmBTNPress" text="Confirm selection" />
+      <Button fx:id="confirmBTN" layoutX="250.0" layoutY="415.0" mnemonicParsing="false" onAction="#confirmBTNPress" text="Confirm selection" />
       <Button fx:id="goToMainBTN" layoutX="75.0" layoutY="415.0" mnemonicParsing="false" onAction="#goToMainBTNPRess" text="Go to main window" />
       <Label fx:id="errorLabel3" layoutX="157.0" layoutY="60.0" textFill="RED" />
       <CheckListView fx:id="checkListView" layoutX="135.0" layoutY="100.0" prefHeight="275.0" prefWidth="165.0" />
