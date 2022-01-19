@@ -117,7 +117,9 @@ public class AddMoviesController implements Initializable {
                 errorLabel2.setText("Invalid input: Rating must have a valid number between 0.0 and 10.0");
             }
         } else {
-            moviesModel.editMovie(selectedMovie, name, ratingNo, pRatingNo, filePathText.getText(), (Date) Date.from(Instant.now()));
+            moviesModel.editMovie(selectedMovie, name, ratingNo, pRatingNo, filePathText.getText(), Date.valueOf(LocalDate.now()));
+
+
             stage = (Stage) anchorPane.getScene().getWindow();
             stage.close();
         }
@@ -179,7 +181,7 @@ public class AddMoviesController implements Initializable {
     }
 
     private void getCategories(){
-        if(isEditing == true){
+        if(isEditing){
             for (int i = 0; i < categories.size(); i++) {
                 for (int j = 0; j < categories.get(i).getMoviesList().size(); j++) {
                     if (selectedMovie.getMovieID() == categories.get(i).getMoviesList().get(j).getMovieID()){
@@ -189,6 +191,4 @@ public class AddMoviesController implements Initializable {
             }
         }
     }
-
-
 }
