@@ -78,10 +78,7 @@ public class StartupController implements Initializable {
         LocalDate today = LocalDate.now();
         for (int i = 0; i < listOfMovies.size(); i++) {
             LocalDate dateOfMovie = listOfMovies.get(i).getLastview().toLocalDate();
-            if (dateOfMovie.isBefore(today.minusYears(20))){
-                displayList.add(listOfMovies.get(i));
-            }
-            if (listOfMovies.get(i).getPRating() < 6.0){
+            if (dateOfMovie.isBefore(today.minusYears(20)) && listOfMovies.get(i).getPRating() < 6.0){
                 displayList.add(listOfMovies.get(i));
             }
         }
