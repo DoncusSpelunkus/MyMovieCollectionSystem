@@ -70,23 +70,19 @@ public class MainController implements Initializable {
         @FXML
         private TextField searchField;
 
-        @FXML
-        private MediaView mediaView;
-
-        private MediaPlayer mediaPlayer;
 
 
     private ObservableList<Categories> observableListCategories;
     private ObservableList<Movies> observableListMovies;
     private StartupController startupController;
-
     private CategoriesModel categoriesModel;
     private MoviesModel moviesModel;
     private TableView.TableViewSelectionModel<Categories> selectionModel;
     private int currentCategory;
+    private Movies currentlySelectedMovie;
 
     public void setController(StartupController StartupController){
-            this.startupController = StartupController;
+        this.startupController = StartupController;
     }
 
     public MainController() {
@@ -197,10 +193,20 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    public void movieListSelect(MouseEvent mouseEvent){ // sets the currentlySelectedMovie from the movielist
+        currentlySelectedMovie = moviesView.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    public void moviesInCategorySelect(MouseEvent mouseEvent){ // set the currentlySelectedMovie from the movies in category list
+        currentlySelectedMovie = moviesInCategory.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
     public void playMovieBtn (ActionEvent actionEvent) throws IOException { // Gets the currently selected item to run the play method
         try {
-        if(moviesView.getSelectionModel().getSelectedItem() != null){
-        playMovies(moviesView.getSelectionModel().getSelectedItem());
+        if(currentlySelectedMovie != null){
+        playMovies();
         }
         else{
                 errorLabel1.setText("Error: No movie selected");
@@ -210,11 +216,10 @@ public class MainController implements Initializable {
             errorLabel1.setText("Error: File is not on this computer");
         }
     }
-    public void playMovies(Movies movies) throws IOException { // Plays the movie with the systems mediaplayer
-        File file = new File(movies.getFilelink());
+    public void playMovies() throws IOException { // Plays the movie with the systems mediaplayer
+        File file = new File(currentlySelectedMovie.getFilelink());
         Desktop.getDesktop().open(file);
-        Movies selectedMovie = moviesView.getSelectionModel().getSelectedItem();
-        moviesModel.editMovie(selectedMovie, selectedMovie.getName(), selectedMovie.getRating(), selectedMovie.getPRating(), selectedMovie.getFilelink(), Date.valueOf(LocalDate.now()));
+        moviesModel.editMovie(currentlySelectedMovie, currentlySelectedMovie.getName(), currentlySelectedMovie.getRating(), currentlySelectedMovie.getPRating(), currentlySelectedMovie.getFilelink(), Date.valueOf(LocalDate.now()));
     }
 
     @FXML // opens the new movie menu in non-edit mode
@@ -224,7 +229,7 @@ public class MainController implements Initializable {
 
     @FXML // opens the new movie menu in edit mode
     private void editMovieBtn (ActionEvent actionEvent) throws SQLServerException, IOException {
-        if (moviesView.getSelectionModel().getSelectedItem() != null) {
+        if (currentlySelectedMovie != null) {
             setupMoviesWindow(true);
         }
         else {
@@ -240,7 +245,7 @@ public class MainController implements Initializable {
         AddMoviesController addMovies = fxmlLoader.getController();
         addMovies.setMyController(this);
         if(edit){
-            fxmlLoader.<AddMoviesController>getController().setEdit(moviesView.getSelectionModel().getSelectedItem());
+            fxmlLoader.<AddMoviesController>getController().setEdit(currentlySelectedMovie);
         }
         fxmlLoader.<AddMoviesController>getController();
         Stage stage = new Stage();
