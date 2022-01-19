@@ -37,7 +37,7 @@ public class VideoPlayerController implements Initializable {
         this.mediaView = mediaView;
     }
 
-    
+
 
     public void setEdit(Movies selectedMovie){
         movie = selectedMovie;
