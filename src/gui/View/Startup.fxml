@@ -20,7 +20,7 @@
       </Label>
       <Button fx:id="confirmBTN" layoutX="250.0" layoutY="415.0" mnemonicParsing="false" onAction="#confirmBTNPress" text="Confirm selection" />
       <Button fx:id="goToMainBTN" layoutX="75.0" layoutY="415.0" mnemonicParsing="false" onAction="#goToMainBTNPRess" text="Go to main window" />
-      <Label fx:id="errorLabel3" layoutX="157.0" layoutY="60.0" textFill="RED" />
+      <Label fx:id="errorLabel3" layoutX="150.0" layoutY="60.0" textFill="RED" />
       <CheckListView fx:id="checkListView" layoutX="135.0" layoutY="100.0" prefHeight="275.0" prefWidth="165.0" />
    </children>
 </AnchorPane>

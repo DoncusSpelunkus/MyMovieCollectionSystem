@@ -112,9 +112,12 @@ public class MainController implements Initializable {
                 moviesModel.addToCategory(categoriesView.getSelectionModel().getSelectedItem(), moviesView.getSelectionModel().getSelectedItem());
                 refreshCategory();
                 fillCurrentCategory();
-            }}
-        catch (NullPointerException | SQLServerException ex){
-            errorLabel1.setText("error: No movie or Category selected, please select one of each");
+            }
+        else{
+                errorLabel1.setText("Error: No movie or Category selected, please select one of each");
+            }
+        } catch (NullPointerException | SQLServerException ex){
+            errorLabel1.setText("Error: Nullpointerexception or SQLServerException detected");
         }
     }
 
@@ -204,7 +207,7 @@ public class MainController implements Initializable {
         }
         }
         catch(IllegalArgumentException a) {
-            errorLabel1.setText("File is not on this computer");
+            errorLabel1.setText("Error: File is not on this computer");
         }
     }
     public void playMovies(Movies movies) throws IOException {
@@ -326,14 +329,14 @@ public class MainController implements Initializable {
     public void refreshMovieList() throws SQLServerException {
         try{ moviesView.setItems(moviesModel.getAllMovies());
     } catch (Exception e) {
-            errorLabel1.setText("Could not refresh Movie list");
+            errorLabel1.setText("Error: Could not refresh Movie list");
         }
     }
 
         public void refreshCategory() throws SQLServerException {
         try{ categoriesView.setItems(categoriesModel.getAllCategories());
     } catch (Exception e) {
-            errorLabel1.setText("Could not refresh Category list");
+            errorLabel1.setText("Error: Could not refresh Category list");
         }
     }
 
