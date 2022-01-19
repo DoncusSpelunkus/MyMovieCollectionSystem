@@ -19,9 +19,6 @@ public class CategoriesModel {
         logiclayer = new BLLManager();
     }
 
-    public static void deleteCategoryBtn(Object selectedItem) {
-    }
-
     public void addCategory(String name){
         logiclayer.makeCategories(name);
     }

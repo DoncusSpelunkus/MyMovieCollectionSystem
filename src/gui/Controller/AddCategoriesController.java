@@ -67,11 +67,9 @@ public class AddCategoriesController {
     }
 
     public void closeACWindow(ActionEvent actionEvent) { // closes the window
-
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
-
         }
     }
 
