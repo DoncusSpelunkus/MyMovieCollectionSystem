@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class AddCategoriesController {
 
     public Label errorLabel4;
+
     @FXML
     private Button addCategoryBtn;
 

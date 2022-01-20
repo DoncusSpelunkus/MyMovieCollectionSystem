@@ -83,11 +83,11 @@ public class AddMoviesController implements Initializable {
     @FXML // Method to open the file explorer and making the filepath into a string
     private void chooseFileBTNPress(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4","*.mov"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
         File file = fileChooser.showOpenDialog(null);
         String path = file.getPath();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
-                new FileChooser.ExtensionFilter("All Files", "*.*"));
         File filestring = new File(path);
         filePathText.setText(filestring.getAbsolutePath());
     }
