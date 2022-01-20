@@ -19,9 +19,6 @@ public class AddCategoriesController {
     private Button addCategoryBtn;
 
     @FXML
-    private Button cancelBtn2;
-
-    @FXML
     private TextField categoryName;
 
     Stage stage;

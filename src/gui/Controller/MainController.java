@@ -353,7 +353,7 @@ public class MainController implements Initializable {
         categoriesView.getSelectionModel().select(currentCategory);
         try{ List<Movies> moviesInList = categoriesView.getSelectionModel().getSelectedItem().getMoviesList();
             if(moviesInList.size() != 0) {
-                for (int i = moviesInList.size() - 1; i >= 0; i--) { // for loop for getting each element of the playlist into the tableview and sets the ID for each one
+                for (int i = moviesInList.size() - 1; i >= 0; i--) {
                     moviesInList.get(i).setIDinsideList(moviesInList.size() - i);
                     moviesInCategory.setItems(FXCollections.observableArrayList(moviesInList));
                 }
