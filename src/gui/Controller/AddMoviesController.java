@@ -82,6 +82,7 @@ public class AddMoviesController implements Initializable {
 
     @FXML // Method to open the file explorer and making the filepath into a string
     private void chooseFileBTNPress(ActionEvent event) {
+        try{
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4","*.mov"),
@@ -90,6 +91,10 @@ public class AddMoviesController implements Initializable {
         String path = file.getPath();
         File filestring = new File(path);
         filePathText.setText(filestring.getAbsolutePath());
+        }
+        catch(NullPointerException e) {
+            errorLabel2.setText("Hey you got a: Nullpointerexception file is null");
+        }
     }
 
     @FXML // Closes the addmovies window
