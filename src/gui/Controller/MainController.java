@@ -97,7 +97,7 @@ public class MainController implements Initializable {
         selectionModel = categoriesView.getSelectionModel();
     }
 
-    private void populateCategoriesView(){ // populates the categories view and adds a searchfilter
+    private void populateCategoriesView(){ // populates the categories view and adds a searchFilter
         try {
             categoryNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -125,7 +125,7 @@ public class MainController implements Initializable {
             categoriesView.setItems(sortedData);
         }
         catch(NullPointerException e) {
-            errorLabel1.setText("Hey you got a: Nullpointerexception at population of categories view");
+            errorLabel1.setText("Hey you got a: NullPointerException at population of categories view");
         }
     }
 
@@ -134,11 +134,11 @@ public class MainController implements Initializable {
             moviesInCategoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
         }
         catch (NullPointerException e){
-            errorLabel1.setText("Hey you got a: Nullpointerexception at population of movies in categories view");
+            errorLabel1.setText("Hey you got a: NullPointerException at population of movies in categories view");
         }
     }
 
-    private void populateMoviesView(){ // populates the movies view and adds a searchfilter
+    private void populateMoviesView(){ // populates the movies view and adds a searchFilter
         try {
             movieNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             lastViewedColumn.setCellValueFactory(new PropertyValueFactory<>("lastview"));
@@ -171,7 +171,7 @@ public class MainController implements Initializable {
             moviesView.setItems(sortedData);
         }
         catch (NullPointerException e) {
-            errorLabel1.setText("Hey you got a: Nullpointerexception at population of movies view");
+            errorLabel1.setText("Hey you got a: NullPointerException at population of movies view");
         }
     }
 
@@ -186,7 +186,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void movieListSelect(MouseEvent mouseEvent){ // sets the currentlySelectedMovie from the movielist
+    private void movieListSelect(MouseEvent mouseEvent){ // sets the currentlySelectedMovie from the movieList
         currentlySelectedMovie = moviesView.getSelectionModel().getSelectedItem();
     }
 
@@ -207,7 +207,7 @@ public class MainController implements Initializable {
                 errorLabel1.setText("Error: No movie or Category selected, please select one of each");
             }
         } catch (NullPointerException | SQLServerException ex){
-            errorLabel1.setText("Error: Nullpointerexception or SQLServerException detected");
+            errorLabel1.setText("Error: NullPointerException or SQLServerException detected");
         }
     }
 
@@ -222,8 +222,8 @@ public class MainController implements Initializable {
             else{
                 errorLabel1.setText("Error: No movie or category selected");
             }
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLServerException throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -328,7 +328,7 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-    private void playMovies() throws IOException { // Plays the movie with the systems mediaplayer
+    private void playMovies() throws IOException { // Plays the movie with the systems MediaPlayer
         File file = new File(currentlySelectedMovie.getFilelink());
         Desktop.getDesktop().open(file);
         moviesModel.editMovie(currentlySelectedMovie, currentlySelectedMovie.getName(), currentlySelectedMovie.getRating(), currentlySelectedMovie.getPRating(), currentlySelectedMovie.getFilelink(), Date.valueOf(LocalDate.now()));
@@ -363,7 +363,7 @@ public class MainController implements Initializable {
             }
         }
         catch(NullPointerException ex){
-            errorLabel1.setText("Hey you got a: Nullpointerexception filling the current movie in categories list");
+            errorLabel1.setText("Hey you got a: NullPointerException filling the current movie in categories list");
         }
     }
 

@@ -73,7 +73,7 @@ public class AddMoviesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        checkCombo.getItems().addAll(categories); // sets the items inside the checkcombobox
+        checkCombo.getItems().addAll(categories); // sets the items inside the checkComboBox
     }
 
     public void setMyController(MainController mainController) {
@@ -93,11 +93,11 @@ public class AddMoviesController implements Initializable {
         filePathText.setText(filestring.getAbsolutePath());
         }
         catch(NullPointerException e) {
-            errorLabel2.setText("Hey you got a: Nullpointerexception file is null");
+            errorLabel2.setText("Hey you got a: NullPointerException file is null");
         }
     }
 
-    @FXML // Closes the addmovies window
+    @FXML // Closes the AddMovies window
     private void closeAMWindow(ActionEvent event){
         stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();
