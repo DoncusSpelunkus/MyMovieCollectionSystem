@@ -177,10 +177,10 @@ public class AddMoviesController implements Initializable {
 
     private void addInitCategories() throws SQLServerException { // The method finds the newly created movie and matches it with catgories selected in the checkcombobox
         List<Categories> selectedCategories = checkCombo.getCheckModel().getCheckedItems();
-        List<Movies> listToGetLastestMovie = moviesModel.getAllMovies();
+        List<Movies> listToGetLatestMovie = moviesModel.getAllMovies();
         Comparator<Movies> sortedList = Comparator.comparing(Movies::getMovieID);
-        listToGetLastestMovie.sort(sortedList);
-        Movies currentMovie = listToGetLastestMovie.get(listToGetLastestMovie.size()-1);
+        listToGetLatestMovie.sort(sortedList);
+        Movies currentMovie = listToGetLatestMovie.get(listToGetLatestMovie.size()-1);
         for (int i = 0; i < selectedCategories.size(); i++) {
             moviesModel.addToCategory(selectedCategories.get(i), currentMovie);
         }
